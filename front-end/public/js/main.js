@@ -2,7 +2,7 @@
     * headerFixed
     * buttonHeart
     * avatar_popup1
-    * avatar_popup2
+    * 
     * tabs
     * buttonfollow
     * tabs1
@@ -123,18 +123,7 @@
         })    
     };
 
-    var avatar_popup2 = function(){
-        $('.popup-user').find('.user').on('click',function(event){
-            event.stopPropagation();});
-        $('.popup-user').find('.user').on('click', function(event){
-            if(!$('.avatar_popup2').hasClass('visible')){
-                $('.avatar_popup2').toggleClass('visible');
-                    event.preventDefault();
-                }
-            else
-                $('.avatar_popup2').removeClass('visible');
-        })
-    };
+
 
     var tabs = function() {
         if ($('div').hasClass('flat-tabs')) {
@@ -606,7 +595,6 @@
         headerFixed();
         buttonHeart();
         avatar_popup1();
-        avatar_popup2();
         tabs();
         buttonfollow();
         tabs1();

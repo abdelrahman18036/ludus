@@ -27,7 +27,7 @@ function LandingPage() {
                                             gem.</p>
                                         <div data-wow-delay="0.2s" className=" wow fadeInUp flat-button flex justify-center">
                                             <a href="/login" className="tf-button style-1 h50 w190 mr-16">Login Now <i className="icon-arrow-up-right2" /></a>
-                                            <a href="/sign-in" className="tf-button style-1 h50 w190 active">Getstart Now <i className="icon-arrow-up-right2" /></a>
+                                            <a href="/sign-up" className="tf-button style-1 h50 w190 active">Getstart Now <i className="icon-arrow-up-right2" /></a>
                                         </div>
                                     </div>
                                     <div className="icon-background">

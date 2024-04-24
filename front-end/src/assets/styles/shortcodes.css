@@ -130,7 +130,7 @@
 .tf-button:hover,
 .tf-button.active {
     color: #161616;
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .tf-button:focus {
@@ -142,7 +142,7 @@
     height: 44px;
     gap: 10px;
     flex-shrink: 0;
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .tf-button.style-1:hover,
@@ -152,7 +152,7 @@
 }
 
 .tf-button.style-1.active:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 /* tf-button loadmore */
@@ -176,7 +176,7 @@
 }
 
 .tf-button-loadmore:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .tf-button-loadmore span {
@@ -309,7 +309,7 @@
 
 .meta-info .item.active,
 .meta-info .item:hover {
-    color: #FF8400;
+    color: #865DFF;
     opacity: 1;
 }
 
@@ -979,7 +979,7 @@
 }
 
 .tf-card-collection.bg-white .author h5 a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 /* style-1 */
@@ -1223,7 +1223,7 @@
 }
 
 .widget-tag ul li a:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 /* tf-grid-blog */
@@ -1339,7 +1339,7 @@
 .tf-blog-detail .inner-content .inner-post blockquote span {
     width: 50px;
     height: 50px;
-    background-color: #FF8400;
+    background-color: #865DFF;
     border-radius: 50%;
     padding: 13px;
 }
@@ -1385,7 +1385,7 @@
 }
 
 .tf-blog-detail .inner-content .bottom .widget-tag ul li a:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .tf-blog-detail .inner-content .related-post {
@@ -1417,7 +1417,7 @@
 }
 
 .tf-blog-detail .inner-content .related-post a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .tf-blog-detail .inner-content .related-post a i {
@@ -1496,7 +1496,7 @@
 }
 
 .tf-blog-detail .inner-content .widget-comment ul li a {
-    color: #FF8400;
+    color: #865DFF;
     line-height: 19px;
     font-size: 14px;
     font-weight: 800;
@@ -1718,7 +1718,7 @@
 
 .swiper-pagination.pagination-number .swiper-pagination-bullet-active {
     --swiper-theme-color: none;
-    color: #FF8400;
+    color: #865DFF;
     margin-right: 60px !important;
 
 }
@@ -1726,7 +1726,7 @@
 .swiper-pagination.pagination-number .swiper-pagination-bullet-active::after {
     position: absolute;
     content: "";
-    background-color: #FF8400;
+    background-color: #865DFF;
     width: 30px;
     height: 1px;
     top: 8px;
@@ -1767,7 +1767,7 @@
 
 .swiper-button-prev.over:hover,
 .swiper-button-next.over:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .swiper-button-prev.over::after,
@@ -1808,7 +1808,7 @@
 }
 
 .style-bottom .swiper-pagination-bullet-active::after {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .style-bottom .swiper-button-next::after,
@@ -1850,7 +1850,7 @@
 
 .tf-author-box .author-avatar .number {
     border-radius: 24px;
-    background: #FF8400;
+    background: #865DFF;
     width: 24px;
     height: 24px;
     display: flex;
@@ -1872,7 +1872,7 @@
 
 .tf-author-box:hover .author-avatar .number {
     transform: rotateY(360deg);
-    background: #FF8400;
+    background: #865DFF;
 }
 
 .tf-author-box .author-infor h5 {
@@ -1907,7 +1907,7 @@
 }
 
 .tf-author-box.bg-white .author-infor h5 a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .tf-author-box.bg-white .author-infor h6 i::before,
@@ -1953,7 +1953,7 @@
 }
 
 .seller .swiper-button-next.active {
-    background: #FF8400;
+    background: #865DFF;
 }
 
 .seller .swiper-button-next.active:hover {
@@ -2025,7 +2025,7 @@
 
 .dropdown .btn-secondary:hover {
     border: 1px solid rgba(255, 255, 255, 0.12);
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .dropdown .btn-secondary svg {
@@ -2045,9 +2045,9 @@
 .tf-soft .btn-secondary:active,
 .btn-secondary.active,
 .tf-soft .show>.btn-secondary.dropdown-toggle {
-    background-color: #FF8400;
+    background-color: #865DFF;
     color: #161616;
-    border-color: #FF8400;
+    border-color: #865DFF;
 }
 
 .tf-soft .btn-secondary:active,
@@ -2075,7 +2075,7 @@
 }
 
 .tf-soft .dropdown-item:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .tf-soft .sort-filter span {
@@ -2086,7 +2086,7 @@
 .tf-soft .sort-filter .icon-tick {
     opacity: 0;
     visibility: hidden;
-    color: #FF8400;
+    color: #865DFF;
     font-size: 16px;
 }
 
@@ -2129,7 +2129,7 @@
 }
 
 .tf-soft .soft-right input:checked[type=checkbox]::before {
-    background: #FF8400;
+    background: #865DFF;
     left: 14px;
 }
 
@@ -2289,7 +2289,7 @@
 }
 
 .tf-box-icon:hover svg * {
-    fill: #FF8400;
+    fill: #865DFF;
 }
 
 /* style-1 */
@@ -2355,7 +2355,7 @@
     padding: 50px 40px;
     margin-left: 5px;
     margin-right: 5px;
-    background-color: #FF8400;
+    background-color: #865DFF;
     border-radius: 30px;
     overflow: hidden;
     position: relative;
@@ -2379,7 +2379,7 @@
 
 .tf-button.style-2 {
     background-color: rgba(22, 22, 22, 1);
-    color: #FF8400;
+    color: #865DFF;
     gap: 10px;
     flex-shrink: 0;
 }
@@ -2554,7 +2554,7 @@
 }
 
 .tf-card-box.style-2 .button-place-bid a:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
     color: #161616;
 }
 
@@ -2606,7 +2606,7 @@
     font-size: 18px;
     border-radius: 12px;
     color: rgba(22, 22, 22, 1);
-    background-color: #FF8400;
+    background-color: #865DFF;
     opacity: 0;
     z-index: 1;
 }
@@ -2861,7 +2861,7 @@
 }
 
 .tf-card-box.style-2.type-1 .button-place-bid:hover a {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .tf-card-box.style-2.type-1 .featured-countdown {
@@ -2935,7 +2935,7 @@
 }
 
 .background-white .tf-author-box .author-infor h5 a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .background-white .tf-author-box .price.gem i::before,
@@ -3007,7 +3007,7 @@
 }
 
 .flat-pages-title-home5 .pages-title .content .tf-button.active:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 /* home-6 */
@@ -3072,7 +3072,7 @@
 }
 
 .section-menu-left .over-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(216.56deg, #FF8400 5.32%, #DEE8E8 94.32%);
+    background: linear-gradient(216.56deg, #865DFF 5.32%, #DEE8E8 94.32%);
     border-radius: 6px;
 }
 
@@ -3377,7 +3377,7 @@
 }
 
 .counter__body-1 .counter-1 .number-counter {
-    color: #FF8400;
+    color: #865DFF;
     font-size: 54px;
     font-weight: 800;
     line-height: 74px;
@@ -3445,7 +3445,7 @@
 
 .widget-pagination ul li.active,
 .widget-pagination ul li:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .widget-pagination ul li.active a,
@@ -3505,8 +3505,8 @@ label input[type="checkbox"] {
 }
 
 input:checked~.btn-checkbox {
-    background-color: #FF8400;
-    border: 1px solid #FF8400;
+    background-color: #865DFF;
+    border: 1px solid #865DFF;
 }
 
 .btn-checkbox:after {
@@ -3530,7 +3530,7 @@ form label i.icon-star {
 }
 
 form label i.icon-star.active {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 /* style-1 */
@@ -3914,7 +3914,7 @@ button.follow.active,
 button.follow:focus,
 button.follow:hover {
     color: #161616;
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .widget-coins-item img {
@@ -3982,7 +3982,7 @@ button.follow:hover {
 .widget-menu-tab li:hover,
 .widget-menu-tab li.active {
     color: #161616;
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .wrap-box-card {
@@ -4013,7 +4013,7 @@ button.follow:hover {
 }
 
 .add-new-collection h6 {
-    color: #FF8400;
+    color: #865DFF;
     font-size: 18px;
     font-weight: 800;
     line-height: 25px;
@@ -4232,7 +4232,7 @@ button.follow:hover {
     content: 'Choose file';
     display: inline-block;
     border: none;
-    background-color: #FF8400;
+    background-color: #865DFF;
     color: #161616;
     text-align: center;
     -webkit-transition: all 0.3s ease-in-out;
@@ -4317,7 +4317,7 @@ button.follow:hover {
 }
 
 .widget-edit.setting input:checked[type=checkbox]::before {
-    background: #FF8400;
+    background: #865DFF;
     left: 30px;
 }
 
@@ -4368,7 +4368,7 @@ button.follow:hover {
     width: 28px;
     height: 28px;
     left: 0;
-    background-color: #FF8400;
+    background-color: #865DFF;
     border-radius: 50%;
     color: #161616;
     font-size: 14px;
@@ -4436,7 +4436,7 @@ button.follow:hover {
 }
 
 #create .widget-content-inner label:hover input::before {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 #create .widget-content-inner label input::after {
@@ -4506,7 +4506,7 @@ button.follow:hover {
 }
 
 .widget-term-condition .menu-tab .item-title.active {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .widget-term-condition .content-tab .content-inner {
@@ -4564,7 +4564,7 @@ button.follow:hover {
 
 .flat-accordion .flat-toggle .toggle-title.active,
 .flat-accordion2 .flat-toggle2 .toggle-title.active {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .flat-accordion .flat-toggle .toggle-title::after,
@@ -4599,7 +4599,7 @@ button.follow:hover {
 
 .flat-accordion .flat-toggle .toggle-title.active::after,
 .flat-accordion2 .flat-toggle2 .toggle-title.active::after {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .flat-accordion .flat-toggle .toggle-content,
@@ -4753,7 +4753,7 @@ button.follow:hover {
 }
 
 .table-ranking-content .fl-row-ranking .warning h6 {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 /* upcoming */
@@ -4885,7 +4885,7 @@ button.follow:hover {
 
 /* infor-product */
 .infor-product>.text {
-    color: #FF8400;
+    color: #865DFF;
     font-size: 14px;
     font-weight: 800;
     line-height: 19px;
@@ -4946,7 +4946,7 @@ button.follow:hover {
 
 .menu_card .dropdown-menu.show a:hover {
     background: unset;
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .menu_card .dropdown-menu.show a i {
@@ -5426,7 +5426,7 @@ fieldset.password>i::before {
 
 .widget-login .login-other-item:hover {
     color: #161616;
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .widget-login .no-account {
@@ -5486,7 +5486,7 @@ fieldset.password>i::before {
     position: absolute;
     right: -15px;
     top: -15px;
-    background-color: #FF8400;
+    background-color: #865DFF;
     border: none;
     outline: none;
     z-index: 10 !important;
@@ -5511,7 +5511,7 @@ fieldset.password>i::before {
 }
 
 .modal-body .image {
-    background-color: #FF8400;
+    background-color: #865DFF;
     border-radius: 10px;
 }
 
@@ -5688,7 +5688,7 @@ fieldset.password>i::before {
     position: absolute;
     content: '\e914';
     font-family: 'icomoon';
-    color: #FF8400;
+    color: #865DFF;
     right: 0px;
     top: 0;
     font-size: 20px;
@@ -5738,7 +5738,7 @@ fieldset.password>i::before {
 
 .background-white #select-day ul li:hover,
 .background-white #select-day ul li.active {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 /* widget-bg-animation */

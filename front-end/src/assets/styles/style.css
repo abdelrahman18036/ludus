@@ -147,13 +147,13 @@ body.background-white {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #FF8400;
+    background-color: #865DFF;
     /* Color of the thumb */
     border-radius: 15px;
 }
 
 ::-webkit-scrollbar-track:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
     /* Color of the track */
 }
 
@@ -727,7 +727,7 @@ input[type="submit"] {
     font-weight: 700;
     font-size: 14px;
     line-height: 22px;
-    background-color: #FF8400;
+    background-color: #865DFF;
     color: rgba(22, 22, 22, 1);
     border-radius: 14px;
     padding: 10px;
@@ -747,7 +747,7 @@ input.style-1[type="submit"] {
     font-weight: 700;
     font-size: 14px;
     line-height: 22px;
-    color: #FF8400;
+    color: #865DFF;
     background-color: rgba(22, 22, 22, 1);
     border-radius: 14px;
     padding: 10px;
@@ -772,7 +772,7 @@ input[type="submit"]:focus {
     outline: 0;
     border: none;
     background-color: rgba(22, 22, 22, 1);
-    color: #FF8400;
+    color: #865DFF;
 }
 
 button.style-1:hover,
@@ -786,7 +786,7 @@ input.style-1[type="submit"]:focus {
     outline: 0;
     border: none;
     color: rgba(22, 22, 22, 1);
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .btn-submit button[type="submit"]:hover {
@@ -1088,7 +1088,7 @@ label.error {
 }
 
 .tf-color {
-    color: #FF8400 !important;
+    color: #865DFF !important;
 }
 
 .divider {
@@ -1147,7 +1147,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #FF8400;
+    color: #865DFF;
     text-decoration: none;
     outline: 0;
     -webkit-transition: all 0.3s ease-in-out;
@@ -1235,7 +1235,7 @@ a:focus {
 }
 
 .canvas.style-1::after {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .header-search.style-1 .show-search {
@@ -1381,7 +1381,7 @@ a:focus {
 
 #main-nav .sub-menu li.current-item>a,
 #main-nav .sub-menu li a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 #main-nav>ul>li .sub-menu li {
@@ -1439,7 +1439,7 @@ a:focus {
 }
 
 .header_1.style-white .tf-button:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .header_1.style-white #main-nav>ul>li>a {
@@ -1500,7 +1500,7 @@ a:focus {
 }
 
 .header_1.header-full #wallet-header a:hover {
-    background: #FF8400;
+    background: #865DFF;
 }
 
 /* Mobile Menu Button */
@@ -1609,7 +1609,7 @@ a:focus {
 }
 
 .widget-menu ul li a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .background-white .widget-menu ul li a:after {
@@ -1621,7 +1621,7 @@ a:focus {
     width: 0;
     height: 1px;
     position: absolute;
-    background: #FF8400;
+    background: #865DFF;
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
@@ -1727,7 +1727,7 @@ a:focus {
 }
 
 .footer-bottom ul li a:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 /* style-1 */
@@ -1891,7 +1891,7 @@ a:focus {
 }
 
 .tf-button.style-1.type-1:hover {
-    background-color: #FF8400;
+    background-color: #865DFF;
     color: #161616;
 }
 
@@ -1948,7 +1948,7 @@ a:focus {
 .section-menu-left .list-menu>ul>li>a:hover {
     box-shadow: 0px 4px 20px 0px rgba(221, 242, 71, 0.30);
     color: #161616;
-    background: #FF8400;
+    background: #865DFF;
 }
 
 .section-menu-left .list-menu>ul>li.has-item>a::before {
@@ -2023,11 +2023,11 @@ a:focus {
 }
 
 .section-menu-left .list-menu ul.sub-item li:hover::before {
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .section-menu-left .list-menu ul.sub-item li:hover a {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .section-menu-left .language ul.sub-item {
@@ -2087,7 +2087,7 @@ a:focus {
 
 .section-menu-left .create a.tf-button.active {
     color: #161616;
-    background-color: #FF8400;
+    background-color: #865DFF;
 }
 
 .section-menu-left .content h6 {
@@ -2128,7 +2128,7 @@ a:focus {
     content: "";
     top: 50%;
     left: 0;
-    background-color: #FF8400;
+    background-color: #865DFF;
     border-radius: 999px;
     transform: translate(-50%, -50%);
     -webkit-transition: all 0.3s ease;
@@ -2146,7 +2146,7 @@ a:focus {
 
 .section-menu-left ul.menu-tab li.active,
 .section-menu-left ul.menu-tab li:hover {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 .section-menu-left ul.menu-tab li svg {
@@ -2344,7 +2344,7 @@ a:focus {
 #menu-mobile-menu li.current-menu-item>a,
 #menu-mobile-menu li a:hover,
 #menu-mobile-menu li.current-item a {
-    color: #FF8400;
+    color: #865DFF;
 }
 
 #menu-mobile-menu li.menu-item-has-children-mobile>a::after {
@@ -2510,7 +2510,7 @@ a:focus {
     line-height: 44px;
     font-size: 16px;
     font-weight: 900;
-    color: #FF8400;
+    color: #865DFF;
     left: 0;
     top: 0;
     height: 44px;
@@ -2537,7 +2537,7 @@ a:focus {
 
 .progress-wrap svg.progress-circle path {
     box-sizing: border-box;
-    stroke: #FF8400;
+    stroke: #865DFF;
     stroke-width: 5;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2566,7 +2566,7 @@ a:focus {
     width: 8px;
     height: 8px;
     z-index: 10000;
-    background-color: #FF8400;
+    background-color: #865DFF;
     -webkit-transition: width .5s ease-in-out, height .5s ease-in-out, margin .5s ease-in-out, opacity .5s ease-in-out;
     transition: width .5s ease-in-out, height .5s ease-in-out, margin .5s ease-in-out, opacity .5s ease-in-out
 }
@@ -2576,7 +2576,7 @@ a:focus {
     margin-top: -40px;
     width: 80px;
     height: 80px;
-    background-color: #FF8400;
+    background-color: #865DFF;
     opacity: .3
 }
 
@@ -2585,7 +2585,7 @@ a:focus {
     margin-top: -22px;
     width: 40px;
     height: 40px;
-    border: 2px solid #FF8400;
+    border: 2px solid #865DFF;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     z-index: 10000;

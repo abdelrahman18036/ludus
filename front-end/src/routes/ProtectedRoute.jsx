@@ -19,7 +19,6 @@ const checkAuthStatus = async () => {
 };
 
 
-
 const ProtectedRoute = ({ children }) => {
     const { data: isAuthenticated, isLoading } = useQuery(
         "authStatus",
