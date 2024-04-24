@@ -19,27 +19,22 @@ function SignUp() {
               <form id="commentform" className="comment-form">
                 <fieldset className="name">
                   <label>Name *</label>
-                  <input type="text" id="name" placeholder="Your name*" name="name" tabIndex={2} defaultValue aria-required="true" required />
+                  <input type="text" id="name" placeholder="Your name*" name="name" tabIndex={2}  aria-required="true" required />
                 </fieldset>
                 <fieldset className="email">
                   <label>Email *</label>
-                  <input type="email" id="email" placeholder="mail@website.com" name="email" tabIndex={2} defaultValue aria-required="true" required />
+                  <input type="email" id="email" placeholder="mail@website.com" name="email" tabIndex={2}  aria-required="true" required />
                 </fieldset>
                 <fieldset className="password">
                   <label>Password *</label>
-                  <input className="password-input" type="password" id="password" placeholder="Min. 8 character" name="password" tabIndex={2} defaultValue aria-required="true" required />
+                  <input className="password-input" type="password" id="password" placeholder="Min. 8 character" name="password" tabIndex={2}  aria-required="true" required />
                   <i className="icon-show password-addon" id="password-addon" />
                 </fieldset>
                 <fieldset className="password">
                   <label>Confirm password *</label>
-                  <input className="password-input" type="password" id="password" placeholder="Confirm password " name="password" tabIndex={2} defaultValue aria-required="true" required />
+                  <input className="password-input" type="password" id="password" placeholder="Confirm password " name="password" tabIndex={2}  aria-required="true" required />
                   <i className="icon-show password-addon" id="password-addon" />
-                  <div className="widget-category-checkbox">
-                    <label>I agree to all Term, Privacy Polic and fees
-                      <input type="checkbox" />
-                      <span className="btn-checkbox" />
-                    </label>
-                  </div>
+             
                 </fieldset>
                 <div className="btn-submit mb-30">
                   <a href="login.html" className="tf-button style-1 h50 w-100" type="submit">Sign up<i className="icon-arrow-up-right2" /></a>

@@ -19,11 +19,11 @@ function SignIn() {
                         <form id="commentform" className="comment-form">
                             <fieldset className="email">
                             <label>Email *</label>
-                            <input type="email" id="email" placeholder="mail@website.com" name="email" tabIndex={2} defaultValue aria-required="true" required />
+                            <input type="email" id="email" placeholder="mail@website.com" name="email" tabIndex={2}  aria-required="true" required />
                             </fieldset>
                             <fieldset className="password">
                             <label>Password *</label>
-                            <input className="password-input" type="password" id="password" placeholder="Min. 8 character" name="password" tabIndex={2} defaultValue aria-required="true" required />
+                            <input className="password-input" type="password" id="password" placeholder="Min. 8 character" name="password" tabIndex={2}  aria-required="true" required />
                             <i className="icon-show password-addon" id="password-addon" />
                             </fieldset>
                             <div className="btn-submit mb-30">
@@ -36,7 +36,8 @@ function SignIn() {
                 </div>
                 </div>
             </div>
-            </div>
+        </div>
+        
 
     </div>
   )

@@ -138,6 +138,27 @@ body {
 body.background-white {
     background-color: #fff;
 }
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #DDF247; /* Color of the thumb */
+    border-radius: 15px;
+  }
+  
+  ::-webkit-scrollbar-track:hover {
+    background-color: #DDF247; /* Color of the track */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #88CC00; /* Color of the thumb on hover */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #161616; /* Color of the track */
+  }
+  
 
 article,
 aside,
