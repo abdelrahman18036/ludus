@@ -1,5 +1,9 @@
 import React from 'react'
-
+import imageOne from '../../assets/images/item1.png'
+import imageTwo from '../../assets/images/item2.png'
+import imageThree from '../../assets/images/item3.png'
+import imageFour from '../../assets/images/item4.png'
+import imageFive from '../../assets/images/item5.png'
 function LandingPage() {
   return (
     <div>
@@ -27,14 +31,14 @@ function LandingPage() {
                     </div>
                     </div>
                     <div className="icon-background">
-                    <img className="absolute item1" src="assets/images/item-background/item1.png" alt />
-                    <img className="absolute item2" src="assets/images/item-background/item2.png" alt />
-                    <img className="absolute item3" src="assets/images/item-background/item3.png" alt />
-                    <img className="absolute item4" src="assets/images/item-background/item1.png" alt />
-                    <img className="absolute item5" src="assets/images/item-background/item1.png" alt />
-                    <img className="absolute item6" src="assets/images/item-background/item4.png" alt />
-                    <img className="absolute item7" src="assets/images/item-background/item5.png" alt />
-                    <img className="absolute item8" src="assets/images/item-background/item5.png" alt />
+                    <img className="absolute item1" src={imageOne} alt />
+                    <img className="absolute item2" src={imageTwo} alt />
+                    <img className="absolute item3" src={imageThree} alt />
+                    <img className="absolute item4" src={imageOne} alt />
+                    <img className="absolute item5" src={imageOne} alt />
+                    <img className="absolute item6" src={imageFour} alt />
+                    <img className="absolute item7" src={imageFive} alt />
+                    <img className="absolute item8" src={imageFive} alt />
                     </div>
                 </div>
                 </div>
