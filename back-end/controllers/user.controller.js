@@ -5,6 +5,7 @@ const config = require("../config/auth.config");
 
 exports.registerUser = async (req, res) => {
   const newUser = new User({
+    fullname: req.body.fullname,
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
@@ -15,7 +16,11 @@ exports.registerUser = async (req, res) => {
     await newUser.save();
     res.send({ message: "User was registered successfully!" });
   } catch (error) {
-    res.status(500).send({ message: error });
+    console.error(error); // Log the error to see more details
+    res.status(500).send({
+      message:
+        error.message || "Some error occurred while registering the User.",
+    });
   }
 };
 
@@ -31,9 +36,7 @@ exports.loginUser = async (req, res) => {
       user.password
     );
     if (!passwordIsValid) {
-      return res
-        .status(401)
-        .send({ accessToken: null, message: "Invalid password!" });
+      return res.status(401).send({ message: "Invalid password!" });
     }
 
     const token = jwt.sign({ id: user._id }, config.secret, {
@@ -47,7 +50,7 @@ exports.loginUser = async (req, res) => {
       accessToken: token,
     });
   } catch (error) {
-    res.status(500).send({ message: "Error logging in." });
+    res.status(500).send({ message: err.message });
   }
 };
 
@@ -98,4 +101,8 @@ exports.getAllUsers = async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
+};
+
+exports.verifyToken = (req, res) => {
+  res.status(200).send({ message: "User is authenticated" });
 };

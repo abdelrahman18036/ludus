@@ -7,6 +7,7 @@ router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 router.get("/all", userController.getAllUsers);
 router.delete("/:id", verifyToken, isAdmin, userController.deleteUser);
+router.get("/verify", verifyToken, userController.verifyToken);
 router.get("/:id", verifyToken, userController.getUser);
 router.put("/:id", verifyToken, userController.updateUser);
 
