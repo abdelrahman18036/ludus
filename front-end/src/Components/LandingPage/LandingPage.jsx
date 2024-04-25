@@ -49,9 +49,7 @@ function LandingPage() {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="action__body m-0">
-                                        <div className="tf-tsparticles">
-                                            <div id="tsparticles1" data-color="#161616" data-line="#000" />
-                                        </div>
+                                   
                                         <h2 className="text-center capitalize mx-auto mw-667">Join the world’s largest nFT community
                                             &amp; start
                                             collecting NFTS</h2>
