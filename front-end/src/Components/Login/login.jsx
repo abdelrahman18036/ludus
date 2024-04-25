@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../assets/styles/style.css';
-import Swal from 'sweetalert2';
 import { baseURL } from '../Auth/API';
 import { useNavigate } from 'react-router-dom';
-
+import Loading from '../Loading/Loading';
+import Tsparticles2 from '../Particles/Tsparticles2';
 
 const checkAuthStatus = async () => {
     try {
@@ -14,18 +14,18 @@ const checkAuthStatus = async () => {
             }
         });
         return response.data.message;
-
     } catch (error) {
         console.error('Error checking auth status:', error.response.data);
         return false;
     }
 };
 
-
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
         const verifyAuthentication = async () => {
             const isAuthenticated = await checkAuthStatus();
@@ -36,34 +36,26 @@ function Login() {
 
         verifyAuthentication();
     }, [navigate]);
+
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post(`${baseURL}/api/users/login`, { email, password });
             const { token } = response.data;
             localStorage.setItem('userToken', response.data.accessToken);
             localStorage.setItem('id', response.data.id);
-            Swal.fire({
-                title: 'Login successful!',
-                text: 'You will be redirected in 3 seconds.',
-                icon: 'success',
-                timer: 3000,
-                timerProgressBar: true,
-                didClose: () => {
-                    navigate('/market');
-                }
-            });
+            navigate('/market');
+            setLoading(false);
         } catch (error) {
-            Swal.fire({
-                title: 'Failed to login!',
-                text: error.response.data.message,
-                icon: 'error',
-                confirmButtonText: 'Try Again'
-            });
+            console.log('Error logging in:', error.response.data);
+            setLoading(false);
         }
     };
 
     return (
+        <>
+        <Tsparticles2 />
         <div id="wrapper">
             <div id="page" className="pt-40">
                 <div className="tf-section-2 pt-60 widget-box-icon">
@@ -86,9 +78,13 @@ function Login() {
                                             <label>Password *</label>
                                             <input type="password" className="password-input" id="password" placeholder="Min. 8 character" name="password" tabIndex={2} required onChange={(e) => setPassword(e.target.value)} />
                                         </fieldset>
-                                        <div className="btn-submit mb-30">
-                                            <button className="tf-button style-1 h50 w-100" type="submit">Login<i className="icon-arrow-up-right2"></i></button>
-                                        </div>
+                                        {loading ? (
+                                            <div className='flex justify-center'><Loading/></div>
+                                        ) : (
+                                            <div className="btn-submit mb-30">
+                                                <button className="tf-button style-1 h50 w-100" type="submit">Login<i className="icon-arrow-up-right2"></i></button>
+                                            </div>
+                                        )}
                                     </form>
                                 </div>
                             </div>
@@ -97,6 +93,8 @@ function Login() {
                 </div>
             </div>
         </div>
+        
+        </>
     );
 }
 

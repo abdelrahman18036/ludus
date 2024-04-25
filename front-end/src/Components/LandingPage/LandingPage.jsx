@@ -6,6 +6,7 @@ import imageFour from '../../assets/images/item4.png'
 import imageFive from '../../assets/images/item5.png'
 
 import Tsparticles from '../Particles/Tsparticles';
+import Accordion from '../Accordion/Accordion'
 function LandingPage() {
 
     return (
@@ -53,10 +54,7 @@ function LandingPage() {
                                 <div className="col-md-12">
                                     <div className="action__body m-0">
                                         <div className="tf-tsparticles">
-
                                             <Tsparticles />
-
-
                                         </div>
                                         <h2 className="text-center capitalize mx-auto mw-667">Join the world’s largest nFT community
                                             &amp; start

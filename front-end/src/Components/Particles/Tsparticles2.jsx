@@ -3,7 +3,7 @@ import { Particles } from "react-tsparticles";
 import { loadStarsPreset } from 'tsparticles-preset-stars';
 
 
-export default function Tsparticles() {
+export default function Tsparticles2() {
     const particlesInit = async (engine) => {
         await loadStarsPreset(engine);
     };
@@ -14,14 +14,14 @@ export default function Tsparticles() {
             options={{
                 particles: {
                     number: {
-                        value: 50,
+                        value:10,
                         density: {
                             enable: true,
                             value_area: 500
                         }
                     },
                     color: {
-                        value: "#161616"
+                        value: "#865DFF"
                     },
                     shape: {
                         type: "circle",

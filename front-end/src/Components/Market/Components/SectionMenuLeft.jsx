@@ -4,13 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function SectionMenuLeft({ onTabClick, activeTab }) {
    const navigate = useNavigate();
-    const handleLogout = () => {
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('id');
+   const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('id');
+    try {
         navigate('/');
         navigate(0);
+    } catch (error) {
+        console.error('Navigation error:', error);
+        navigate('/');
 
-    };
+    }
+};
+
     return (
 
         <div className="section-menu-left">
