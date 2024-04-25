@@ -3,26 +3,19 @@ import logo from "../../../assets/images/logo/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SectionMenuLeft({ onTabClick, activeTab }) {
-<<<<<<< Updated upstream
-   const navigate = useNavigate();
-   const handleLogout = () => {
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('id');
+
     try {
-=======
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('id');
->>>>>>> Stashed changes
-        navigate('/');
-        navigate(0);
+        const navigate = useNavigate();
+        const handleLogout = () => {
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('id');
+            navigate('/');
+            navigate(0);
+        };
     } catch (error) {
         console.error('Navigation error:', error);
         navigate('/');
-
     }
-};
 
     return (
 

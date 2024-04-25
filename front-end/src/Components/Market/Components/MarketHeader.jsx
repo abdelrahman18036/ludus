@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../../Auth/API";
-<<<<<<< Updated upstream
 import { Navigate, useNavigate } from "react-router-dom";
-=======
+
 import { useNavigate } from "react-router-dom";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
->>>>>>> Stashed changes
 export default function MarketHeader() {
-    const navigate = useNavigate();
     const [userData, setUserData] = useState({ username: '', profilePicture: '' });
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isPopupOpen2, setIsPopupOpen2] = useState(false);
@@ -46,10 +43,8 @@ export default function MarketHeader() {
         localStorage.removeItem('userToken');
         localStorage.removeItem('id');
         navigate('/');
-<<<<<<< Updated upstream
         navigate(0);
-=======
->>>>>>> Stashed changes
+
 
     };
 
