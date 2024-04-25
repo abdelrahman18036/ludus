@@ -1,8 +1,16 @@
 import React from "react";
 import logo from "../../../assets/images/logo/logo.png";
-
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SectionMenuLeft({ onTabClick, activeTab }) {
+   const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('id');
+        navigate('/');
+        navigate(0);
+
+    };
     return (
 
         <div className="section-menu-left">
@@ -129,7 +137,7 @@ export default function SectionMenuLeft({ onTabClick, activeTab }) {
                             Settings
                         </li>
                         <li>
-                            <a href="index-2.html">Logout</a>
+                            <Link onClick={handleLogout} >Logout</Link>
                             <svg width={22} height={22} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.2">
                                     <path d="M13.7627 6.77369V5.91844C13.7627 4.05303 12.2502 2.54053 10.3848 2.54053H5.91606C4.05156 2.54053 2.53906 4.05303 2.53906 5.91844V16.1209C2.53906 17.9864 4.05156 19.4989 5.91606 19.4989H10.394C12.2539 19.4989 13.7627 17.9909 13.7627 16.131V15.2666" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

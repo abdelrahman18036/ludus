@@ -2402,7 +2402,8 @@
 
 .tf-button.style-2:hover {
     color: rgba(22, 22, 22, 1);
-    background-color: #fff;
+    background-color: transparent;
+    border: 1px solid rgba(22, 22, 22, 1);
 }
 
 .tf-button.w230 {
