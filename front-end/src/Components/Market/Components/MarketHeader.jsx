@@ -61,7 +61,7 @@ export default function MarketHeader() {
                                 <div className="widget-recently">
                                     <div className="card-small">
                                         <div className="author">
-                                            <img src="assets/images/blog/sidebar-06.jpg" alt />
+                                            <img src="assets/images/blog/sidebar-06.jpg" alt="alt" />
                                             <div className="info">
                                                 <h6><a href="#">Propw</a></h6>
                                                 <p><a href="#">@themes</a></p>
@@ -71,7 +71,7 @@ export default function MarketHeader() {
                                     </div>
                                     <div className="card-small">
                                         <div className="author">
-                                            <img src="assets/images/blog/sidebar-06.jpg" alt />
+                                            <img src="assets/images/blog/sidebar-06.jpg" alt="alt" />
                                             <div className="info">
                                                 <h6><a href="#">Propw</a></h6>
                                                 <p><a href="#">@themes</a></p>
@@ -81,7 +81,7 @@ export default function MarketHeader() {
                                     </div>
                                     <div className="card-small">
                                         <div className="author">
-                                            <img src="assets/images/blog/sidebar-06.jpg" alt />
+                                            <img src="assets/images/blog/sidebar-06.jpg" alt="alt" />
                                             <div className="info">
                                                 <h6><a href="#">Propw</a></h6>
                                                 <p><a href="#">@themes</a></p>
@@ -91,7 +91,7 @@ export default function MarketHeader() {
                                     </div>
                                     <div className="card-small">
                                         <div className="author">
-                                            <img src="assets/images/blog/sidebar-06.jpg" alt />
+                                            <img src="assets/images/blog/sidebar-06.jpg" alt="alt" />
                                             <div className="info">
                                                 <h6><a href="#">Propw</a></h6>
                                                 <p><a href="#">@themes</a></p>

@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import MarketHeader from "./Components/MarketHeader";
 import SectionMenuLeft from "./Components/SectionMenuLeft";
+import MarketContent from "./Components/MarketContent";
+import ActiveBid from "./Components/ActiveBid";
+import Explore from "./Components/Explore";
+import Layout from "../Layout/Layout";
 export default function Market() {
+    const [activeTab, setActiveTab] = useState('market');
+    const handleTabClick = (tabName) => {
+        setActiveTab(tabName);
+    };
     return (
-        <div id="page" class="market-page">
+        <div id="page" className="market-page">
             <MarketHeader />
-            <div class="flat-tabs">
-                <SectionMenuLeft />
-
+            <div className="flat-tabs">
+                <SectionMenuLeft onTabClick={handleTabClick} activeTab={activeTab} />
+                <div className="content-tabs">
+                    <Layout >
+                        {activeTab === 'market' && <MarketContent />}
+                        {activeTab === 'bid' && <ActiveBid />}
+                        {activeTab === 'explore' && <Explore />}
+                    </Layout>
+                </div>
             </div>
         </div>
 

@@ -1,10 +1,13 @@
 import React from "react";
+import logo from "../../../assets/images/logo/logo.png";
 
-export default function SectionMenuLeft() {
+
+export default function SectionMenuLeft({ onTabClick, activeTab }) {
     return (
+
         <div className="section-menu-left">
             <div className="box-logo">
-                <a href="index-2.html"><img src="assets/images/logo/logo.png" alt /></a>
+                <a href="index-2.html" style={{ color: "white", fontSize: "30px", fontWeight: "bolder" }}><img src={logo} alt="logo" style={{ height: "60px" }} /> MARKET</a>
             </div>
             <div className="create menu-tab">
                 <a className="tf-button style-1 type-1 tablinks" data-tabs="create">
@@ -16,7 +19,7 @@ export default function SectionMenuLeft() {
                 <div className="content">
                     <h6>Marketplace</h6>
                     <ul className="menu-tab">
-                        <li className="tablinks active" data-tabs="market">
+                        <li className={`tablinks ${activeTab === 'market' ? 'active' : ''}`} data-tabs="market" onClick={() => onTabClick('market')}>
                             <svg width={22} height={22} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.2">
                                     <path d="M6.75731 9.35159V15.64" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -30,7 +33,7 @@ export default function SectionMenuLeft() {
                             </svg>
                             Market
                         </li>
-                        <li className="tablinks" data-tabs="bid">
+                        <li className={`tablinks ${activeTab === 'bid' ? 'active' : ''}`} data-tabs="bid" onClick={() => onTabClick('bid')}>
                             <svg width={22} height={22} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.2">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M6.61499 14.6693C6.46832 14.6693 6.32074 14.6226 6.19607 14.5272C5.89541 14.2953 5.83857 13.8636 6.07049 13.5629L8.81407 9.99708C8.92591 9.85133 9.09182 9.75691 9.27332 9.73399C9.45849 9.71016 9.63999 9.76149 9.78391 9.87608L12.3689 11.9065L14.6303 8.98874C14.8632 8.68716 15.294 8.63124 15.5947 8.86591C15.8953 9.09874 15.9503 9.53049 15.7175 9.83024L13.0317 13.2952C12.9198 13.4401 12.7548 13.5345 12.5733 13.5565C12.39 13.5812 12.2085 13.5281 12.0637 13.4153L9.48049 11.3858L7.16041 14.4007C7.02474 14.5767 6.82124 14.6693 6.61499 14.6693Z" fill="white" />
@@ -53,7 +56,7 @@ export default function SectionMenuLeft() {
                             </svg>
                             Active Bid
                         </li>
-                        <li className="tablinks" data-tabs="explore">
+                        <li className={`tablinks ${activeTab === 'explore' ? 'active' : ''}`} data-tabs="explore" onClick={() => onTabClick('explore')}>
                             <svg width={22} height={22} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.2">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M5.73177 3.20834C3.21094 3.20834 3.21094 3.39901 3.21094 5.72918V5.75209C3.21094 6.76684 3.21094 7.50018 3.45935 7.81001C3.70227 8.11068 4.42369 8.25001 5.73177 8.25001C7.03985 8.25001 7.76127 8.10976 8.00419 7.80909C8.2526 7.50018 8.2526 6.76684 8.2526 5.75118C8.2526 3.39901 8.2526 3.20834 5.73177 3.20834ZM5.73177 9.62501C4.18627 9.62501 3.02669 9.46276 2.3896 8.67168C1.83594 7.98509 1.83594 7.04826 1.83594 5.75209L2.52344 5.72918H1.83594C1.83594 3.09834 2.00185 1.83334 5.73177 1.83334C9.46169 1.83334 9.6276 3.09834 9.6276 5.72918C9.6276 7.04734 9.6276 7.98509 9.07394 8.67168C8.43685 9.46276 7.27727 9.62501 5.73177 9.62501Z" fill="white" />
@@ -141,9 +144,8 @@ export default function SectionMenuLeft() {
                     </ul>
                 </div>
             </div>
-            <div className="bottom">
-                <p>© 2023 OpeN9</p>
-                <p>Made By Themesflat</p>
+            <div className="bottom" >
+                <p>© 2024 NFTMARKET</p>
             </div>
         </div>
 
