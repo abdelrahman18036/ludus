@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../../Auth/API";
-import { Navigate, useNavigate } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
 export default function MarketHeader() {

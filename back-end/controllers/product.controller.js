@@ -1,39 +1,48 @@
 const Product = require("../models/product");
+const Category = require("../models/category");
 
 exports.createProduct = async (req, res) => {
+  const { category, ...productData } = req.body;
+
   try {
-    const newProduct = new Product(req.body);
+    // Check if the category already exists
+    let categoryDoc = await Category.findOne({ name: category });
+
+    // If the category doesn't exist, create it
+    if (!categoryDoc) {
+      categoryDoc = new Category({ name: category });
+      await categoryDoc.save();
+    }
+
+    // Create the product with the category ID
+    const newProduct = new Product({
+      ...productData,
+      category: categoryDoc._id,
+      author: req.userId,
+    });
+
     await newProduct.save();
     res.status(201).send(newProduct);
   } catch (error) {
+    console.error("Failed to create product:", error);
     res.status(500).send(error);
   }
 };
 
 exports.getAllProducts = async (req, res) => {
   try {
-    let products = await Product.find({});
+    let products = await Product.find({})
+      .populate("category")
+      .populate("author", "username profilePicture");
 
-    const categoryNames = products.map((product) => product.category);
-    const uniqueCategoryNames = [...new Set(categoryNames)];
-    const categories = await Category.find({
-      name: { $in: uniqueCategoryNames },
-    });
-
-    const categoryMap = categories.reduce((acc, cur) => {
-      acc[cur.name] = cur;
-      return acc;
-    }, {});
-
-    products = products.map((product) => {
-      return {
-        ...product.toObject(),
-        categoryDetails: categoryMap[product.category],
-      };
-    });
+    if (!products.length) {
+      res.status(404).send("No products found.");
+      return;
+    }
 
     res.send(products);
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).send(error);
   }
 };
@@ -88,8 +97,11 @@ exports.searchProducts = async (req, res) => {
 
 exports.getProductsByCategory = async (req, res) => {
   try {
-    const categoryName = req.params.categoryName;
+    const categoryName = req.params.name;
     const products = await Product.find({ category: categoryName });
+    if (products.length === 0) {
+      return res.status(404).send("No products found in this category.");
+    }
     res.send(products);
   } catch (error) {
     res.status(500).send(error);
