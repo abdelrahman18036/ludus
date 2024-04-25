@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useHistory for navigation
 import '../../assets/styles/style.css';
 import { baseURL } from '../../Components/Auth/API';
 import Swal from 'sweetalert2';
+
+const checkAuthStatus = async () => {
+  try {
+    const response = await axios.get(`${baseURL}/api/users/verify`, {
+      headers: {
+        'x-access-token': localStorage.getItem('userToken')
+      }
+    });
+    return response.data.message;
+
+  } catch (error) {
+    console.error('Error checking auth status:', error.response.data);
+    return false;
+  }
+};
 
 function SignUp() {
   const [userData, setUserData] = useState({
@@ -15,7 +30,16 @@ function SignUp() {
   });
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const verifyAuthentication = async () => {
+      const isAuthenticated = await checkAuthStatus();
+      if (isAuthenticated) {
+        navigate('/market'); // Redirect if already logged in
+      }
+    };
 
+    verifyAuthentication();
+  }, [navigate]);
   const handleInputChange = (e) => {
     setUserData({
       ...userData,

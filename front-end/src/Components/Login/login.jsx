@@ -1,13 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../assets/styles/style.css';
 import Swal from 'sweetalert2';
 import { baseURL } from '../Auth/API';
 import { useNavigate } from 'react-router-dom';
+
+
+const checkAuthStatus = async () => {
+    try {
+        const response = await axios.get(`${baseURL}/api/users/verify`, {
+            headers: {
+                'x-access-token': localStorage.getItem('userToken')
+            }
+        });
+        return response.data.message;
+
+    } catch (error) {
+        console.error('Error checking auth status:', error.response.data);
+        return false;
+    }
+};
+
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    useEffect(() => {
+        const verifyAuthentication = async () => {
+            const isAuthenticated = await checkAuthStatus();
+            if (isAuthenticated) {
+                navigate('/market'); // Redirect if already logged in
+            }
+        };
+
+        verifyAuthentication();
+    }, [navigate]);
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
