@@ -127,6 +127,7 @@ export default function Sliderbar() {
                     <p><a href="/">Litecoin</a></p>
                 </div>
             </div>
+<<<<<<< Updated upstream
             <div className="widget widget-history">
                 <div className="flex items-center justify-between">
                     <h5 className="title-widget">History</h5>
@@ -183,6 +184,9 @@ export default function Sliderbar() {
                     <span className="time">16hr ago</span>
                 </div>
             </div>
+=======
+
+>>>>>>> Stashed changes
         </div>
 
     );

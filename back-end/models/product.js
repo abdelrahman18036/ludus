@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   description: { type: String, required: true },
   about: { type: String, required: true },
   price: { type: Number, required: true },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  category: { type: String, ref: "Category" },
   stock: { type: Number, required: true },
   imageUrl: { type: String },
   createdAt: { type: Date, default: Date.now },

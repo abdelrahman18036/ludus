@@ -12,7 +12,26 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find({});
+    let products = await Product.find({});
+
+    const categoryNames = products.map((product) => product.category);
+    const uniqueCategoryNames = [...new Set(categoryNames)];
+    const categories = await Category.find({
+      name: { $in: uniqueCategoryNames },
+    });
+
+    const categoryMap = categories.reduce((acc, cur) => {
+      acc[cur.name] = cur;
+      return acc;
+    }, {});
+
+    products = products.map((product) => {
+      return {
+        ...product.toObject(),
+        categoryDetails: categoryMap[product.category],
+      };
+    });
+
     res.send(products);
   } catch (error) {
     res.status(500).send(error);
@@ -69,7 +88,8 @@ exports.searchProducts = async (req, res) => {
 
 exports.getProductsByCategory = async (req, res) => {
   try {
-    const products = await Product.find({ category: req.params.id });
+    const categoryName = req.params.categoryName;
+    const products = await Product.find({ category: categoryName });
     res.send(products);
   } catch (error) {
     res.status(500).send(error);

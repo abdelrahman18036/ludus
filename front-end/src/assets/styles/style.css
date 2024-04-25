@@ -2258,6 +2258,12 @@ a:focus {
     cursor: pointer;
 }
 
+.side-bar {
+    z-index: 1;
+}
+
+
+
 /* mobile header */
 /* ------------------------------------ */
 .mobile-nav-wrap .overlay-mobile-nav {

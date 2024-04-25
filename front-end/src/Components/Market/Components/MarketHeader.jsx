@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../../Auth/API";
+<<<<<<< Updated upstream
 import { Navigate, useNavigate } from "react-router-dom";
+=======
+import { useNavigate } from "react-router-dom";
+import profilePic from "../../../assets/images/avatar/avatar-01.png";
+>>>>>>> Stashed changes
 export default function MarketHeader() {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({ username: '', profilePicture: '' });
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isPopupOpen2, setIsPopupOpen2] = useState(false);
+
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchUserData = async () => {
             const userId = localStorage.getItem('id');
@@ -39,7 +46,10 @@ export default function MarketHeader() {
         localStorage.removeItem('userToken');
         localStorage.removeItem('id');
         navigate('/');
+<<<<<<< Updated upstream
         navigate(0);
+=======
+>>>>>>> Stashed changes
 
     };
 
@@ -113,7 +123,7 @@ export default function MarketHeader() {
 
                         <div className="popup-user relative" onClick={togglePopup}>
                             <div className="user">
-                                <img src={userData.profilePicture} alt={userData.username} />
+                                <img src={userData.profilePicture || profilePic} alt={userData.username} />
                                 <span>{userData.username}<i className="icon-keyboard_arrow_down" /></span>
                             </div>
                             {isPopupOpen && (
