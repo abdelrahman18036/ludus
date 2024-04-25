@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useHistory for navigation
 import '../../assets/styles/style.css';
 import { baseURL } from '../../Components/Auth/API';
-import Swal from 'sweetalert2';
+
+import Loading from '../Loading/Loading';
+import Tsparticles2 from '../Particles/Tsparticles2';
 
 const checkAuthStatus = async () => {
   try {
@@ -13,7 +15,6 @@ const checkAuthStatus = async () => {
       }
     });
     return response.data.message;
-
   } catch (error) {
     console.error('Error checking auth status:', error.response.data);
     return false;
@@ -28,8 +29,10 @@ function SignUp() {
     confirmPassword: '',
     username: ''
   });
-
+  const [loading, setLoading] = useState(false); // Initialize loading state
+  const [isRePassword, setIsRePassword] = useState(false); 
   const navigate = useNavigate();
+
   useEffect(() => {
     const verifyAuthentication = async () => {
       const isAuthenticated = await checkAuthStatus();
@@ -40,6 +43,7 @@ function SignUp() {
 
     verifyAuthentication();
   }, [navigate]);
+
   const handleInputChange = (e) => {
     setUserData({
       ...userData,
@@ -50,51 +54,35 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userData.password !== userData.confirmPassword) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Passwords do not match!',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
+        setIsRePassword(true);
       return;
     }
 
     try {
+      setLoading(true); // Set loading state to true during the API request
       await axios.post(`${baseURL}/api/users/register`, {
         email: userData.email,
         password: userData.password,
         fullname: userData.name,
         username: userData.username
-
       });
-      Swal.fire({
-        title: 'Registration successful!',
-        text: 'You will be redirected in 3 seconds.',
-        icon: 'success',
-        timer: 3000,
-        timerProgressBar: true,
-        willClose: () => {
-          navigate('/market');
-        }
-      });
+      setLoading(false); // Reset loading state after the API request completes
     } catch (error) {
+      setLoading(false); // Reset loading state in case of an error
       let errorMessage = 'Failed to register. Please try again.';
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
       } else if (error.message) {
         errorMessage = error.message;
       }
-      console.error(error);
-      Swal.fire({
-        title: 'Failed to register!',
-        text: errorMessage,
-        icon: 'error',
-        confirmButtonText: 'Try Again'
-      });
+      console.error(errorMessage);
+      // You can handle error feedback here
     }
   };
 
   return (
+    <>
+    <Tsparticles2 />
     <div id="wrapper">
       <div id="page" className="pt-40">
         <div className="tf-section-2 pt-60 widget-box-icon">
@@ -129,11 +117,16 @@ function SignUp() {
                       <label>Confirm Password *</label>
                       <input type="password" className="password-input" placeholder="Confirm password" name="confirmPassword" required onChange={handleInputChange} />
                     </fieldset>
+                      <div  style={{ fontSize: '20px', fontWeight:'bold' }} className="text-danger fontBig my-4 text-center">{isRePassword && 'Password does not match'}</div>
                     <div className="btn-submit mb-30">
-                      <button className="tf-button style-1 h50 w-100" type="submit">Sign up<i className="icon-arrow-up-right2"></i></button>
+                      {loading ? ( // Show loading indicator when loading is true
+                         <div className='flex justify-center'> <Loading />  </div> 
+                      ) : (
+                        <button className="tf-button style-1 h50 w-100" type="submit">Sign up<i className="icon-arrow-up-right2"></i></button>
+                      )}
                     </div>
                   </form>
-                  <div className="no-account">Already have an account? <a href="/login" className="tf-color">Log in</a></div>
+                     <div className="no-account">Already have an account? <a href="/login" className="tf-color">Log in</a></div>
                 </div>
               </div>
             </div>
@@ -141,6 +134,8 @@ function SignUp() {
         </div>
       </div>
     </div>
+    </>
+
   );
 }
 

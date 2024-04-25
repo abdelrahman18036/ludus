@@ -573,13 +573,8 @@
     }
 
     var retinaLogos = function() {
-        var retina = window.devicePixelRatio > 1 ? true : false;
-          if(retina) {
-            var tfheader =$('#logo_header').data('retina');
-            $('#site-logo-inner').find('img').attr({src:tfheader,width:'168px',height:'57px'});
-            var tffooter =$('#logo_footer').data('retina');
-            $('#logo-footer').find('img').attr({src:tffooter,width:'168px',height:'57px'});
-          }
+      
+        
       };  
 
     var preloader = function () {
