@@ -4,18 +4,20 @@ import bgaction from "../../assets/images/item-background/bg-action-1.png";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css'
+
+import Tsparticles from "../Particles/Tsparticles";
+
 export default function Layout({ children }) {
     return (
         <div className="wrapper-content">
             <div className="inner-content">
                 <div className="action__body w-full mb-40">
                     <div className="tf-tsparticles">
-                        <div id="tsparticles1" data-color="#161616" data-line="#000" />
+                        <Tsparticles />
                     </div>
                     <h2>Discover, create and sell your own NFT</h2>
                     <div className="flat-button flex">
-                        <a href="#" className="tf-button style-2 h50 w190 mr-10">Explore now<i className="icon-arrow-up-right2" /></a>
-                        <a href="#" className="tf-button style-2 h50 w230">Create your first NFT<i className="icon-arrow-up-right2" /></a>
+                        <a href="/create" className="tf-button style-2 h50 w230">Create your first NFT<i className="icon-arrow-up-right2" /></a>
                     </div>
                     <div className="bg-home7">
                         <Swiper

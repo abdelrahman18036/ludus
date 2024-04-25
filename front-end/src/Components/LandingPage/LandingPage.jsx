@@ -4,7 +4,10 @@ import imageTwo from '../../assets/images/item2.png'
 import imageThree from '../../assets/images/item3.png'
 import imageFour from '../../assets/images/item4.png'
 import imageFive from '../../assets/images/item5.png'
+
+import Tsparticles from '../Particles/Tsparticles';
 function LandingPage() {
+
     return (
         <div>
             <div id="wrapper">
@@ -49,7 +52,12 @@ function LandingPage() {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="action__body m-0">
-                                   
+                                        <div className="tf-tsparticles">
+
+                                            <Tsparticles />
+
+
+                                        </div>
                                         <h2 className="text-center capitalize mx-auto mw-667">Join the world’s largest nFT community
                                             &amp; start
                                             collecting NFTS</h2>

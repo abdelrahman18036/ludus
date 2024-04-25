@@ -676,6 +676,10 @@
     bottom: -10px;
 }
 
+.flat-pages-title {
+    z-index: 1;
+}
+
 /* flat-pages-title-home3 */
 .flat-pages-title-home3 {
     padding-top: 83px;
