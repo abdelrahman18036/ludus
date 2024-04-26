@@ -16,7 +16,7 @@ export default function MarketContent() {
             try {
                 const response = await axios.get(`${baseURL}/api/nfts/`);
                 setNfts(response.data.slice(0, 6));
-            } catch (error) {
+            } catch (error) {   
                 console.error('Failed to fetch NFTs:', error);
             }
         }
@@ -80,7 +80,7 @@ export default function MarketContent() {
                                         className="featured pt-10 swiper-container carousel1"
                                     >
                                         {nfts.map(nft => (
-                                            <SwiperSlide key={nft._id}>
+                                            <SwiperSlide className="relative z-99999" key={nft._id}>
                                                 <div className="tf-card-box style-4">
                                                     <div className="author flex items-center">
                                                         <div className="avatar">

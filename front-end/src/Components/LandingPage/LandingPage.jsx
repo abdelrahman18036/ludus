@@ -16,9 +16,10 @@ function LandingPage() {
                     <div className="flat-pages-title">
                         <div className="widget-bg-line">
                             <div className="wraper">
-                                <div className="bg-grid-line y bottom">
+                                <div className="bg-grid-line y bottom ">
                                     <div className="bg-line" />
                                 </div>
+                           
                             </div>
                         </div>
                         <div className="themesflat-container w1490">
