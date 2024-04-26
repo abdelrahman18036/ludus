@@ -21,46 +21,38 @@ function MainNav() {
 
                             </div>
 
-
-                            <nav id="main-nav" className="main-nav ">
-
-
-                            <ul id="menu-primary-menu" className="menu">
-                                <li className="menu-item menu-item-has-children">
-                                <a href="/">Home</a>
-                        
-                                </li>
-                                <li className="menu-item">
-                                <a href="/">About us</a>
-                                </li>
-                                <li className="menu-item menu-item-has-children">
-                                <a>Explore</a>
-                              
-                                </li>
-                                <li className="menu-item menu-item-has-children">
-                                <a>Pages</a>
-                           
-                                </li>
-                                <li className="menu-item menu-item-has-children">
-                                <a>Blog</a>
-                       
-                                </li>
-                                <li className="menu-item ">
-                                <a href="/contact">Contact</a>
-                                </li>
-                            </ul>
-
-
-                            </nav>
-
-
-                            <div className="flat-wallet flex items-center p-0 justify-center  mt-3">
-        
-
-                            <div className="canvas m-0 p-0">
-                                <span />
-                            </div>
-                            </div>
+                            <nav id="main-nav" class="main-nav">
+                                        <ul id="menu-primary-menu" class="menu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a>Home</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="about-us.html">About us</a>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a>Explore</a>
+                                               
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a>Pages</a>
+                                         
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a>Blog</a>
+                                           
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a href="contact-us.html">Contact</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    
+                                    <div class="flat-wallet flex">
+                                        
+                                    </div>
+                                        <div class="canvas">
+                                            <span></span>
+                                        </div>
                         </div> 
                         </div>
                     </div>
