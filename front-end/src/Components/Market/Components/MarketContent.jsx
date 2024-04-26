@@ -34,6 +34,22 @@ export default function MarketContent() {
         fetchLatestNFTs();
     }, []);
 
+    const placeBid = async (nftId, bidAmount) => {
+        try {
+            const token = localStorage.getItem('userToken');
+            const response = await axios.post(`${baseURL}/api/orders`, {
+                nftId: nftId,
+            }, {
+                headers: {
+                    'x-access-token': localStorage.getItem('userToken')
+                }
+            });
+            alert('Bid placed successfully');
+        } catch (error) {
+            console.error('Failed to place bid:', error);
+        }
+    };
+
 
     return (
         <div id="market" className="tabcontent active">
@@ -44,20 +60,7 @@ export default function MarketContent() {
                         <h2 className="tf-title pb-30">Trending NFTs</h2>
                     </div>
                     <div className="widget-tabs relative mb-40">
-                        <ul className="widget-menu-tab">
-                            <li className="item-title">
-                                <span className="inner">Category</span>
-                            </li>
-                            <li className="item-title active">
-                                <span className="inner">Items</span>
-                            </li>
-                            <li className="item-title">
-                                <span className="inner">Status</span>
-                            </li>
-                            <li className="item-title">
-                                <span className="inner">Price range</span>
-                            </li>
-                        </ul>
+
                         <div className="widget-content-tab">
                             <div className="widget-content-inner">
                                 <div className="featured-item style-bottom">
@@ -101,7 +104,7 @@ export default function MarketContent() {
                                                             <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
                                                         </div>
                                                         <div className="button-place-bid">
-                                                            <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
+                                                            <button data-toggle="modal" data-target="#popup_bid" className="tf-button" onClick={() => placeBid(nft._id)}><span>Place Bid</span></button>
                                                         </div>
                                                     </div>
                                                 </div>
