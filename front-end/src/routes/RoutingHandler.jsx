@@ -9,6 +9,7 @@ import Market from '../Components/Market/Market';
 import MainLayOut from '../Components/Layout/MainLayOut';
 import Loading from '../Components/Loading/Loading';
 import Err404 from '../Components/404/Err404';
+import Maintenance from '../Components/Maintaince/Maintenance';
 function RoutingHandler() {
     return (
         <Routes>
@@ -17,6 +18,7 @@ function RoutingHandler() {
             <Route path="login" element={<Login />} />
             <Route path="Loading" element={<Loading />} />
             <Route path="404" element={<Err404 />} />
+            <Route path="maintenance" element={<Maintenance />} />
             <Route path="sign-up" element={<SignUp />} />
             <Route path="contact" element={<ContactUs />} />
             <Route

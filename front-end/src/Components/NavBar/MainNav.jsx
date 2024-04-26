@@ -16,10 +16,7 @@ function MainNav() {
                                 </a>
                             </div>
                             </div>
-                            <div className="mobile-button">
-                            <span />
-
-                            </div>
+                  
 
                             <nav id="main-nav" class="main-nav">
                                         <ul id="menu-primary-menu" class="menu">
@@ -27,29 +24,19 @@ function MainNav() {
                                                 <a>Home</a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="about-us.html">About us</a>
+                                                <a href="/404">404</a>
                                             </li>
                                             <li class="menu-item menu-item-has-children">
-                                                <a>Explore</a>
+                                                <a href='/maintenance'>Maintenance</a>
                                                
                                             </li>
-                                            <li class="menu-item menu-item-has-children">
-                                                <a>Pages</a>
-                                         
-                                            </li>
-                                            <li class="menu-item menu-item-has-children">
-                                                <a>Blog</a>
-                                           
-                                            </li>
                                             <li class="menu-item ">
-                                                <a href="contact-us.html">Contact</a>
+                                                <a href="/contact">Contact</a>
                                             </li>
                                         </ul>
                                     </nav>
                                     
-                                    <div class="flat-wallet flex">
-                                        
-                                    </div>
+                        
                                         <div class="canvas">
                                             <span></span>
                                         </div>

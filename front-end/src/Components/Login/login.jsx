@@ -30,7 +30,7 @@ function Login() {
         const verifyAuthentication = async () => {
             const isAuthenticated = await checkAuthStatus();
             if (isAuthenticated) {
-                navigate('/market'); // Redirect if already logged in
+                navigate('/market'); 
             }
         };
 
