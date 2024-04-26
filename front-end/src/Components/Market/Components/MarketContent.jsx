@@ -34,7 +34,7 @@ export default function MarketContent() {
         fetchLatestNFTs();
     }, []);
 
-    const placeBid = async (nftId, bidAmount) => {
+    const placeBid = async (nftId) => {
         try {
             const token = localStorage.getItem('userToken');
             const response = await axios.post(`${baseURL}/api/orders`, {
