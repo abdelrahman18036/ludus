@@ -9,30 +9,30 @@ import profilePic from "../../../assets/images/avatar/avatar-01.png";
 
 export default function MarketContent() {
     const [nfts, setNfts] = useState([]);
-    const [latestNfts, setLatestNfts] = useState([]);
+    const [latestNfts, setLatestNFTs] = useState([]);
 
     useEffect(() => {
-        async function fetchNFTs() {
-            try {
-                const response = await axios.get(`${baseURL}/api/nfts/`);
-                setNfts(response.data.slice(0, 6));
-            } catch (error) {   
-                console.error('Failed to fetch NFTs:', error);
-            }
-        }
-
-        async function fetchLatestNFTs() {
-            try {
-                const response = await axios.get(`${baseURL}/api/nfts/latest`);
-                setLatestNfts(response.data.slice(0, 4));
-            } catch (error) {
-                console.error('Failed to fetch latest NFTs:', error);
-            }
-        }
-
         fetchNFTs();
         fetchLatestNFTs();
     }, []);
+
+    const fetchNFTs = async () => {
+        try {
+            const response = await axios.get(`${baseURL}/api/nfts/`);
+            setNfts(response.data.slice(0, 6));
+        } catch (error) {
+            console.error('Failed to fetch NFTs:', error);
+        }
+    };
+
+    const fetchLatestNFTs = async () => {
+        try {
+            const response = await axios.get(`${baseURL}/api/nfts/latest`);
+            setLatestNFTs(response.data.slice(0, 8));
+        } catch (error) {
+            console.error('Failed to fetch latest NFTs:', error);
+        }
+    };
 
     const placeBid = async (nftId) => {
         try {
@@ -45,6 +45,9 @@ export default function MarketContent() {
             });
 
             alert('Bid placed successfully');
+            fetchNFTs();
+            fetchLatestNFTs();
+
         } catch (error) {
             console.error('Failed to place bid:', error);
         }
@@ -128,12 +131,11 @@ export default function MarketContent() {
                                         <div className="col-item" key={nft._id}>
                                             <div className="tf-card-box style-1">
                                                 <div className="card-media">
-                                                    <a href="#">
-                                                        <img src={nft.imageUrl || profilePic} alt={nft.name} />
-                                                    </a>
+
+                                                    <img src={nft.imageUrl || profilePic} alt={nft.name} />
                                                     <span className="wishlist-button icon-heart" />
                                                     <div className="button-place-bid">
-                                                        <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
+                                                        <button onClick={() => placeBid(nft._id)} data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></button>
                                                     </div>
                                                 </div>
                                                 <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
