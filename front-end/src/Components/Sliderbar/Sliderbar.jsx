@@ -1,130 +1,94 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import { baseURL } from "../Auth/API";
+import Coin1 from "../../assets/images/box-icon/coin-01.png";
+import Coin2 from "../../assets/images/box-icon/coin-02.png";
+import Coin3 from "../../assets/images/box-icon/coin-03.png";
+import Coin4 from "../../assets/images/box-icon/coin-04.png";
+import Coin5 from "../../assets/images/box-icon/coin-05.png";
+import profilePic from "../../assets/images/avatar/avatar-01.png";
 
 export default function Sliderbar() {
+    const [topAuthors, setTopAuthors] = useState([]);
+    const [latestNFTs, setLatestNFTs] = useState([]);
+
+    useEffect(() => {
+        const fetchTopAuthors = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/api/nfts/topauthors`);
+                setTopAuthors(response.data);
+            } catch (error) {
+                console.error('Failed to fetch top authors:', error);
+            }
+        };
+
+        const fetchLatestNFTs = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/api/nfts/latest`);
+                setLatestNFTs(response.data.slice(0, 5));
+            } catch (error) {
+                console.error('Failed to fetch latest NFTs:', error);
+            }
+        };
+
+        fetchTopAuthors();
+        fetchLatestNFTs();
+    }, []);
     return (
         <div className="side-bar">
             <div className="widget widget-recently">
                 <h5 className="title-widget">Recently added</h5>
-                <div className="card-small-main">
-                    <img src="assets/images/blog/sidebar-05.jpg" alt="alt" />
-                    <div className="card-bottom">
-                        <h5><a href="/">Photography</a></h5>
-                        <span className="date">16hr ago</span>
-                    </div>
-                </div>
-                <div className="card-small">
-                    <div className="author">
-                        <img src="assets/images/blog/sidebar-06.jpg" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Propw</a></h6>
-                            <p><a href="/">@themes</a></p>
+                {latestNFTs.map((nft, index) => (
+                    <div className="card-small" key={index}>
+                        <div className="author authos">
+                            <img src={nft.imageUrl} alt="alt" />
+                            <div className="info">
+                                <h6><a href="/">{nft.name}</a></h6>
+                                <p><a href="/">@{nft.author.username}</a></p>
+                            </div>
                         </div>
+                        <span className="date">{new Date(nft.createdAt).toLocaleDateString()}</span>
                     </div>
-                    <span className="date">Mon, 08 May </span>
-                </div>
-                <div className="card-small">
-                    <div className="author">
-                        <img src="assets/images/blog/sidebar-07.jpg" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Propw</a></h6>
-                            <p><a href="/">@themes</a></p>
-                        </div>
-                    </div>
-                    <span className="date">Mon, 08 May </span>
-                </div>
-                <div className="card-small">
-                    <div className="author">
-                        <img src="assets/images/blog/sidebar-08.jpg" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Propw</a></h6>
-                            <p><a href="/">@themes</a></p>
-                        </div>
-                    </div>
-                    <span className="date">Mon, 08 May </span>
-                </div>
+                ))}
             </div>
             <div className="widget widget-creators">
                 <div className="flex items-center justify-between">
                     <h5 className="title-widget">Top Creators</h5>
-                    <a className="see-all" href="/">See all</a>
                 </div>
-                <div className="widget-creators-item flex items-center mb-20">
-                    <div className="order">1. </div>
-                    <div className="author flex items-center flex-grow">
-                        <img src="assets/images/avatar/avatar-small-01.png" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Brooklyn Simmons</a></h6>
-                            <span><a href="/">@themes</a></span>
+                {topAuthors.map((author, index) => (
+                    <div className="widget-creators-item flex items-center mb-20" key={index}>
+                        <div className="order">{index + 1}. </div>
+                        <div className="author flex items-center flex-grow">
+                            <img src={author.authorDetails.profilePicture || profilePic} alt="alt" />
+                            <div className="info">
+                                <h6><a>{author.authorDetails.fullname}</a></h6>
+                                <span><a >@{author.authorDetails.username}</a></span>
+                            </div>
                         </div>
                     </div>
-                    <button className="follow">Follow</button>
-                </div>
-                <div className="widget-creators-item flex items-center mb-20">
-                    <div className="order">2. </div>
-                    <div className="author flex items-center flex-grow">
-                        <img src="assets/images/avatar/avatar-small-02.png" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Brooklyn Simmons</a></h6>
-                            <span><a href="/">@themes</a></span>
-                        </div>
-                    </div>
-                    <button className="follow">Follow</button>
-                </div>
-                <div className="widget-creators-item flex items-center mb-20">
-                    <div className="order">3. </div>
-                    <div className="author flex items-center flex-grow">
-                        <img src="assets/images/avatar/avatar-small-03.png" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Brooklyn Simmons</a></h6>
-                            <span><a href="/">@themes</a></span>
-                        </div>
-                    </div>
-                    <button className="follow">Follow</button>
-                </div>
-                <div className="widget-creators-item flex items-center mb-20">
-                    <div className="order">4. </div>
-                    <div className="author flex items-center flex-grow">
-                        <img src="assets/images/avatar/avatar-small-04.png" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Brooklyn Simmons</a></h6>
-                            <span><a href="/">@themes</a></span>
-                        </div>
-                    </div>
-                    <button className="follow">Follow</button>
-                </div>
-                <div className="widget-creators-item flex items-center">
-                    <div className="order">5. </div>
-                    <div className="author flex items-center flex-grow">
-                        <img src="assets/images/avatar/avatar-small-01.png" alt="alt" />
-                        <div className="info">
-                            <h6><a href="/">Brooklyn Simmons</a></h6>
-                            <span><a href="/">@themes</a></span>
-                        </div>
-                    </div>
-                    <button className="follow">Follow</button>
-                </div>
+                ))}
             </div>
             <div className="widget widget-coins">
                 <h5 className="title-widget">Trending coins</h5>
                 <div className="widget-coins-item flex items-center mb-20">
-                    <img src="assets/images/box-icon/coin-01.png" alt="alt" />
-                    <p><a href="/">Bitcoin</a></p>
+                    <img src={Coin1} alt="alt" />
+                    <p><a href="#">Bitcoin</a></p>
                 </div>
                 <div className="widget-coins-item flex items-center mb-20">
-                    <img src="assets/images/box-icon/coin-02.png" alt="alt" />
-                    <p><a href="/">Ethereum</a></p>
+                    <img src={Coin2} alt="alt" />
+                    <p><a href="#">Ethereum</a></p>
                 </div>
                 <div className="widget-coins-item flex items-center mb-20">
-                    <img src="assets/images/box-icon/coin-03.png" alt="alt" />
-                    <p><a href="/">Cardano</a></p>
+                    <img src={Coin3} alt="alt" />
+                    <p><a href="#">Cardano</a></p>
                 </div>
                 <div className="widget-coins-item flex items-center mb-20">
-                    <img src="assets/images/box-icon/coin-04.png" alt="alt" />
-                    <p><a href="/">Solana</a></p>
+                    <img src={Coin4} alt="alt" />
+                    <p><a href="#">Solana</a></p>
                 </div>
                 <div className="widget-coins-item flex items-center">
-                    <img src="assets/images/box-icon/coin-05.png" alt="alt" />
-                    <p><a href="/">Litecoin</a></p>
+                    <img src={Coin5} alt="alt" />
+                    <p><a href="#">Litecoin</a></p>
                 </div>
             </div>
 

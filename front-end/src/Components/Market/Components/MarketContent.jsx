@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css'
+import { baseURL } from "../../Auth/API";
+import axios from "axios";
+import profilePic from "../../../assets/images/avatar/avatar-01.png";
+
+
 export default function MarketContent() {
+    const [nfts, setNfts] = useState([]);
+    const [latestNfts, setLatestNfts] = useState([]);
+
+    useEffect(() => {
+        async function fetchNFTs() {
+            try {
+                const response = await axios.get(`${baseURL}/api/nfts/`);
+                setNfts(response.data.slice(0, 6));
+            } catch (error) {
+                console.error('Failed to fetch NFTs:', error);
+            }
+        }
+
+        async function fetchLatestNFTs() {
+            try {
+                const response = await axios.get(`${baseURL}/api/nfts/latest`);
+                setLatestNfts(response.data.slice(0, 4));
+            } catch (error) {
+                console.error('Failed to fetch latest NFTs:', error);
+            }
+        }
+
+        fetchNFTs();
+        fetchLatestNFTs();
+    }, []);
+
+
     return (
         <div id="market" className="tabcontent active">
             <div className="wrapper-content">
@@ -44,35 +76,37 @@ export default function MarketContent() {
                                         }}
                                         className="featured pt-10 swiper-container carousel1"
                                     >
-                                        <SwiperSlide>
-                                            <div className="tf-card-box style-4">
-                                                <div className="author flex items-center">
-                                                    <div className="avatar">
-                                                        <img src="assets/images/avatar/avatar-box-02.jpg" alt="Marvin McKinney" />
+                                        {nfts.map(nft => (
+                                            <SwiperSlide key={nft._id}>
+                                                <div className="tf-card-box style-4">
+                                                    <div className="author flex items-center">
+                                                        <div className="avatar">
+                                                            <img src={nft.author.profilePicture || profilePic} alt={nft.author.username} />
+                                                        </div>
+                                                        <div className="info">
+                                                            <span>Created by:</span>
+                                                            <h6><a href={`author-2.html`}>{nft.author.username}</a></h6>
+                                                        </div>
                                                     </div>
-                                                    <div className="info">
-                                                        <span>Created by:</span>
-                                                        <h6><a href="author-2.html">Marvin McKinney</a></h6>
+                                                    <div className="card-media">
+                                                        <a href="#">
+                                                            <img src={nft.imageUrl} alt={nft.name} />
+                                                        </a>
+                                                        <span className="wishlist-button icon-heart" />
+                                                    </div>
+                                                    <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
+                                                    <div className="meta-info flex items-center justify-between">
+                                                        <div>
+                                                            <span className="text-bid">Current Bid</span>
+                                                            <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
+                                                        </div>
+                                                        <div className="button-place-bid">
+                                                            <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="card-media">
-                                                    <a href="#">
-                                                        <img src="assets/images/box-item/card-item-49.jpg" alt="Dayco serpentine belt" />
-                                                    </a>
-                                                    <span className="wishlist-button icon-heart" />
-                                                </div>
-                                                <h5 className="name"><a href="nft-detail-2.html">Dayco serpentine belt</a></h5>
-                                                <div className="meta-info flex items-center justify-between">
-                                                    <div>
-                                                        <span className="text-bid">Current Bid</span>
-                                                        <h6 className="price gem"><i className="icon-gem" />0,34</h6>
-                                                    </div>
-                                                    <div className="button-place-bid">
-                                                        <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
+                                            </SwiperSlide>
+                                        ))}
 
                                     </Swiper>
                                 </div>
@@ -84,73 +118,44 @@ export default function MarketContent() {
                         <h2 className="tf-title style-1 pb-30">Recently added</h2>
                     </div>
                     <div className="widget-tabs relative">
-
                         <div className="widget-content-tab">
                             <div className="widget-content-inner">
                                 <div className="wrap-box-card">
-                                    <div className="col-item">
-                                        <div className="tf-card-box style-1">
-                                            <div className="card-media">
-                                                <a href="#">
-                                                    <img src="assets/images/box-item/card-item-53.jpg" alt />
-                                                </a>
-                                                <span className="wishlist-button icon-heart" />
-                                                <div className="button-place-bid">
-                                                    <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
+                                    {latestNfts.map(nft => (
+                                        <div className="col-item" key={nft._id}>
+                                            <div className="tf-card-box style-1">
+                                                <div className="card-media">
+                                                    <a href="#">
+                                                        <img src={nft.imageUrl || profilePic} alt={nft.name} />
+                                                    </a>
+                                                    <span className="wishlist-button icon-heart" />
+                                                    <div className="button-place-bid">
+                                                        <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <h5 className="name"><a href="nft-detail-2.html">Dayco serpentine
-                                                belt</a></h5>
-                                            <div className="author flex items-center">
-                                                <div className="avatar">
-                                                    <img src="assets/images/avatar/avatar-box-03.jpg" alt="Image" />
+                                                <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
+                                                <div className="author flex items-center">
+                                                    <div className="avatar">
+                                                        <img src={nft.author.profilePicture} alt={nft.author.username} />
+                                                    </div>
+                                                    <div className="info">
+                                                        <span>Created by:</span>
+                                                        <h6><a href="author-2.html">{nft.author.username}</a></h6>
+                                                    </div>
                                                 </div>
-                                                <div className="info">
-                                                    <span>Created by:</span>
-                                                    <h6><a href="author-2.html">Marvin McKinney</a> </h6>
+                                                <div className="divider" />
+                                                <div className="meta-info flex items-center justify-between">
+                                                    <span className="text-bid">Current Bid</span>
+                                                    <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
                                                 </div>
-                                            </div>
-                                            <div className="divider" />
-                                            <div className="meta-info flex items-center justify-between">
-                                                <span className="text-bid">Current Bid</span>
-                                                <h6 className="price gem"><i className="icon-gem" />0,34</h6>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-item">
-                                        <div className="tf-card-box style-1">
-                                            <div className="card-media">
-                                                <a href="#">
-                                                    <img src="assets/images/box-item/card-item-54.jpg" alt />
-                                                </a>
-                                                <span className="wishlist-button icon-heart" />
-                                                <div className="button-place-bid">
-                                                    <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></a>
-                                                </div>
-                                            </div>
-                                            <h5 className="name"><a href="nft-detail-2.html">Dayco serpentine
-                                                belt</a></h5>
-                                            <div className="author flex items-center">
-                                                <div className="avatar">
-                                                    <img src="assets/images/avatar/avatar-box-03.jpg" alt="Image" />
-                                                </div>
-                                                <div className="info">
-                                                    <span>Created by:</span>
-                                                    <h6><a href="author-2.html">Marvin McKinney</a> </h6>
-                                                </div>
-                                            </div>
-                                            <div className="divider" />
-                                            <div className="meta-info flex items-center justify-between">
-                                                <span className="text-bid">Current Bid</span>
-                                                <h6 className="price gem"><i className="icon-gem" />0,34</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>

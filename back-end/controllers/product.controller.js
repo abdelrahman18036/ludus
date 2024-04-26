@@ -29,6 +29,25 @@ exports.createProduct = async (req, res) => {
   }
 };
 
+exports.getLatestProducts = async (req, res) => {
+  try {
+    const products = await Product.find({})
+      .sort({ createdAt: -1 })
+      .populate("category")
+      .populate("author", "username profilePicture fullname");
+
+    if (!products.length) {
+      res.status(404).send("No products found.");
+      return;
+    }
+
+    res.send(products);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send(error);
+  }
+};
+
 exports.getAllProducts = async (req, res) => {
   try {
     let products = await Product.find({})
@@ -97,13 +116,60 @@ exports.searchProducts = async (req, res) => {
 
 exports.getProductsByCategory = async (req, res) => {
   try {
-    const categoryName = req.params.name;
-    const products = await Product.find({ category: categoryName });
+    const categoryId = req.params.id;
+    const products = await Product.find({ category: categoryId }).populate(
+      "category"
+    );
     if (products.length === 0) {
       return res.status(404).send("No products found in this category.");
     }
     res.send(products);
   } catch (error) {
+    res.status(500).send(error);
+  }
+};
+exports.getTopAuthors = async (req, res) => {
+  try {
+    const authors = await Product.aggregate([
+      {
+        $group: {
+          _id: "$author",
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { count: -1 },
+      },
+      {
+        $limit: 5,
+      },
+      {
+        $lookup: {
+          from: "users", // Ensure this matches the collection name in MongoDB
+          localField: "_id",
+          foreignField: "_id",
+          as: "authorDetails",
+        },
+      },
+      {
+        $unwind: {
+          path: "$authorDetails",
+          preserveNullAndEmptyArrays: false, // Ensures that only documents with non-empty author details are included
+        },
+      },
+      {
+        $project: {
+          _id: 0, // Exclude this if you don't want to show the ObjectId in the output
+          "authorDetails.username": 1,
+          "authorDetails.profilePicture": 1,
+          count: 1,
+        },
+      },
+    ]);
+
+    res.send(authors);
+  } catch (error) {
+    console.error("Aggregation error:", error);
     res.status(500).send(error);
   }
 };
