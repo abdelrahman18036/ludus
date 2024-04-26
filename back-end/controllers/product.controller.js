@@ -31,7 +31,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getLatestProducts = async (req, res) => {
   try {
-    const products = await Product.find({})
+    const products = await Product.find({ isAvailable: true })
       .sort({ createdAt: -1 })
       .populate("category")
       .populate("author", "username profilePicture fullname");
@@ -50,7 +50,7 @@ exports.getLatestProducts = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
   try {
-    let products = await Product.find({})
+    let products = await Product.find({ isAvailable: true })
       .populate("category")
       .populate("author", "username profilePicture");
 

@@ -41,10 +41,22 @@ exports.placeOrder = async (req, res) => {
 
 exports.getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find({});
-    res.send(orders);
+    const orders = await Order.find({})
+      .populate({
+        path: "products", // Direct reference to the products array
+        model: "Product", // Ensure this matches the Product model name
+        select: "name description price imageUrl isAvailable category", // Select fields you want to display
+      })
+      .populate({
+        path: "user",
+        model: "User",
+        select: "username fullname email profilePicture", // Fields to display from User model
+      });
+
+    res.status(200).json(orders);
   } catch (error) {
-    res.status(500).send(error);
+    console.error("Error fetching orders:", error);
+    res.status(500).send({ message: "Failed to fetch orders", error: error });
   }
 };
 

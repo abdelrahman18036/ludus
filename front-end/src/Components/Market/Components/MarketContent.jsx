@@ -36,14 +36,14 @@ export default function MarketContent() {
 
     const placeBid = async (nftId) => {
         try {
-            const token = localStorage.getItem('userToken');
             const response = await axios.post(`${baseURL}/api/orders`, {
-                nftId: nftId,
+                productIds: nftId,
             }, {
                 headers: {
                     'x-access-token': localStorage.getItem('userToken')
                 }
             });
+
             alert('Bid placed successfully');
         } catch (error) {
             console.error('Failed to place bid:', error);

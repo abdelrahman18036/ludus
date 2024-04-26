@@ -11,7 +11,8 @@ import profilePic from "../../assets/images/avatar/avatar-01.png";
 export default function Sliderbar() {
     const [topAuthors, setTopAuthors] = useState([]);
     const [latestNFTs, setLatestNFTs] = useState([]);
-
+    const userToken = localStorage.getItem('userToken');
+    const [history, setHistory] = useState([]);
     useEffect(() => {
         const fetchTopAuthors = async () => {
             try {
@@ -31,8 +32,20 @@ export default function Sliderbar() {
             }
         };
 
+        const fetchHistory = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/api/orders/`, {
+                    headers: { 'x-access-token': userToken }
+                });
+                setHistory(response.data);
+            } catch (error) {
+                console.error('Failed to fetch history:', error);
+            }
+        };
+
         fetchTopAuthors();
         fetchLatestNFTs();
+        fetchHistory();
     }, []);
     return (
         <div className="side-bar">
@@ -91,6 +104,24 @@ export default function Sliderbar() {
                     <p><a href="#">Litecoin</a></p>
                 </div>
             </div>
+            <div className="widget widget-history">
+                <div className="flex items-center justify-between">
+                    <h5 className="title-widget">History</h5>
+                </div>
+                {history.map((history, index) => (
+                    <div className="widget-creators-item flex items-center mb-20">
+                        <div className="author flex items-center flex-grow">
+                            <img src={history.user.profilePicture} alt />
+                            <div className="info">
+                                <h6><a >{history.products[0].name}</a></h6>
+                                <span><a >Bought with {history.products[0].price} <i class="icon-gem"></i></a></span>
+                            </div>
+                        </div>
+                        <span className="time">Just now</span>
+                    </div>
+                ))}
+            </div>
+
 
 
         </div>

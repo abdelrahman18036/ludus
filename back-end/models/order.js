@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
   products: [
     {
-      product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
-      quantity: { type: Number, required: true },
+      type: mongoose.Schema.Types.ObjectId, // Direct reference to Product model
+      ref: "Product",
     },
   ],
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   dateOrdered: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },
-  status: { type: String, default: "Pending" },
+  status: { type: String, default: "Successful" },
 });
 
 module.exports = mongoose.model("Order", orderSchema);
