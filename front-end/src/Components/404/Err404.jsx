@@ -6,6 +6,15 @@ return (
     <div>
         <NavBar />
         <div id="wrapper">
+        <div className="widget-bg-line">
+                            <div className="wraper">
+                                <div className="bg-grid-line y top ">
+                                    <div className="bg-line" />
+                                </div>
+                   
+                           
+                            </div>
+              </div>
             <div className="section-404-page relative">
 
                     <div className="content flex justify-center items-center">

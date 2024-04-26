@@ -1268,15 +1268,8 @@ a:focus {
 }
 
 /* main-nav */
-.header_1 #main-nav {
-    position: absolute;
-    left: 22.48%;
-    top: 50%;
-    z-index: 0;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
+#main-nav {
+
 }
 
 #main-nav ul li {
@@ -1644,6 +1637,71 @@ a:focus {
     transition: all 0.3s ease-in-out;
 }
 
+/*
+    Maintainance
+
+*/
+.maintain{
+    height: 100vh;
+    overflow-y: hidden !important;
+}
+.maintenance-page{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+
+}
+.overflow-hidden{
+    overflow: hidden;
+}
+.maintenance{
+    padding: 40px 0px;
+}
+.maintenance .maintain-h{
+    font-family: 'Azeret Mono';
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 11px;
+    margin-bottom: -11px;
+}
+.maintain-q{
+    font-family: 'Azeret Mono';
+    color: rgba(255, 255, 255, 0.53);
+    font-size: 14px;
+}
+.logoMainImg{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 5%);
+}
+.maintenance p{
+    font-size: 20px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+
+}
+.maintenance h1{
+    font-size: 100px;
+    font-weight: 800;
+    line-height: 137px;
+    text-transform: capitalize;
+    margin-bottom: 24px;
+    padding: 0;
+    margin: 0;
+}
+.box-button{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 /* widget-social */
 .widget-social ul li {
     margin-right: 10px;
