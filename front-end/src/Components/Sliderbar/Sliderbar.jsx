@@ -111,7 +111,7 @@ export default function Sliderbar() {
                 {history.map((history, index) => (
                     <div className="widget-creators-item flex items-center mb-20">
                         <div className="author flex items-center flex-grow">
-                            <img src={history.user.profilePicture} alt />
+                            <img src={history.user.profilePicture || profilePic} alt />
                             <div className="info">
                                 <h6><a >{history.products[0].name}</a></h6>
                                 <span><a >Bought with {history.products[0].price} <i class="icon-gem"></i></a></span>
