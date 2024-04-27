@@ -1,47 +1,3 @@
-/**
-    * button
-    * pagetitle
-    * tf card article 
-    * tf-card-box
-    * wishlist-button
-    * button-place-bid
-    * tf-card-collection
-    * side-bar
-    * widget-comment
-    * swiper-container
-    * featured-item
-    * tf-author-box
-    * collector
-    * grid-box-icon
-    * grid-author-box
-    * tf-box-icon
-    * action__body
-    * tf-category
-    * logo-rotate
-    * swiper-rotate-3
-    * counter
-    * widget-pagination
-    * widget-category-checkbox
-    * market-page
-    * admin_active
-    * flat-tabs
-    * widget-tabs
-    * widget-term-condition
-    * wrap-accordion
-    * widget-box-icon
-    * widget-our-team
-    * widget-income
-    * gg-map
-    * widget-login
-    * popup
-    * section-single-page
-    * select-day
-    * widget-bg-animation
-    * widget-bg-line
-    * tsparticles
-*/
-
-/* container */
 .themesflat-container {
     position: relative;
     margin-left: auto;
@@ -6182,4 +6138,9 @@ fieldset.password>i::before {
 
 .po-sticky.fixed.type1 {
     margin-top: 98px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    z-index: 99 !important;
 }
