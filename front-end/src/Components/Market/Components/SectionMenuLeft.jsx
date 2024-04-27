@@ -22,7 +22,7 @@ export default function SectionMenuLeft({ onTabClick, activeTab }) {
 
         <div className={`section-menu-left ${isActive ? '' : 'null'}`}>
             <div className="box-logo">
-                <a href="/" style={{ color: "white", fontSize: "30px", fontWeight: "bolder" }}><img src={logo} alt="logo" style={{ height: "60px" }} /> MARKET</a>
+                <a  className="flex justify-center items-center" href="/" style={{ color: "white", fontSize: "30px", fontWeight: "bolder" }}><img src={logo} alt="logo" style={{ height: "60px" }} /> MARKET</a>
             </div>
             <div className="create menu-tab">
                 <a className="tf-button style-1 type-1 tablinks" data-tabs="create">

@@ -107,13 +107,23 @@ export default function MarketContent() {
                                                                 <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
                                                             </div>
                                                             <div className="button-place-bid">
-                                                                <button data-toggle="modal" data-target="#popup_bid" className="tf-button" onClick={() => placeBid(nft._id)}><span>Place Bid</span></button>
+                                                                <button
+                                                                    data-toggle="modal"
+                                                                    data-target="#popup_bid"
+                                                                    className="tf-button"
+                                                                    onClick={(event) => {
+                                                                        event.preventDefault(); 
+                                                                        placeBid(nft._id);
+                                                                    }}>
+                                                                    <span>Place Bid</span>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </Link>
                                             </SwiperSlide>
                                         ))}
+
 
                                     </Swiper>
                                 </div>
@@ -130,7 +140,8 @@ export default function MarketContent() {
                                 <div className="wrap-box-card">
                                     {latestNfts.map(nft => (
                                         <div className="col-item" key={nft._id}>
-                                            <div className="tf-card-box style-1">
+                                           <Link to={`/nft/${nft._id}`}>
+                                           <div className="tf-card-box style-1">
                                                 <div className="card-media">
 
                                                     <img src={nft.imageUrl || profilePic} alt={nft.name} />
@@ -155,6 +166,7 @@ export default function MarketContent() {
                                                     <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
                                                 </div>
                                             </div>
+                                           </Link>
                                         </div>
                                     ))}
                                 </div>
