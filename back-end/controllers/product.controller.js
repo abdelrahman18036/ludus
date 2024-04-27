@@ -180,3 +180,22 @@ exports.getTopAuthors = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.getProductsByAuthor = async (req, res) => {
+  try {
+    const authorId = req.params.id;
+    const products = await Product.find({
+      author: authorId,
+      isAvailable: true,
+    }).populate("category", "name");
+
+    if (products.length === 0) {
+      return res.status(404).send("No products found for this author.");
+    }
+
+    res.send(products);
+  } catch (error) {
+    console.error("Error fetching products by author:", error);
+    res.status(500).send(error);
+  }
+};

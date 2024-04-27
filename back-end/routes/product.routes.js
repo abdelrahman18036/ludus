@@ -9,6 +9,7 @@ router.get("/latest", productController.getLatestProducts);
 router.get("/topauthors", productController.getTopAuthors);
 router.get("/search", productController.searchProducts);
 router.get("/category/:id", productController.getProductsByCategory);
+router.get("/author/:id", productController.getProductsByAuthor);
 router.get("/:id", productController.getProductById);
 router.put("/:id", verifyToken, isAdmin, productController.updateProduct);
 router.delete("/:id", verifyToken, isAdmin, productController.deleteProduct);
