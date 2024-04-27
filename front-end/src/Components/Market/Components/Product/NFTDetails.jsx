@@ -77,8 +77,8 @@ function NFTDetails() {
                             </div>
                         </div>
                         <div className="flex">
-                            <div data-wow-delay="0s" className=" text-center  col-md-6">
-                                <div className="tf-card-box style-5 mb-0">
+                            <div data-wow-delay="0s" className="   col-md-6">
+                                <div className="tf-card-box style-5 m-0">
                                     <div className="card-media mb-0">
                                         <a href="#">
                                             <img src={nft?.imageUrl} alt="alt" />
