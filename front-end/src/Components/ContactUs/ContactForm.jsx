@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Loading from '../Loading/Loading';
-
+import "../../assets/styles/style.css";
 function ContactForm() {
     const baseURL = "https://apis.unlimited-eg.com/api/contact/";
     const [loading, setLoading] = useState(false);
@@ -80,7 +80,7 @@ function ContactForm() {
                                 </fieldset>
                             </div>
                             <fieldset className="message">
-                                <textarea className="style-1" id="message" name="message" rows={4} placeholder="Your message*" tabIndex={4} aria-required="true" required onChange={contactFormik.handleChange} value={contactFormik.values.message} />
+                                <textarea  className="style-1" id="message" name="message" rows={4} placeholder="Your message*" tabIndex={4} aria-required="true" required onChange={contactFormik.handleChange} value={contactFormik.values.message} />
                             </fieldset>
 
                                 {

@@ -91,7 +91,7 @@
         max-width: calc(100vw - 395px );
     }
     .tf-card-box .card-media img {
-        width: 100% !important;
+        width: 0% !important;
         height: auto !important;
     }
     .flat-pages-title-home3 .next-3d,

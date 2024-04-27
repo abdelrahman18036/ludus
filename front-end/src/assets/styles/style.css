@@ -100,7 +100,9 @@ video {
     font-style: inherit;
     font-weight: inherit;
 }
-
+textarea{
+    resize: none;
+}
 article,
 aside,
 details,
@@ -1842,6 +1844,13 @@ a:focus {
     margin: 0;
     padding: 0;
 
+ }
+ .contents p{
+    color: rgba(255, 255, 255, 0.53);
+    font-family: 'Azeret Mono';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
  }
  .section-404-page::before{
     content: '';

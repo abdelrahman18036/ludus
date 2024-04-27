@@ -408,7 +408,7 @@
 
 .tf-card-box .card-media img {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;

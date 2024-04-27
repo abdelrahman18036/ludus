@@ -10,6 +10,7 @@ import MainLayOut from '../Components/Layout/MainLayOut';
 import Loading from '../Components/Loading/Loading';
 import Err404 from '../Components/404/Err404';
 import Maintenance from '../Components/Maintaince/Maintenance';
+import Product from '../Components/Market/Components/Product/NFTDetails';
 function RoutingHandler() {
     return (
         <Routes>
@@ -21,6 +22,11 @@ function RoutingHandler() {
             <Route path="maintenance" element={<Maintenance />} />
             <Route path="sign-up" element={<SignUp />} />
             <Route path="contact" element={<ContactUs />} />
+            <Route path="nft/:id" element={
+                                            <ProtectedRoute>
+                                                <Product />
+                                            </ProtectedRoute>
+                                        } />
             <Route
                 path="market"
                 element={

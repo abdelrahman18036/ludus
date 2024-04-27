@@ -5,6 +5,7 @@ import 'swiper/swiper-bundle.css'
 import { baseURL } from "../../Auth/API";
 import axios from "axios";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
+import { Link } from "react-router-dom";
 
 
 export default function MarketContent() {
@@ -20,6 +21,7 @@ export default function MarketContent() {
         try {
             const response = await axios.get(`${baseURL}/api/nfts/`);
             setNfts(response.data.slice(0, 6));
+            console.log(response);
         } catch (error) {
             console.error('Failed to fetch NFTs:', error);
         }
@@ -84,33 +86,35 @@ export default function MarketContent() {
                                     >
                                         {nfts.map(nft => (
                                             <SwiperSlide className="relative z-99999" key={nft._id}>
-                                                <div className="tf-card-box style-4">
-                                                    <div className="author flex items-center">
-                                                        <div className="avatar">
-                                                            <img src={nft.author.profilePicture || profilePic} alt={nft.author.username} />
+                                                <Link to={`/nft/${nft._id}`}>
+                                                    <div className="tf-card-box style-4">
+                                                        <div className="author flex items-center">
+                                                            <div className="avatar">
+                                                                <img src={nft.author.profilePicture || profilePic} alt={nft.author.username} />
+                                                            </div>
+                                                            <div className="info">
+                                                                <span>Created by:</span>
+                                                                <h6><a href={`author-2.html`}>{nft.author.username}</a></h6>
+                                                            </div>
                                                         </div>
-                                                        <div className="info">
-                                                            <span>Created by:</span>
-                                                            <h6><a href={`author-2.html`}>{nft.author.username}</a></h6>
+                                                        <div className="card-media">
+                                                            <a href="#">
+                                                                <img src={nft.imageUrl} alt={nft.name} />
+                                                            </a>
+                                                            <span className="wishlist-button icon-heart" />
+                                                        </div>
+                                                        <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
+                                                        <div className="meta-info flex items-center justify-between">
+                                                            <div>
+                                                                <span className="text-bid">Current Bid</span>
+                                                                <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
+                                                            </div>
+                                                            <div className="button-place-bid">
+                                                                <button data-toggle="modal" data-target="#popup_bid" className="tf-button" onClick={() => placeBid(nft._id)}><span>Place Bid</span></button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div className="card-media">
-                                                        <a href="#">
-                                                            <img src={nft.imageUrl} alt={nft.name} />
-                                                        </a>
-                                                        <span className="wishlist-button icon-heart" />
-                                                    </div>
-                                                    <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
-                                                    <div className="meta-info flex items-center justify-between">
-                                                        <div>
-                                                            <span className="text-bid">Current Bid</span>
-                                                            <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
-                                                        </div>
-                                                        <div className="button-place-bid">
-                                                            <button data-toggle="modal" data-target="#popup_bid" className="tf-button" onClick={() => placeBid(nft._id)}><span>Place Bid</span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </Link>
                                             </SwiperSlide>
                                         ))}
 

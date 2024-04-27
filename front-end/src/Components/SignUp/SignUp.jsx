@@ -59,7 +59,7 @@ function SignUp() {
     }
 
     try {
-      setLoading(true); // Set loading state to true during the API request
+      setLoading(true); 
       await axios.post(`${baseURL}/api/users/register`, {
         email: userData.email,
         password: userData.password,
@@ -67,6 +67,7 @@ function SignUp() {
         username: userData.username
       });
       setLoading(false); // Reset loading state after the API request completes
+      navigate('/login');
     } catch (error) {
       setLoading(false); // Reset loading state in case of an error
       let errorMessage = 'Failed to register. Please try again.';

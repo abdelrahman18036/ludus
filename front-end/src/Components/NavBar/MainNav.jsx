@@ -1,6 +1,7 @@
 import React from 'react'
 import  logo from "../../assets/images/logo/logo.png"
 import "../../assets/styles/style.css"
+import { Link } from 'react-router-dom'
 
 function MainNav() {
   return (
@@ -11,9 +12,9 @@ function MainNav() {
                         <div className="flex items-center justify-between ">
                             <div id="site-logo">
                             <div id="site-logo-inner">
-                                <a href="/" rel="home" className="main-logo">
+                                <Link to="/" rel="home" className="main-logo">
                                 <img id="logo_header"  className="w-25 " src={logo} />
-                                </a>
+                                </Link>
                             </div>
                             </div>
                   
@@ -21,17 +22,17 @@ function MainNav() {
                             <nav id="main-nav" class="main-nav">
                                         <ul id="menu-primary-menu" class="menu">
                                             <li class="menu-item menu-item-has-children">
-                                                <a>Home</a>
+                                                <Link to='/'>Home</Link>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="/404">404</a>
+                                                <Link to="/404">404</Link>
                                             </li>
                                             <li class="menu-item menu-item-has-children">
-                                                <a href='/maintenance'>Maintenance</a>
+                                                <Link to='/maintenance'>Maintenance</Link>
                                                
                                             </li>
                                             <li class="menu-item ">
-                                                <a href="/contact">Contact</a>
+                                                <Link to="/contact">Contact</Link>
                                             </li>
                                         </ul>
                                     </nav>
