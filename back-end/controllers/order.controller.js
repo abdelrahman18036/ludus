@@ -62,7 +62,17 @@ exports.getAllOrders = async (req, res) => {
 
 exports.getOrderByUserId = async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.params.userId });
+    const orders = await Order.find({ user: req.params.userId })
+      .populate({
+        path: "products",
+        model: "Product",
+        select: "name description price imageUrl isAvailable category",
+      })
+      .populate({
+        path: "user",
+        model: "User",
+        select: "username fullname email profilePicture", // Fields to display from User model
+      });
     res.send(orders);
   } catch (error) {
     res.status(500).send(error);
@@ -97,11 +107,18 @@ exports.updateOrder = async (req, res) => {
 
 exports.deleteOrder = async (req, res) => {
   try {
-    const order = await Order.findByIdAndDelete(req.params.id);
+    const order = await Order.findByIdAndDelete(req.params.id).populate(
+      "products"
+    );
     if (!order) {
       return res.status(404).send("Order not found");
     }
-    res.send(order);
+    const productUpdates = order.products.map((product) =>
+      Product.findByIdAndUpdate(product._id, { isAvailable: true })
+    );
+
+    const updatedProducts = await Promise.all(productUpdates);
+    res.send(updatedProducts);
   } catch (error) {
     res.status(500).send(error);
   }
