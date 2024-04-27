@@ -30,7 +30,7 @@ function LoginForm() {
         const verifyAuthentication = async () => {
             const isAuthenticated = await checkAuthStatus();
             if (isAuthenticated) {
-                navigate('/market'); 
+                navigate('/market');
             }
         };
 
@@ -46,9 +46,9 @@ function LoginForm() {
             email: '',
             password: '',
         },
-        validationSchema ,
+        validationSchema,
         onSubmit: async (values) => {
-            const newValues   ={
+            const newValues = {
                 email: values.email,
                 password: values.password
             }
@@ -66,7 +66,6 @@ function LoginForm() {
         },
     });
 
-    console.log(formik);
     return (
         <>
             <div id="wrapper">

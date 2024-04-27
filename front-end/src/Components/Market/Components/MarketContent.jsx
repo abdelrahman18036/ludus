@@ -21,7 +21,6 @@ export default function MarketContent() {
         try {
             const response = await axios.get(`${baseURL}/api/nfts/`);
             setNfts(response.data.slice(0, 6));
-            console.log(response);
         } catch (error) {
             console.error('Failed to fetch NFTs:', error);
         }
@@ -98,9 +97,7 @@ export default function MarketContent() {
                                                             </div>
                                                         </div>
                                                         <div className="card-media">
-                                                            <a href="#">
-                                                                <img src={nft.imageUrl} alt={nft.name} />
-                                                            </a>
+                                                            <img src={nft.imageUrl} alt={nft.name} />
                                                             <span className="wishlist-button icon-heart" />
                                                         </div>
                                                         <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
@@ -142,14 +139,14 @@ export default function MarketContent() {
                                                         <button onClick={() => placeBid(nft._id)} data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></button>
                                                     </div>
                                                 </div>
-                                                <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
+                                                <h5 className="name">{nft.name}</h5>
                                                 <div className="author flex items-center">
                                                     <div className="avatar">
                                                         <img src={nft.author.profilePicture} alt={nft.author.username} />
                                                     </div>
                                                     <div className="info">
                                                         <span>Created by:</span>
-                                                        <h6><a href="author-2.html">{nft.author.username}</a></h6>
+                                                        <h6>{nft.author.username}</h6>
                                                     </div>
                                                 </div>
                                                 <div className="divider" />

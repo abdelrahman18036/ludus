@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../assets/images/logo/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SectionMenuLeft({ onTabClick, activeTab }) {
 
+    const [isActive, setIsActive] = useState(false);
 
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -13,11 +14,15 @@ export default function SectionMenuLeft({ onTabClick, activeTab }) {
         navigate(0);
     };
 
+    const toggleActive = () => {
+        setIsActive(!isActive);
+    };
+
     return (
 
-        <div className="section-menu-left">
+        <div className={`section-menu-left ${isActive ? '' : 'null'}`}>
             <div className="box-logo">
-                <a href="index-2.html" style={{ color: "white", fontSize: "30px", fontWeight: "bolder" }}><img src={logo} alt="logo" style={{ height: "60px" }} /> MARKET</a>
+                <a href="/" style={{ color: "white", fontSize: "30px", fontWeight: "bolder" }}><img src={logo} alt="logo" style={{ height: "60px" }} /> MARKET</a>
             </div>
             <div className="create menu-tab">
                 <a className="tf-button style-1 type-1 tablinks" data-tabs="create">
@@ -138,8 +143,14 @@ export default function SectionMenuLeft({ onTabClick, activeTab }) {
                     </ul>
                 </div>
             </div>
+
             <div className="bottom" >
                 <p>© 2024 NFTMARKET</p>
+            </div>
+            <div className={`btn-canvas ${isActive ? 'active' : ''}`} onClick={toggleActive}>
+                <div className="canvas">
+                    <span></span>
+                </div>
             </div>
         </div>
 

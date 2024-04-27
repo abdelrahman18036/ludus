@@ -140,11 +140,7 @@ export default function MarketHeader() {
                     </div>
                 </div>
             </div>
-            <div className="btn-canvas active">
-                <div className="canvas">
-                    <span></span>
-                </div>
-            </div>
+
         </>
     );
 }

@@ -56,8 +56,8 @@ export default function Sliderbar() {
                         <div className="author authos">
                             <img src={nft.imageUrl} alt="alt" />
                             <div className="info">
-                                <h6><a href="/">{nft.name}</a></h6>
-                                <p><a href="/">@{nft.author.username}</a></p>
+                                <h6>{nft.name}</h6>
+                                <p>@{nft.author.username}</p>
                             </div>
                         </div>
                         <span className="date">{new Date(nft.createdAt).toLocaleDateString()}</span>
@@ -74,8 +74,8 @@ export default function Sliderbar() {
                         <div className="author flex items-center flex-grow">
                             <img src={author.authorDetails.profilePicture || profilePic} alt="alt" />
                             <div className="info">
-                                <h6><a>{author.authorDetails.fullname}</a></h6>
-                                <span><a >@{author.authorDetails.username}</a></span>
+                                <h6>{author.authorDetails.fullname}</h6>
+                                <span>@{author.authorDetails.username}</span>
                             </div>
                         </div>
                     </div>
@@ -85,23 +85,23 @@ export default function Sliderbar() {
                 <h5 className="title-widget">Trending coins</h5>
                 <div className="widget-coins-item flex items-center mb-20">
                     <img src={Coin1} alt="alt" />
-                    <p><a href="#">Bitcoin</a></p>
+                    <p>Bitcoin</p>
                 </div>
                 <div className="widget-coins-item flex items-center mb-20">
                     <img src={Coin2} alt="alt" />
-                    <p><a href="#">Ethereum</a></p>
+                    <p>Ethereum</p>
                 </div>
                 <div className="widget-coins-item flex items-center mb-20">
                     <img src={Coin3} alt="alt" />
-                    <p><a href="#">Cardano</a></p>
+                    <p>Cardano</p>
                 </div>
                 <div className="widget-coins-item flex items-center mb-20">
                     <img src={Coin4} alt="alt" />
-                    <p><a href="#">Solana</a></p>
+                    <p>Solana</p>
                 </div>
                 <div className="widget-coins-item flex items-center">
                     <img src={Coin5} alt="alt" />
-                    <p><a href="#">Litecoin</a></p>
+                    <p>Litecoin</p>
                 </div>
             </div>
             <div className="widget widget-history">
