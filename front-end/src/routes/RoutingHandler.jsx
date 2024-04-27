@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import Login from '../Components/Login/login';
 import SignUp from '../Components/SignUp/SignUp';
 import LandingPage from '../Components/LandingPage/LandingPage';
 import ContactUs from '../Components/ContactUs/ContactUs';
@@ -11,13 +10,14 @@ import Loading from '../Components/Loading/Loading';
 import Err404 from '../Components/404/Err404';
 import Maintenance from '../Components/Maintaince/Maintenance';
 import Product from '../Components/Market/Components/Product/NFTDetails';
+import Login from '../Components/Login/Login';
 function RoutingHandler() {
     return (
         <Routes>
             <Route path="/" element={<MainLayOut />}>
             </Route>
-            <Route path="login" element={<Login />} />
             <Route path="Loading" element={<Loading />} />
+            <Route path="login" element={<Login />} />
             <Route path="404" element={<Err404 />} />
             <Route path="maintenance" element={<Maintenance />} />
             <Route path="sign-up" element={<SignUp />} />
