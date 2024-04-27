@@ -94,7 +94,7 @@ function NFTDetails() {
                 <div className="col-md-6">
                  
                     <div data-wow-delay="0s" className="wow fadeInRight product-item time-sales">
-                    <h6><i className="icon-clock" />Created At {formatDate(nft.createdAt)} (GMT + 3)</h6>
+                    <h6><i className="icon-clock" />Created At {formatDate(nft?.createdAt)} (GMT + 3)</h6>
                     <div className="content">
                         <div className="text">Current price</div>
                         <div className="flex justify-between">
