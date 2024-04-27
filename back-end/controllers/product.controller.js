@@ -1,31 +1,43 @@
 const Product = require("../models/product");
 const Category = require("../models/category");
 const User = require("../models/user");
+const fs = require("fs");
 exports.createProduct = async (req, res) => {
   const { category, ...productData } = req.body;
 
   try {
-    // Check if the category already exists
     let categoryDoc = await Category.findOne({ name: category });
-
-    // If the category doesn't exist, create it
     if (!categoryDoc) {
+      if (!category || category.trim() === "") {
+        throw new Error("Invalid category name");
+      }
       categoryDoc = new Category({ name: category });
       await categoryDoc.save();
     }
 
-    // Create the product with the category ID
+    const imageUrl = req.file ? req.file.path : undefined;
+
     const newProduct = new Product({
       ...productData,
       category: categoryDoc._id,
       author: req.userId,
+      imageUrl: imageUrl,
     });
 
     await newProduct.save();
     res.status(201).send(newProduct);
   } catch (error) {
     console.error("Failed to create product:", error);
-    res.status(500).send(error);
+    res
+      .status(500)
+      .send({ message: "Failed to create product", error: error.message });
+    if (req.file) {
+      // Optionally remove the file if there's an error after upload
+      fs.unlink(req.file.path, (err) => {
+        if (err)
+          console.error("Failed to delete uploaded file after error:", err);
+      });
+    }
   }
 };
 
@@ -187,7 +199,9 @@ exports.getProductsByAuthor = async (req, res) => {
     const products = await Product.find({
       author: authorId,
       isAvailable: true,
-    }).populate("category", "name");
+    })
+      .populate("category", "name")
+      .populate("author", "username profilePicture");
 
     if (products.length === 0) {
       return res.status(404).send("No products found for this author.");

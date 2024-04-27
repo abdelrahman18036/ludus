@@ -54,7 +54,7 @@ export default function Sliderbar() {
                 {latestNFTs.map((nft, index) => (
                     <div className="card-small" key={index}>
                         <div className="author authos">
-                            <img src={nft.imageUrl} alt="alt" />
+                            <img src={`http://localhost:5000/${nft.imageUrl}`} alt="alt" />
                             <div className="info">
                                 <h6>{nft.name}</h6>
                                 <p>@{nft.author.username}</p>
@@ -72,7 +72,7 @@ export default function Sliderbar() {
                     <div className="widget-creators-item flex items-center mb-20" key={index}>
                         <div className="order">{index + 1}. </div>
                         <div className="author flex items-center flex-grow">
-                            <img src={author.authorDetails.profilePicture || profilePic} alt="alt" />
+                            <img src={`http://localhost:5000/${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
                             <div className="info">
                                 <h6>{author.authorDetails.fullname}</h6>
                                 <span>@{author.authorDetails.username}</span>
@@ -111,7 +111,7 @@ export default function Sliderbar() {
                 {history.map((history, index) => (
                     <div className="widget-creators-item flex items-center mb-20">
                         <div className="author flex items-center flex-grow">
-                            <img src={history.user.profilePicture || profilePic} alt="alt" />
+                            <img src={`http://localhost:5000/${history.user.profilePicture}` || profilePic} alt="alt" />
                             <div className="info">
                                 <h6><a >{history.products[0].name}</a></h6>
                                 <span><a >Bought with {history.products[0].price} <i class="icon-gem"></i></a></span>

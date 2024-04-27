@@ -52,7 +52,7 @@ function NFTDetails() {
                                     <div className='flex justify-between items-center col-md-12 bg-'>
                                         <div className="author flex items-center mb-30">
                                             <div className="avatar">
-                                                <img src={nft?.author.profilePicture} alt="Image" />
+                                                <img src={`http://localhost:5000/${nft?.author.profilePicture}`} alt="Image" />
                                             </div>
                                             <div className="info">
                                                 <span>Owned by:</span>
@@ -81,7 +81,7 @@ function NFTDetails() {
                                 <div className="tf-card-box style-5 m-0">
                                     <div className="card-media mb-0">
                                         <a href="#">
-                                            <img src={nft?.imageUrl} alt="alt" />
+                                            <img src={`http://localhost:5000/${nft?.imageUrl}`} alt="alt" />
                                         </a>
                                     </div>
                                     <h6 className="price gem"><i className="icon-gem" /></h6>

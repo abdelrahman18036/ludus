@@ -67,13 +67,22 @@ exports.getUser = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
+  const updateData = req.body;
+
+  if (req.file) {
+    updateData.profilePicture = req.file.path;
+  }
+
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
+      runValidators: true,
     });
+
     if (!user) {
       return res.status(404).send("User not found");
     }
+
     res.send(user);
   } catch (error) {
     res.status(500).send(error);

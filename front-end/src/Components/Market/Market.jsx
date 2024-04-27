@@ -5,7 +5,9 @@ import MarketContent from "./Components/MarketContent";
 import ActiveBid from "./Components/ActiveBid";
 import Explore from "./Components/Explore";
 import Layout from "../Layout/Layout";
-import Accordion from "../Accordion/Accordion";
+import Collection from "./Components/Collection";
+import Setting from "./Components/Settings";
+
 export default function Market() {
     const [activeTab, setActiveTab] = useState('market');
     const handleTabClick = (tabName) => {
@@ -16,14 +18,21 @@ export default function Market() {
             <MarketHeader />
             <div className="flat-tabs">
                 <SectionMenuLeft onTabClick={handleTabClick} activeTab={activeTab} />
+
                 <div className="content-tabs">
                     <Layout >
                         {activeTab === 'market' && <MarketContent />}
                         {activeTab === 'bid' && <ActiveBid />}
                         {activeTab === 'explore' && <Explore />}
+                        {activeTab === 'collection' && <Collection />}
+                        {activeTab === 'settings' && <Setting />}
+
                     </Layout>
+
                 </div>
+
             </div>
+
         </div>
 
     );

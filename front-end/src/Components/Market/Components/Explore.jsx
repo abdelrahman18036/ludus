@@ -54,8 +54,8 @@ export default function Explore() {
             });
 
             alert('Bid placed successfully');
-       
-            fetchProducts("All") 
+
+            fetchProducts("All")
         } catch (error) {
             console.error('Failed to place bid:', error);
         }
@@ -95,38 +95,36 @@ export default function Explore() {
                                     <Link to={`/nft/${product._id}`}>
                                         <div className="tf-card-box style-4">
                                             <div className="card-media">
-                                                <a href="#">
-                                                    <img src={product.imageUrl || 'path/to/default/image'} alt={product.name} />
-                                                </a>
+                                                <img src={`http://localhost:5000/${product.imageUrl}`} alt={product.name} />
                                             </div>
                                             <div className="author flex items-center">
                                                 <div className="avatar">
-                                                    <img src={profilePic} alt="Profile" />
+                                                    <img src={`http://localhost:5000/${product.author.profilePicture}`} alt="Profile" />
                                                 </div>
                                                 <div className="info">
                                                     <span>Created by:</span>
-                                                    <h6><a href="#">{product.author.name}</a></h6>
+                                                    <h6>{product.author.username}</h6>
                                                 </div>
                                             </div>
                                             <h5 className="name"><a href="nft-detail-2.html">{product.name}</a></h5>
-                                                    <div className="meta-info flex items-center justify-between">
-                                                        <div>
-                                                            <span className="text-bid">Current Bid</span>
-                                                            <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
-                                                        </div>
-                                                        <div className="button-place-bid">
-                                                            <button
-                                                                data-toggle="modal"
-                                                                data-target="#popup_bid"
-                                                                className="tf-button"
-                                                                onClick={(event) => {
-                                                                    event.preventDefault(); 
-                                                                    placeBid(product._id);
-                                                                }}>
-                                                                <span>Place Bid</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                            <div className="meta-info flex items-center justify-between">
+                                                <div>
+                                                    <span className="text-bid">Current Bid</span>
+                                                    <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
+                                                </div>
+                                                <div className="button-place-bid">
+                                                    <button
+                                                        data-toggle="modal"
+                                                        data-target="#popup_bid"
+                                                        className="tf-button"
+                                                        onClick={(event) => {
+                                                            event.preventDefault();
+                                                            placeBid(product._id);
+                                                        }}>
+                                                        <span>Place Bid</span>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </Link>
                                 </div>

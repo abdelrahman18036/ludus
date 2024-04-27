@@ -4,13 +4,13 @@ import axios from "axios";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
 import { Link } from "react-router-dom";
 
-export default function ActiveBid() {
+export default function Collection() {
     const [activeBid, setActiveBid] = useState([]);
     const userId = localStorage.getItem('id');
     const userToken = localStorage.getItem('userToken');
     const fetchActiveBid = async () => {
         try {
-            const response = await axios.get(`${baseURL}/api/orders/${userId}`, {
+            const response = await axios.get(`${baseURL}/api/nfts/author/${userId}`, {
                 headers: {
                     'x-access-token': userToken
                 }
@@ -23,7 +23,7 @@ export default function ActiveBid() {
 
     const handleRemoveBid = async (orderId) => {
         try {
-            await axios.delete(`${baseURL}/api/orders/${orderId}`, {
+            await axios.delete(`${baseURL}/api/nfts/${orderId}`, {
                 headers: {
                     'x-access-token': userToken
                 }
@@ -43,7 +43,7 @@ export default function ActiveBid() {
     return (
         <>
             <div class="heading-section">
-                <h2 class="tf-title pb-30">My Active Bid</h2>
+                <h2 class="tf-title pb-30">My Added Collection</h2>
             </div>
             <div className="widget-tabs relative">
 
@@ -53,9 +53,9 @@ export default function ActiveBid() {
                             {activeBid.map(activeBids => (
 
                                 <div className="col-item">
-                                    <div className="tf-card-box style-1" key={activeBids.products[0]._id}>
+                                    <div className="tf-card-box style-1" key={activeBids._id}>
                                         <div className="card-media">
-                                            <img src={`http://localhost:5000/${activeBids.products[0].imageUrl}`} alt="alt" />
+                                            <img src={`http://localhost:5000/${activeBids.imageUrl}`} alt="alt" />
                                             <span className="wishlist-button icon-heart" />
                                             {/* <div className="featured-countdown">
                                                 <span className="js-countdown" data-timer={7500} data-labels="d,h,m,s">
@@ -68,20 +68,20 @@ export default function ActiveBid() {
                                                 <button data-toggle="modal" data-target="#popup_bid" className="tf-button" onClick={() => handleRemoveBid(activeBids._id)}><span>Remove Bid</span></button>
                                             </div>
                                         </div>
-                                        <h5 className="name"><a href="nft-detail-2.html">{activeBids.products[0].name}</a></h5>
+                                        <h5 className="name"><a href="nft-detail-2.html">{activeBids.name}</a></h5>
                                         <div className="author flex items-center">
                                             <div className="avatar">
-                                                <img src={`http://localhost:5000/${activeBids.user.profilePicture}` || profilePic} alt="Image" />
+                                                <img src={`http://localhost:5000/${activeBids.author.profilePicture}` || profilePic} alt="Image" />
                                             </div>
                                             <div className="info">
                                                 <span>Created by:</span>
-                                                <h6>{activeBids.user.username}</h6>
+                                                <h6>{activeBids.author.username}</h6>
                                             </div>
                                         </div>
                                         <div className="divider" />
                                         <div className="meta-info flex items-center justify-between">
                                             <span className="text-bid">Bid Value</span>
-                                            <h6 className="price gem"><i className="icon-gem" /> {activeBids.products[0].price}</h6>
+                                            <h6 className="price gem"><i className="icon-gem" /> {activeBids.price}</h6>
                                         </div>
                                     </div>
                                 </div>

@@ -11,6 +11,7 @@ import Err404 from '../Components/404/Err404';
 import Maintenance from '../Components/Maintaince/Maintenance';
 import Product from '../Components/Market/Components/Product/NFTDetails';
 import Login from '../Components/Login/Login';
+import Create from '../Components/Market/Components/Product/Create';
 function RoutingHandler() {
     return (
         <Routes>
@@ -23,10 +24,15 @@ function RoutingHandler() {
             <Route path="sign-up" element={<SignUp />} />
             <Route path="contact" element={<ContactUs />} />
             <Route path="nft/:id" element={
-                                            <ProtectedRoute>
-                                                <Product />
-                                            </ProtectedRoute>
-                                        } />
+                <ProtectedRoute>
+                    <Product />
+                </ProtectedRoute>
+            } />
+            <Route path="create" element={
+                <ProtectedRoute>
+                    <Create />
+                </ProtectedRoute>
+            } />
             <Route
                 path="market"
                 element={
@@ -35,9 +41,6 @@ function RoutingHandler() {
                     </ProtectedRoute>
                 }
             />
-            {/* <Route path="about" element={<About />} /> */}
-            {/* <Route path="sign-up" element={<SignUp />} /> */}
-            {/* <Route path="landing" element={<Landing />} /> */}
         </Routes>
     );
 }
