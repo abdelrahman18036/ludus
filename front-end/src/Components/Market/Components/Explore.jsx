@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../../Auth/API";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";  // Assuming this might be used later
+import { Link } from "react-router-dom";
 
 export default function Explore() {
     const [categories, setCategories] = useState([]);
@@ -42,6 +43,23 @@ export default function Explore() {
             console.error('Failed to search products', error);
         }
     };
+    const placeBid = async (nftId) => {
+        try {
+            const response = await axios.post(`${baseURL}/api/orders`, {
+                productIds: nftId,
+            }, {
+                headers: {
+                    'x-access-token': localStorage.getItem('userToken')
+                }
+            });
+
+            alert('Bid placed successfully');
+       
+            fetchProducts("All") 
+        } catch (error) {
+            console.error('Failed to place bid:', error);
+        }
+    };
 
     return (
         <>
@@ -74,26 +92,43 @@ export default function Explore() {
                         <div className="wrap-box-card">
                             {products.map(product => (
                                 <div className="col-item" key={product._id}>
-                                    <div className="tf-card-box style-4">
-                                        <div className="card-media">
-                                            <a href="#">
-                                                <img src={product.imageUrl || 'path/to/default/image'} alt={product.name} />
-                                            </a>
-                                        </div>
-                                        <div className="author flex items-center">
-                                            <div className="avatar">
-                                                <img src={profilePic} alt="Profile" />
+                                    <Link to={`/nft/${product._id}`}>
+                                        <div className="tf-card-box style-4">
+                                            <div className="card-media">
+                                                <a href="#">
+                                                    <img src={product.imageUrl || 'path/to/default/image'} alt={product.name} />
+                                                </a>
                                             </div>
-                                            <div className="info">
-                                                <span>Created by:</span>
-                                                <h6><a href="#">{product.author.name}</a></h6>
+                                            <div className="author flex items-center">
+                                                <div className="avatar">
+                                                    <img src={profilePic} alt="Profile" />
+                                                </div>
+                                                <div className="info">
+                                                    <span>Created by:</span>
+                                                    <h6><a href="#">{product.author.name}</a></h6>
+                                                </div>
                                             </div>
+                                            <h5 className="name"><a href="nft-detail-2.html">{product.name}</a></h5>
+                                                    <div className="meta-info flex items-center justify-between">
+                                                        <div>
+                                                            <span className="text-bid">Current Bid</span>
+                                                            <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
+                                                        </div>
+                                                        <div className="button-place-bid">
+                                                            <button
+                                                                data-toggle="modal"
+                                                                data-target="#popup_bid"
+                                                                className="tf-button"
+                                                                onClick={(event) => {
+                                                                    event.preventDefault(); 
+                                                                    placeBid(product._id);
+                                                                }}>
+                                                                <span>Place Bid</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                         </div>
-                                        <h5 className="name"><a href="#">{product.name}</a></h5>
-                                        <div className="meta-info flex items-center justify-between">
-                                            <h6 className="price">{product.price}</h6>
-                                        </div>
-                                    </div>
+                                    </Link>
                                 </div>
                             ))}
                         </div>
