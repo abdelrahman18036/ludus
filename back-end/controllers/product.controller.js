@@ -1,6 +1,6 @@
 const Product = require("../models/product");
 const Category = require("../models/category");
-
+const User = require("../models/user");
 exports.createProduct = async (req, res) => {
   const { category, ...productData } = req.body;
 
@@ -68,7 +68,10 @@ exports.getAllProducts = async (req, res) => {
 
 exports.getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate(
+      "author",
+      "username profilePicture fullname"
+    );
     if (!product) {
       return res.status(404).send("Product not found");
     }
