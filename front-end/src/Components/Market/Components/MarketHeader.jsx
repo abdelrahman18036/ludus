@@ -51,12 +51,7 @@ export default function MarketHeader() {
             <div id="market-header">
                 <div className="market-header flex items-center justify-between">
                     <div className="widget-search">
-                        <form action="#" method="get" role="search" className="search-form relative">
-                            <input type="search" id="search" className="search-field style-1" placeholder="Search artwork, collection..." name="s" title="Search for" required />
-                            <button className="search search-submit" type="submit" title="Search">
-                                <i className="icon-search" />
-                            </button>
-                        </form>
+
                     </div>
                     <div className="admin_active" id="header_admin">
                         <div className="popup-notification relative">

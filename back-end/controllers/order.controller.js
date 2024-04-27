@@ -43,14 +43,14 @@ exports.getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find({})
       .populate({
-        path: "products", // Direct reference to the products array
-        model: "Product", // Ensure this matches the Product model name
-        select: "name description price imageUrl isAvailable category", // Select fields you want to display
+        path: "products",
+        model: "Product",
+        select: "name description price imageUrl isAvailable category",
       })
       .populate({
         path: "user",
         model: "User",
-        select: "username fullname email profilePicture", // Fields to display from User model
+        select: "username fullname email profilePicture",
       });
 
     res.status(200).json(orders);
@@ -94,7 +94,7 @@ exports.getOrderById = async (req, res) => {
 exports.updateOrder = async (req, res) => {
   try {
     const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
-      new: true, // Ensures that the updated document is returned
+      new: true,
     });
     if (!order) {
       return res.status(404).send("Order not found");

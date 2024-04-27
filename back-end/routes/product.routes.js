@@ -7,7 +7,6 @@ router.post("/", verifyToken, productController.createProduct);
 router.get("/", productController.getAllProducts);
 router.get("/latest", productController.getLatestProducts);
 router.get("/topauthors", productController.getTopAuthors);
-
 router.get("/search", productController.searchProducts);
 router.get("/category/:id", productController.getProductsByCategory);
 router.get("/:id", productController.getProductById);

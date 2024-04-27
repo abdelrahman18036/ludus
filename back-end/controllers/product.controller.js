@@ -110,7 +110,10 @@ exports.deleteProduct = async (req, res) => {
 exports.searchProducts = async (req, res) => {
   try {
     const { name } = req.query;
-    const products = await Product.find({ name: new RegExp(name, "i") });
+    const products = await Product.find({
+      name: new RegExp(name, "i"),
+      isAvailable: true,
+    });
     res.json(products);
   } catch (error) {
     res.status(500).send(error);
@@ -120,9 +123,10 @@ exports.searchProducts = async (req, res) => {
 exports.getProductsByCategory = async (req, res) => {
   try {
     const categoryId = req.params.id;
-    const products = await Product.find({ category: categoryId }).populate(
-      "category"
-    );
+    const products = await Product.find({
+      category: categoryId,
+      isAvailable: true,
+    }).populate("category");
     if (products.length === 0) {
       return res.status(404).send("No products found in this category.");
     }
