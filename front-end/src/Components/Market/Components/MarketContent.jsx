@@ -212,7 +212,13 @@ export default function MarketContent() {
                                                                     <img  className="w-100  "src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />
                                                                     <span className="wishlist-button icon-heart" />
                                                                     <div className="button-place-bid">
-                                                                        <button onClick={() => placeBid(nft._id)} data-toggle="modal" data-target="#popup_bid" className="tf-button"><span>Place Bid</span></button>
+                                                                        <button  onClick={(event) => {
+                                                                            event.preventDefault();
+                                                                            placeBid(nft._id);
+                                                                        }}
+                                                                         data-toggle="modal" data-target="#popup_bid" className="tf-button">
+                                                                            <span>Place Bid</span>
+                                                                            </button>
                                                                     </div>
                                                                 </div>
                                                                 <h5 className="name">{nft.name}</h5>
