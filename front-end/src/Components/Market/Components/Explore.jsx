@@ -13,6 +13,7 @@ export default function Explore() {
     const [activeCategory, setActiveCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
     const [loading , setLoading] = useState(false);
+    const [cardsLoading, setCardsLoading] = useState(true);
     useEffect(() => {
         fetchCategories();
         fetchProducts(activeCategory);
@@ -28,12 +29,15 @@ export default function Explore() {
     };
 
     const fetchProducts = async (categoryId) => {
+        setCardsLoading(true);
         try {
             const url = categoryId === 'All' ? `${baseURL}/api/nfts/` : `${baseURL}/api/nfts/category/${categoryId}`;
             const response = await axios.get(url);
             setProducts(response.data);
+            setCardsLoading(false);
         } catch (error) {
             console.error('Failed to fetch products', error);
+            setCardsLoading(false);
         }
     };
 
@@ -108,47 +112,64 @@ export default function Explore() {
                 <div className="widget-content-tab">
                     <div className="widget-content-inner">
                         <div className="wrap-box-card">
-                            {products.map(product => (
-                                <div className="col-item" key={product._id}>
-                                    <Link to={`/nft/${product._id}`}>
-                                        <div className="tf-card-box style-4">
-                                            <div className="card-media">
-                                                <img src={`http://localhost:5000/${product.imageUrl}`} alt={product.name} />
-                                            </div>
-                                            <div className="author flex items-center">
-                                                <div className="avatar">
-                                                    <img src={`http://localhost:5000/${product.author.profilePicture}`} alt="Profile" />
+                            {
+                                
+                                !cardsLoading ? products.map(product => (
+                                    <div className="col-item" key={product._id}>
+                                        <Link to={`/nft/${product._id}`}>
+                                            <div className="tf-card-box style-4">
+                                                <div className="card-media">
+                                                    <img src={`http://localhost:5000/${product.imageUrl}`} alt={product.name} />
                                                 </div>
-                                                <div className="info">
-                                                    <span>Created by:</span>
-                                                    <h6>{product.author.username}</h6>
+                                                <div className="author flex items-center">
+                                                    <div className="avatar">
+                                                        <img src={`http://localhost:5000/${product.author.profilePicture}`} alt="Profile" />
+                                                    </div>
+                                                    <div className="info">
+                                                        <span>Created by:</span>
+                                                        <h6>{product.author.username}</h6>
+                                                    </div>
+                                                </div>
+                                                <h5 className="name"><a href="nft-detail-2.html">{product.name}</a></h5>
+                                                <div className="meta-info flex items-center justify-between">
+                                                    <div>
+                                                        <span className="text-bid">Current Bid</span>
+                                                        <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
+                                                    </div>
+                                                {
+                                                    loading ? <Loading />   : (                                                <div className="button-place-bid">
+                                                    <button
+                                                        data-toggle="modal"
+                                                        data-target="#popup_bid"
+                                                        className="tf-button"
+                                                        onClick={(event) => {
+                                                            event.preventDefault();
+                                                            placeBid(product._id);
+                                                        }}>
+                                                        <span>Place Bid</span>
+                                                    </button>
+                                                </div>)
+                                                }
                                                 </div>
                                             </div>
-                                            <h5 className="name"><a href="nft-detail-2.html">{product.name}</a></h5>
-                                            <div className="meta-info flex items-center justify-between">
-                                                <div>
-                                                    <span className="text-bid">Current Bid</span>
-                                                    <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
+                                        </Link>
+                                    </div>
+                                )) : (
+                                    <div className="container">
+
+                                    <div className="row">
+                                        {Array.from({ length: 4 }).map((_, index) => (
+                                            <div className="col-md-3 my-5  flex justify-center">
+                                                <div className="col-item" >
+                                                    <Loading />
                                                 </div>
-                                            {
-                                                loading ? <Loading />   : (                                                <div className="button-place-bid">
-                                                <button
-                                                    data-toggle="modal"
-                                                    data-target="#popup_bid"
-                                                    className="tf-button"
-                                                    onClick={(event) => {
-                                                        event.preventDefault();
-                                                        placeBid(product._id);
-                                                    }}>
-                                                    <span>Place Bid</span>
-                                                </button>
-                                            </div>)
-                                            }
                                             </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            ))}
+                                        ))}
+                                    </div>
+                                    </div>
+
+                                ) 
+                            }
                         </div>
                     </div>
                 </div>

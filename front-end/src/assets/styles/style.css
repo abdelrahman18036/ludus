@@ -6,6 +6,8 @@
 @import "font.css";
 @import "bootstrap.css";
 @import "icon.css";
+
+
 .rounded{
     border-radius: 20px !important;
 }
@@ -27,6 +29,14 @@
     font-weight: semibold;
     font-family: 'Azeret Mono';
   }
+
+
+    .sliderCards:hover{
+        cursor: grab;
+    }
+    .sliderCards.active {
+        cursor: grabbing;
+    }
 html,
 body,
 div,
