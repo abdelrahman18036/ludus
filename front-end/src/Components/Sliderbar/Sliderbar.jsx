@@ -7,12 +7,24 @@ import Coin3 from "../../assets/images/box-icon/coin-03.png";
 import Coin4 from "../../assets/images/box-icon/coin-04.png";
 import Coin5 from "../../assets/images/box-icon/coin-05.png";
 import profilePic from "../../assets/images/avatar/avatar-01.png";
+import Skeleton from "react-loading-skeleton";
 
 export default function Sliderbar() {
     const [topAuthors, setTopAuthors] = useState([]);
     const [latestNFTs, setLatestNFTs] = useState([]);
     const userToken = localStorage.getItem('userToken');
     const [history, setHistory] = useState([]);
+    function extractTime(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+    }
+    
+ 
     useEffect(() => {
         const fetchTopAuthors = async () => {
             try {
@@ -72,10 +84,27 @@ export default function Sliderbar() {
                     <div className="widget-creators-item flex items-center mb-20" key={index}>
                         <div className="order">{index + 1}. </div>
                         <div className="author flex items-center flex-grow">
-                            <img src={`http://localhost:5000/${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
-                            <div className="info">
-                                <h6>{author.authorDetails.fullname}</h6>
-                                <span>@{author.authorDetails.username}</span>
+                           {
+                            topAuthors? <img src={`http://localhost:5000/${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
+                            :
+                            <Skeleton className="mr-2" circle={true}  highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
+                           }
+                            <div className="info  ">
+                                <h6>{
+                                
+                                topAuthors? <a >{author.authorDetails.fullName}</a>
+                                :
+                                <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />    
+
+                                    }
+                                </h6>
+                                <span>{
+                                    
+                                    topAuthors? <a >@{author.authorDetails.username}</a>
+                                    :
+                                    <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />    
+
+                                    }</span>
                             </div>
                         </div>
                     </div>
@@ -109,15 +138,40 @@ export default function Sliderbar() {
                     <h5 className="title-widget">History</h5>
                 </div>
                 {history.map((history, index) => (
-                    <div className="widget-creators-item flex items-center mb-20">
+                    <div className="widget-creators-item flex mb-20">
                         <div className="author flex items-center flex-grow">
-                            <img src={`http://localhost:5000/${history.user.profilePicture}` || profilePic} alt="alt" />
-                            <div className="info">
-                                <h6><a >{history.products[0].name}</a></h6>
-                                <span><a >Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
+                           {
+                            history?  <img  className="" src={`http://localhost:5000/${history.user.profilePicture}` || profilePic} alt="alt" />
+                            :
+                            <Skeleton className="mr-3" circle={true}  highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
+                           }
+                        <div className="w-100">
+                            <div className="flex  justify-between items-start">
+
+                                <div className="info">
+                                    {
+                                        history?<h6><a >{history.products[0].name}</a></h6>
+                                        :
+                                        <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />
+                                    }
+                                    {
+                                        history?<span><a >Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
+                                        :
+                                        <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />
+                                    }
+                                </div>
+                                <span className="time " >
+                                {
+                                    history? extractTime(history.createdAt)
+                                    :
+                                    <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={70} />
+                                }
+                                </span>
                             </div>
                         </div>
-                        <span className="time">Just now</span>
+
+                        </div>
+                  
                     </div>
                 ))}
             </div>

@@ -125,7 +125,7 @@ export default function MarketContent() {
                                     >
                                         {
                                             
-                                            !nfts ? (nfts.map(nft => (
+                                            nfts ? (nfts.map(nft => (
                                                 <SwiperSlide className="relative z-99999" key={nft._id}>
                                                     <Link to={`/nft/${nft._id}`}>
                                                         <motion.div className="tf-card-box style-4" variants={itemVariants}>
