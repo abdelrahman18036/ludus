@@ -354,6 +354,9 @@
 .tf-card-box:hover {
     transform: translateY(-10px);
 }
+.tf-card-box:hover .name  a{
+   color: #865DFF;
+}
 
 .tf-card-box .card-media {
     position: relative;
