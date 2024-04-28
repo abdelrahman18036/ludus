@@ -52,12 +52,12 @@ export default function Sliderbar() {
             <div className="widget widget-recently">
                 <h5 className="title-widget">Recently added</h5>
                 {latestNFTs.map((nft, index) => (
-                    <div className="card-small" key={index}>
-                        <div className="author authos">
+                    <div className="card-small flex items-center  justify-center " key={index}>
+                        <div className="author authos flex items-start  justify-center ">
                             <img src={`http://localhost:5000/${nft.imageUrl}`} alt="alt" />
-                            <div className="info">
-                                <h6>{nft.name}</h6>
-                                <p>@{nft.author.username}</p>
+                            <div className="info flex flex-column justify-center ">
+                                <h6 className="m-0">{nft.name}</h6>
+                                <p className="m-0">@{nft.author.username}</p>
                             </div>
                         </div>
                         <span className="date">{new Date(nft.createdAt).toLocaleDateString()}</span>
@@ -114,7 +114,7 @@ export default function Sliderbar() {
                             <img src={`http://localhost:5000/${history.user.profilePicture}` || profilePic} alt="alt" />
                             <div className="info">
                                 <h6><a >{history.products[0].name}</a></h6>
-                                <span><a >Bought with {history.products[0].price} <i class="icon-gem"></i></a></span>
+                                <span><a >Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
                             </div>
                         </div>
                         <span className="time">Just now</span>

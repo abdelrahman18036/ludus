@@ -19,26 +19,26 @@ function MainNav() {
                             </div>
 
 
-                            <nav id="main-nav" class="main-nav">
-                                <ul id="menu-primary-menu" class="menu">
-                                    <li class="menu-item ">
+                            <nav id="main-nav" className="main-nav">
+                                <ul id="menu-primary-menu" className="menu">
+                                    <li className="menu-item ">
                                         <Link to='/'>Home</Link>
                                     </li>
-                                    <li class="menu-item">
+                                    <li className="menu-item">
                                         <Link to="/404">404</Link>
                                     </li>
-                                    <li class="menu-item ">
+                                    <li className="menu-item ">
                                         <Link to='/maintenance'>Maintenance</Link>
 
                                     </li>
-                                    <li class="menu-item ">
+                                    <li className="menu-item ">
                                         <Link to="/contact">Contact</Link>
                                     </li>
                                 </ul>
                             </nav>
 
 
-                            <div class="canvas">
+                            <div className="canvas">
                                 <span></span>
                             </div>
                         </div>
