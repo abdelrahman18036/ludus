@@ -3,11 +3,14 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../../Auth/API';
 import Skeleton from 'react-loading-skeleton';
+import { Flip, ToastContainer, toast } from 'react-toastify';
+import Loading from '../../../Loading/Loading';
 
 function NFTDetails() {
     let { id } = useParams();
     const [nft, setNft] = useState(null);
-
+    const [loading, setLoading] = useState(false);
+    const [nftAdded, setNftAdded] = useState(false);    
     useEffect(() => {
         const fetchNFT = async () => {
             try {
@@ -35,10 +38,40 @@ function NFTDetails() {
         };
         return date.toLocaleString('en-US', options);
     }
+    const placeBid = async (nftId) => {
+        setLoading(true);
+        try {
+            const response = await axios.post(`${baseURL}/api/orders`, {
+                productIds: nftId,
+            }, {
+                headers: {
+                    'x-access-token': localStorage.getItem('userToken')
+                }
+            });
+            setLoading(false);
+           
+            toast.success('🦄 NFT Added Successfully ', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+                });
 
+        } catch (error) {
+            console.error('Failed to place bid:', error);
+            setLoading(false);
+        }
+        setNftAdded(true);
+    };
 
     return (
         <div id="wrapper">
+            <ToastContainer />
             <div id="page" className="pt-40">
                 <div className="tf-section-2 product-detail">
                     <div className="themesflat-container">
@@ -113,7 +146,20 @@ function NFTDetails() {
                                                 nft ? <p><i className="icon-gem" />{nft?.price} <span className='ml-3'>{convertBTCtoUSD(nft?.price)}$</span></p> :
                                                     <p><Skeleton  className='rounded '  highlightColor={"#333"} baseColor={"grey"} width={200} /></p>
                                             }
-                                            <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button style-1 h50 w216">Place a bid<i className="icon-arrow-up-right2" /></a>
+                                                    {
+                                                        loading ? <Loading />
+                                                         :
+                                                            <button
+                                                                disabled={nftAdded}
+                                                                data-toggle="modal"
+                                                                data-target="#popup_bid"
+                                                                className="tf-button"
+                                                                onClick={(event) => {
+                                                                    placeBid(nft?._id);
+                                                                }}>
+                                                                <span>Place Bid</span>
+                                                            </button>
+                                                    }
                                         </div>
                                     </div>
                                 </div>
