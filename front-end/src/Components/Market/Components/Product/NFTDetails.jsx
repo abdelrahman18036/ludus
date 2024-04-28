@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../../Auth/API';
+import Skeleton from 'react-loading-skeleton';
 
 function NFTDetails() {
     let { id } = useParams();
@@ -52,7 +53,12 @@ function NFTDetails() {
                                     <div className='flex justify-between items-center col-md-12 bg-'>
                                         <div className="author flex items-center mb-30">
                                             <div className="avatar">
-                                                <img src={`http://localhost:5000/${nft?.author.profilePicture}`} className='' alt="Image" />
+                                                {
+                                                        
+                                                        nft?.author.profilePicture ? <img src={`http://localhost:5000/${nft?.author.profilePicture}`} className='' alt="Image" />: 
+                                                        <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"} width={250} height={300} />
+                                                }
+                                                
                                             </div>
                                             <div className="info">
                                                 <span>Owned by:</span>
@@ -81,7 +87,9 @@ function NFTDetails() {
                                 <div className="tf-card-box style-5 m-0">
                                     <div className="card-media mb-5">
                                         <a href="#">
-                                            <img src={`http://localhost:5000/${nft?.imageUrl}`} className='' alt="alt" />
+                                            {
+                                                nft ? <img src={`http://localhost:5000/${nft?.imageUrl}`} className='' alt="alt" /> : <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"}  height={500} />
+                                            }
                                         </a>
                                     </div>
                                     <h6 className="price gem"><i className="icon-gem" /></h6>
@@ -94,11 +102,17 @@ function NFTDetails() {
                             <div className="col-md-6">
 
                                 <div data-wow-delay="0s" className="wow fadeInRight product-item time-sales">
-                                    <h6><i className="icon-clock" />Created At {formatDate(nft?.createdAt)} (GMT + 3)</h6>
+                                    <h6><i className="icon-clock " />Created At {
+                                        nft ? <span className='mx-2'>{formatDate(nft?.createdAt)}</span> : <Skeleton  className='rounded mx-2' width={100}  highlightColor={"#333"} baseColor={"grey"}   />
+                                    }
+                                    (GMT + 3)</h6>
                                     <div className="content">
                                         <div className="text">Current price</div>
                                         <div className="flex justify-between">
-                                            <p><i className="icon-gem" />{nft?.price} <span className='ml-3'>{convertBTCtoUSD(nft?.price)}$</span></p>
+                                            {
+                                                nft ? <p><i className="icon-gem" />{nft?.price} <span className='ml-3'>{convertBTCtoUSD(nft?.price)}$</span></p> :
+                                                    <p><Skeleton  className='rounded '  highlightColor={"#333"} baseColor={"grey"} width={200} /></p>
+                                            }
                                             <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button style-1 h50 w216">Place a bid<i className="icon-arrow-up-right2" /></a>
                                         </div>
                                     </div>
@@ -108,7 +122,9 @@ function NFTDetails() {
                                     <i className="icon-keyboard_arrow_down" />
                                     <div className="content">
                                         <p>
-                                            {nft?.description}
+                                            {
+                                                nft ? nft?.description : <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"}  />
+                                            }
 
                                         </p>
                                     </div>
@@ -117,7 +133,10 @@ function NFTDetails() {
                                     <h6><i className="icon-description" />about</h6>
                                     <div className="contents">
                                         <p>
-                                            {nft?.about}
+                                        {
+                                                nft ? nft?.about : <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"}  />
+                                        }
+                                            
                                         </p>
                                     </div>
                                 </div>
