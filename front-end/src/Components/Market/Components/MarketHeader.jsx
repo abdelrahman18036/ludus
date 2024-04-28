@@ -122,7 +122,7 @@ export default function MarketHeader() {
 
                         <div className="popup-user relative" onClick={togglePopup}>
                             <div className="user">
-                                <img src={`${userData.profilePicture}` || profilePic} alt={userData.username} />
+                                <img src={CheckUserProfilePic()} alt={userData.username} />
                                 <span>{userData.username}<i className="icon-keyboard_arrow_down" /></span>
                             </div>
                             {isPopupOpen && (

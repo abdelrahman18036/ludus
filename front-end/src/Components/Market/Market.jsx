@@ -7,6 +7,7 @@ import Explore from "./Components/Explore";
 import Layout from "../Layout/Layout";
 import Collection from "./Components/Collection";
 import Setting from "./Components/Settings";
+import CustomCursor from "../Cursor/CustomCursor";
 
 export default function Market() {
     const [activeTab, setActiveTab] = useState('market');
@@ -18,6 +19,7 @@ export default function Market() {
             <MarketHeader />
             <div className="flat-tabs">
                 <SectionMenuLeft onTabClick={handleTabClick} activeTab={activeTab} />
+                <CustomCursor />
 
                 <div className="content-tabs">
                     <Layout >
