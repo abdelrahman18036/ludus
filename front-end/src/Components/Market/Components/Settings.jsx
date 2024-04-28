@@ -78,8 +78,8 @@ export default function Setting() {
                     </div>
                     <form action="#">
 
-                        <div className="uploadfile flex">
-                            <img style={{height:"100px"}}src={profilePic} alt="" />
+                        <div className="uploadfile flex ">
+                            <img className="mt-2" style={{height:"100px"}}src={profilePic} alt="" />
 
                             <div>
                                 <h6>Upload a new avatar”</h6>

@@ -88,7 +88,7 @@ function NFTDetails() {
                                     <div className="card-media mb-5">
                                         <a href="#">
                                             {
-                                                nft ? <img src={`http://localhost:5000/${nft?.imageUrl}`} className='' alt="alt" /> : <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"}  height={500} />
+                                                nft ? <img  src={`http://localhost:5000/${nft?.imageUrl}`} className='' alt="alt" /> : <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"}  height={500} />
                                             }
                                         </a>
                                     </div>
