@@ -52,7 +52,7 @@ function NFTDetails() {
                                     <div className='flex justify-between items-center col-md-12 bg-'>
                                         <div className="author flex items-center mb-30">
                                             <div className="avatar">
-                                                <img src={`http://localhost:5000/${nft?.author.profilePicture}`} alt="Image" />
+                                                <img src={`http://localhost:5000/${nft?.author.profilePicture}`} className='' alt="Image" />
                                             </div>
                                             <div className="info">
                                                 <span>Owned by:</span>
@@ -79,9 +79,9 @@ function NFTDetails() {
                         <div className="flex">
                             <div data-wow-delay="0s" className="   col-md-6">
                                 <div className="tf-card-box style-5 m-0">
-                                    <div className="card-media mb-0">
+                                    <div className="card-media mb-5">
                                         <a href="#">
-                                            <img src={`http://localhost:5000/${nft?.imageUrl}`} alt="alt" />
+                                            <img src={`http://localhost:5000/${nft?.imageUrl}`} className='' alt="alt" />
                                         </a>
                                     </div>
                                     <h6 className="price gem"><i className="icon-gem" /></h6>
@@ -98,7 +98,7 @@ function NFTDetails() {
                                     <div className="content">
                                         <div className="text">Current price</div>
                                         <div className="flex justify-between">
-                                            <p>{nft?.price} <span className='ml-3'>{convertBTCtoUSD(nft?.price)}$</span></p>
+                                            <p><i className="icon-gem" />{nft?.price} <span className='ml-3'>{convertBTCtoUSD(nft?.price)}$</span></p>
                                             <a href="#" data-toggle="modal" data-target="#popup_bid" className="tf-button style-1 h50 w216">Place a bid<i className="icon-arrow-up-right2" /></a>
                                         </div>
                                     </div>

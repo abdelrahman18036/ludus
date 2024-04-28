@@ -6,7 +6,27 @@
 @import "font.css";
 @import "bootstrap.css";
 @import "icon.css";
+.rounded{
+    border-radius: 20px !important;
+}
+.gap15{
+    gap: 15px;
 
+}
+.Toastify__toast  {
+    height: 80px !important;
+  }
+  
+ 
+  .Toastify__toast-body  div {
+        font-size: 15px;
+  }
+  .collection-text  p{
+    font-size: 20px  !important;
+    margin: 20px;
+    font-weight: semibold;
+    font-family: 'Azeret Mono';
+  }
 html,
 body,
 div,

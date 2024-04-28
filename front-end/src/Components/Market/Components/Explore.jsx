@@ -3,13 +3,16 @@ import axios from "axios";
 import { baseURL } from "../../Auth/API";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";  // Assuming this might be used later
 import { Link } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import { Bounce, Flip, ToastContainer, toast } from "react-toastify";
+import Loading from "../../Loading/Loading";
 
 export default function Explore() {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
-
+    const [loading , setLoading] = useState(false);
     useEffect(() => {
         fetchCategories();
         fetchProducts(activeCategory);
@@ -44,6 +47,7 @@ export default function Explore() {
         }
     };
     const placeBid = async (nftId) => {
+        setLoading(true);
         try {
             const response = await axios.post(`${baseURL}/api/orders`, {
                 productIds: nftId,
@@ -52,17 +56,31 @@ export default function Explore() {
                     'x-access-token': localStorage.getItem('userToken')
                 }
             });
-
-            alert('Bid placed successfully');
+            setLoading(false);
+           
+            toast.success('🦄 NFT Added Successfully ', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+                });
 
             fetchProducts("All")
         } catch (error) {
             console.error('Failed to place bid:', error);
+            setLoading(false);
         }
     };
 
     return (
         <>
+            <ToastContainer />
+
             <div className="heading-section">
                 <h2 className="tf-title pb-30">Explore Product</h2>
             </div>
@@ -112,18 +130,20 @@ export default function Explore() {
                                                     <span className="text-bid">Current Bid</span>
                                                     <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
                                                 </div>
-                                                <div className="button-place-bid">
-                                                    <button
-                                                        data-toggle="modal"
-                                                        data-target="#popup_bid"
-                                                        className="tf-button"
-                                                        onClick={(event) => {
-                                                            event.preventDefault();
-                                                            placeBid(product._id);
-                                                        }}>
-                                                        <span>Place Bid</span>
-                                                    </button>
-                                                </div>
+                                            {
+                                                loading ? <Loading />   : (                                                <div className="button-place-bid">
+                                                <button
+                                                    data-toggle="modal"
+                                                    data-target="#popup_bid"
+                                                    className="tf-button"
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        placeBid(product._id);
+                                                    }}>
+                                                    <span>Place Bid</span>
+                                                </button>
+                                            </div>)
+                                            }
                                             </div>
                                         </div>
                                     </Link>

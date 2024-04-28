@@ -1,7 +1,9 @@
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import { baseURL } from "../../Auth/API";
 import axios from "axios";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
+import { Bounce, Flip, ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 export default function ActiveBid() {
@@ -29,7 +31,17 @@ export default function ActiveBid() {
                 }
             });
             fetchActiveBid();
-            alert('Bid removed successfully');
+            toast('👏 Bid Removed Successfully  ', {
+                position: "top-right",
+                autoClose: 1100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+              })
         } catch (error) {
             console.error(error);
         }
@@ -42,8 +54,10 @@ export default function ActiveBid() {
     }, []);
     return (
         <>
-            <div class="heading-section">
-                <h2 class="tf-title pb-30">My Active Bid</h2>
+
+        <ToastContainer />
+            <div className="heading-section">
+                <h2 className="tf-title pb-30">My Active Bid</h2>
             </div>
             <div className="widget-tabs relative">
 
@@ -71,7 +85,7 @@ export default function ActiveBid() {
                                         <h5 className="name"><a href="nft-detail-2.html">{activeBids.products[0].name}</a></h5>
                                         <div className="author flex items-center">
                                             <div className="avatar">
-                                                <img src={`http://localhost:5000/${activeBids.user.profilePicture}` || profilePic} alt="Image" />
+                                                <img src={`${activeBids.user.profilePicture}` || profilePic} alt="Image" />
                                             </div>
                                             <div className="info">
                                                 <span>Created by:</span>

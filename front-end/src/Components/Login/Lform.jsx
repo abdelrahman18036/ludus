@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Loading from '../Loading/Loading';
-import Tsparticles2 from '../Particles/Tsparticles2';
 import '../../assets/styles/style.css';
 import { baseURL } from '../Auth/API';
 
@@ -25,7 +24,7 @@ const checkAuthStatus = async () => {
 function LoginForm() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-
+    const [error, setError] = useState('');
     useEffect(() => {
         const verifyAuthentication = async () => {
             const isAuthenticated = await checkAuthStatus();
@@ -60,6 +59,7 @@ function LoginForm() {
                 navigate('/market');
             } catch (error) {
                 console.log('Error logging in:', error.response ? error.response.data : error);
+                setError(error.response ? error.response.data : error);
             } finally {
                 setLoading(false);
             }
@@ -94,7 +94,7 @@ function LoginForm() {
                                                     required
                                                 />
                                                 {formik.touched.email && formik.errors.email ? (
-                                                    <div className="error mt-3  text-danger">{formik.errors.email}</div>
+                                                    <div className="error mt-3 font-weight-bold text-danger">{formik.errors.email}</div>
                                                 ) : null}
                                             </fieldset>
                                             <fieldset className="password">
@@ -109,7 +109,7 @@ function LoginForm() {
                                                     required
                                                 />
                                                 {formik.touched.password && formik.errors.password ? (
-                                                    <div className="error error mt-3  text-danger ">{formik.errors.password}</div>
+                                                    <div className="error error mt-3 font-weight-bold  text-danger ">{formik.errors.password}</div>
                                                 ) : null}
                                             </fieldset>
                                             <div className="btn-submit mb-30">
@@ -119,6 +119,9 @@ function LoginForm() {
                                                     <button className="tf-button style-1 h50 w-100" type="submit">Login<i className="icon-arrow-up-right2"></i></button>
                                                 )}
                                             </div>
+                                            {
+                                                error && <div className="error text-danger capitalize font-weight-bold">{error.message}</div>
+                                            }
                                         </form>
                                     </div>
                                 </div>

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -7,6 +8,8 @@ import Loading from '../Loading/Loading';
 import Tsparticles2 from '../Particles/Tsparticles2';
 import '../../assets/styles/style.css';
 import { baseURL } from '../../Components/Auth/API';
+import { Bounce, Flip, ToastContainer, toast } from "react-toastify";
+
 
 const checkAuthStatus = async () => {
   try {
@@ -25,6 +28,7 @@ const checkAuthStatus = async () => {
 function SignUpForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const verifyAuthentication = async () => {
@@ -61,17 +65,43 @@ function SignUpForm() {
           fullname: values.name,
           username: values.username
         });
+        toast('🎉 Account Made Successfully  ', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Flip,
+        })
         setLoading(false);
-        navigate('/login');
+        setTimeout  (() => {
+          navigate('/login');
+        },2500);
       } catch (error) {
         console.error('Failed to register:', error.response ? error.response.data : error);
+        setError(error.response ? error.response.data : error);
         setLoading(false);
       }
     },
   });
+  // useEffect(() => {  toast('🎉 Account Made Successfully  ', {
+  //   position: "top-right",
+  //   autoClose: 5000,
+  //   hideProgressBar: false,
+  //   closeOnClick: true,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  //   theme: "dark",
+  //   transition: Flip,
+  //   })},[]);
 
   return (
     <>
+    <ToastContainer />
       <div id="wrapper">
         <div id="page" className="pt-40">
           <div className="tf-section-2 pt-60 widget-box-icon">
@@ -90,35 +120,35 @@ function SignUpForm() {
                         <label>Name *</label>
                         <input type="text" name="name" required {...formik.getFieldProps('name')} />
                         {formik.touched.name && formik.errors.name ? (
-                          <div className="error mt-4  text-danger text-danger">{formik.errors.name}</div>
+                          <div className="error mt-4 capitalize font-weight-bold  text-danger text-danger">{formik.errors.name}</div>
                         ) : null}
                       </fieldset>
                       <fieldset className="email">
                         <label>Email *</label>
                         <input type="email" name="email" required {...formik.getFieldProps('email')} />
                         {formik.touched.email && formik.errors.email ? (
-                          <div className="error mt-4  text-danger text-danger">{formik.errors.email}</div>
+                          <div className="error mt-4 capitalize font-weight-bold  text-danger text-danger">{formik.errors.email}</div>
                         ) : null}
                       </fieldset>
                       <fieldset className="user">
                         <label>Username *</label>
                         <input type="text" name="username" required {...formik.getFieldProps('username')} />
                         {formik.touched.username && formik.errors.username ? (
-                          <div className="error mt-4  text-danger text-danger">{formik.errors.username}</div>
+                          <div className="error mt-4 capitalize font-weight-bold  text-danger text-danger">{formik.errors.username}</div>
                         ) : null}
                       </fieldset>
                       <fieldset className="password">
                         <label>Password *</label>
                         <input type="password" className="password-input" name="password" required {...formik.getFieldProps('password')} />
                         {formik.touched.password && formik.errors.password ? (
-                          <div className="error mt-4  text-danger text-danger">{formik.errors.password}</div>
+                          <div className="error mt-4   capitalize font-weight-bold text-danger text-danger">{formik.errors.password}</div>
                         ) : null}
                       </fieldset>
                       <fieldset className="password">
                         <label>Confirm Password *</label>
                         <input type="password" className="password-input" name="confirmPassword" required {...formik.getFieldProps('confirmPassword')} />
                         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                          <div className="error mt-4  text-danger text-danger">{formik.errors.confirmPassword}</div>
+                          <div className="error mt-4  capitalize font-weight-bold  text-danger text-danger">{formik.errors.confirmPassword}</div>
                         ) : null}
                       </fieldset>
                       <div className="btn-submit mb-30">
@@ -128,6 +158,9 @@ function SignUpForm() {
                           <button className="tf-button style-1 h50 w-100" type="submit">Sign up<i className="icon-arrow-up-right2"></i></button>
                         )}
                       </div>
+                      {
+                        error && <div className="error text-danger capitalize font-weight-bold">{error.message}</div>
+                      }
                     </form>
                     <div className="no-account">Already have an account? <a href="/login" className="tf-color">Log in</a></div>
                   </div>
