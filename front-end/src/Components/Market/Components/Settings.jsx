@@ -72,14 +72,14 @@ export default function Setting() {
                     <h2 className="tf-title pb-30">Setting</h2>
                 </div>
                 <div className="widget-edit mb-30 avatar">
-                    <div class="title">
+                    <div className="title">
                         <h4>Edit your avatar</h4>
-                        <i class="icon-keyboard_arrow_up"></i>
+                        <i className="icon-keyboard_arrow_up"></i>
                     </div>
                     <form action="#">
 
-                        <div class="uploadfile flex">
-                            <img src={profilePic} alt="" />
+                        <div className="uploadfile flex">
+                            <img style={{height:"100px"}}src={profilePic} alt="" />
 
                             <div>
                                 <h6>Upload a new avatar”</h6>
@@ -87,7 +87,7 @@ export default function Setting() {
                                     <input type="file" onChange={handleFileChange} />
                                     <span className="text filename">{file ? file.name : "No file selected"}</span>
                                 </label>
-                                <p class="text">JPEG 100x100</p>
+                                <p className="text">JPEG 100x100</p>
                             </div>
                         </div>
                     </form>

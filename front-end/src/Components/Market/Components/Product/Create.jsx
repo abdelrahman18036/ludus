@@ -50,7 +50,8 @@ export default function Create() {
 
 
     return (
-        <div id="page" className="market-page" style={{ paddingLeft: "40px" }}>
+        <div className='bg-main' style={{backgroundColor:"#111"}}>
+             <div id="page" className="market-page mark" style={{ paddingLeft: "40px" }}>
             <div className="heading-section">
                 <a href="/market" className="pb-30">Back To Market</a>
             </div>
@@ -84,7 +85,7 @@ export default function Create() {
                                                 <input type="file" onChange={handleFileChange} name="file" required />
                                             </label>
                                             <div className="wrap-content w-full">
-                                                <fieldset className="name">
+                                                <fieldset className="name mt-5">
                                                     <label>Product name *</label>
                                                     <input type="text" placeholder="Product name" onChange={e => setName(e.target.value)} required />
                                                 </fieldset>
@@ -117,5 +118,7 @@ export default function Create() {
                 </div>
             </div>
         </div>
+        </div>
+       
     );
 }
