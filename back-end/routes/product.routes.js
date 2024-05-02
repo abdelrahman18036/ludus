@@ -18,7 +18,7 @@ router.get("/search", productController.searchProducts);
 router.get("/category/:id", productController.getProductsByCategory);
 router.get("/author/:id", productController.getProductsByAuthor);
 router.get("/:id", productController.getProductById);
-router.put("/:id", verifyToken, isAdmin, productController.updateProduct);
+router.put("/:id", verifyToken, productController.updateProduct);
 
-router.delete("/:id", verifyToken, isAdmin, productController.deleteProduct);
+router.delete("/:id", verifyToken, productController.deleteProduct);
 module.exports = router;
