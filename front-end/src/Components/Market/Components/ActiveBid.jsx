@@ -55,7 +55,9 @@ export default function ActiveBid() {
     useEffect(() => {
         fetchActiveBid();
     }, []);
-
+    {
+        console.log(activeBid);
+    }
     return (
         <>
             <ToastContainer />
@@ -79,6 +81,7 @@ export default function ActiveBid() {
                             ) : (
                                 activeBid.map(activeBids => (
                                     <div className="col-item" key={activeBids.products[0]._id}>
+                                       
                                         <div className="tf-card-box style-1">
                                             <div className="card-media">
                                                 <img src={`http://localhost:5000/${activeBids.products[0].imageUrl}`} alt="alt" />
@@ -92,7 +95,8 @@ export default function ActiveBid() {
                                             <h5 className="name"><a href="nft-detail-2.html">{activeBids.products[0].name}</a></h5>
                                             <div className="author flex items-center">
                                                 <div className="avatar">
-                                                    <img src={activeBids.user.profilePicture || profilePic} alt="Image" />
+                                                    <img src={`http://localhost:5000/${activeBids.user.profilePicture}`  || profilePic} alt="Image" />
+                                                    
                                                 </div>
                                                 <div className="info">
                                                     <span>Created by:</span>

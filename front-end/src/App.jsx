@@ -3,14 +3,15 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import AppRoutes from './routes/RoutingHandler';
 import CustomCursor from './Components/Cursor/CustomCursor';
 
+export const queryClient = new QueryClient();
 function App() {
-  const queryClient = new QueryClient();
-
+  
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <AppRoutes />
-      </Router>
+        <Router>
+          <CustomCursor />
+          <AppRoutes />
+        </Router>
     </QueryClientProvider>
   );
 }

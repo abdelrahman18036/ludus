@@ -1,22 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { baseURL } from "../../Auth/API";
-import profilePic from "../../../assets/images/avatar/avatar-01.png";  // Assuming this might be used later
 import { Link } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, Flip, ToastContainer, toast } from "react-toastify";
 import Loading from "../../Loading/Loading";
+import { baseURL } from "../../Auth/API";
 
 export default function Explore() {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
-    const [loading , setLoading] = useState(false);
-    const [cardsLoading, setCardsLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [cardsLoading, setCardsLoading] = useState(false);
+    const cancelTokenSource = useRef(null);
+
     useEffect(() => {
         fetchCategories();
-        fetchProducts(activeCategory);
+        // Cleanup function to cancel the request if the component unmounts
+        return () => {
+            if (cancelTokenSource.current) {
+                cancelTokenSource.current.cancel("Component got unmounted");
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (cancelTokenSource.current) {
+            cancelTokenSource.current.cancel("Category changed");
+        }
+        cancelTokenSource.current = axios.CancelToken.source();
+
+        fetchProducts(activeCategory, setProducts, setCardsLoading, cancelTokenSource.current);
+
+        return () => {
+            cancelTokenSource.current.cancel("Category changed");
+        };
     }, [activeCategory]);
 
     const fetchCategories = async () => {
@@ -28,15 +47,21 @@ export default function Explore() {
         }
     };
 
-    const fetchProducts = async (categoryId) => {
+    const fetchProducts = async (categoryId, setProducts, setCardsLoading, cancelToken) => {
         setCardsLoading(true);
+        setProducts([]); // Clear previous products immediately when a new category is selected
+
+        const url = categoryId === 'All' ? `${baseURL}/api/nfts/` : `${baseURL}/api/nfts/category/${categoryId}`;
         try {
-            const url = categoryId === 'All' ? `${baseURL}/api/nfts/` : `${baseURL}/api/nfts/category/${categoryId}`;
-            const response = await axios.get(url);
+            const response = await axios.get(url, { cancelToken: cancelToken.token });
             setProducts(response.data);
-            setCardsLoading(false);
         } catch (error) {
-            console.error('Failed to fetch products', error);
+            if (axios.isCancel(error)) {
+                console.log('Request canceled:', error.message);
+            } else {
+                console.error('Failed to fetch products', error);
+            }
+        } finally {
             setCardsLoading(false);
         }
     };
@@ -50,6 +75,7 @@ export default function Explore() {
             console.error('Failed to search products', error);
         }
     };
+
     const placeBid = async (nftId) => {
         setLoading(true);
         try {
@@ -61,7 +87,6 @@ export default function Explore() {
                 }
             });
             setLoading(false);
-           
             toast.success('🦄 NFT Added Successfully ', {
                 position: "top-right",
                 autoClose: 1000,
@@ -72,14 +97,15 @@ export default function Explore() {
                 progress: undefined,
                 theme: "dark",
                 transition: Flip,
-                });
-
-            fetchProducts("All")
+            });
+            fetchProducts(activeCategory);
         } catch (error) {
             console.error('Failed to place bid:', error);
             setLoading(false);
         }
     };
+
+    const realCat = categories.slice(0, 5);
 
     return (
         <>
@@ -93,7 +119,7 @@ export default function Explore() {
                     <li className={`item-title ${activeCategory === 'All' ? 'active' : ''}`} onClick={() => setActiveCategory('All')}>
                         <span className="inner">All</span>
                     </li>
-                    {categories.map(category => (
+                    {realCat.map(category => (
                         <li key={category._id} className={`item-title ${activeCategory === category.name ? 'active' : ''}`} onClick={() => setActiveCategory(category._id)}>
                             <span className="inner">{category.name}</span>
                         </li>
@@ -113,7 +139,6 @@ export default function Explore() {
                     <div className="widget-content-inner">
                         <div className="wrap-box-card">
                             {
-                                
                                 !cardsLoading ? products.map(product => (
                                     <div className="col-item" key={product._id}>
                                         <Link to={`/nft/${product._id}`}>
@@ -136,39 +161,37 @@ export default function Explore() {
                                                         <span className="text-bid">Current Bid</span>
                                                         <h6 className="price gem"><i className="icon-gem" />{product.price}</h6>
                                                     </div>
-                                                {
-                                                    loading ? <Loading />   : (                                                <div className="button-place-bid">
-                                                    <button
-                                                        data-toggle="modal"
-                                                        data-target="#popup_bid"
-                                                        className="tf-button"
-                                                        onClick={(event) => {
-                                                            event.preventDefault();
-                                                            placeBid(product._id);
-                                                        }}>
-                                                        <span>Place Bid</span>
-                                                    </button>
-                                                </div>)
-                                                }
+                                                    {loading ? <Loading /> : (
+                                                        <div className="button-place-bid">
+                                                            <button
+                                                                data-toggle="modal"
+                                                                data-target="#popup_bid"
+                                                                className="tf-button"
+                                                                onClick={(event) => {
+                                                                    event.preventDefault();
+                                                                    placeBid(product._id);
+                                                                }}>
+                                                                <span>Place Bid</span>
+                                                            </button>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         </Link>
                                     </div>
                                 )) : (
                                     <div className="container">
-
-                                    <div className="row">
-                                        {Array.from({ length: 4 }).map((_, index) => (
-                                            <div className="col-md-3 my-5  flex justify-center">
-                                                <div className="col-item" >
-                                                    <Loading />
+                                        <div className="row">
+                                            {Array.from({ length: 4 }).map((_, index) => (
+                                                <div className="col-md-3 my-5 flex justify-center">
+                                                    <div className="col-item">
+                                                        <Loading />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
                                     </div>
-                                    </div>
-
-                                ) 
+                                )
                             }
                         </div>
                     </div>

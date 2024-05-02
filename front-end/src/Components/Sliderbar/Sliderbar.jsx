@@ -1,64 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { useQuery } from 'react-query';
 import axios from 'axios';
-import { baseURL } from "../Auth/API";
-import Coin1 from "../../assets/images/box-icon/coin-01.png";
-import Coin2 from "../../assets/images/box-icon/coin-02.png";
-import Coin3 from "../../assets/images/box-icon/coin-03.png";
-import Coin4 from "../../assets/images/box-icon/coin-04.png";
-import Coin5 from "../../assets/images/box-icon/coin-05.png";
-import profilePic from "../../assets/images/avatar/avatar-01.png";
-import Skeleton from "react-loading-skeleton";
+import { baseURL } from '../Auth/API';
+import Coin1 from '../../assets/images/box-icon/coin-01.png';
+import Coin2 from '../../assets/images/box-icon/coin-02.png';
+import Coin3 from '../../assets/images/box-icon/coin-03.png';
+import Coin4 from '../../assets/images/box-icon/coin-04.png';
+import Coin5 from '../../assets/images/box-icon/coin-05.png';
+import profilePic from '../../assets/images/avatar/avatar-01.png';
+import Skeleton from 'react-loading-skeleton';
+
+const fetchTopAuthors = async () => {
+    const response = await axios.get(`${baseURL}/api/nfts/topauthors`);
+    return response.data;
+};
+
+const fetchLatestNFTs = async () => {
+    const response = await axios.get(`${baseURL}/api/nfts/latest`);
+    return response.data.slice(0, 5);
+};
+
+const fetchHistory = async (userToken) => {
+    const response = await axios.get(`${baseURL}/api/orders/`, {
+        headers: { 'x-access-token': userToken }
+    });
+    return response.data;
+};
+
+const extractTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    });
+};
 
 export default function Sliderbar() {
-    const [topAuthors, setTopAuthors] = useState([]);
-    const [latestNFTs, setLatestNFTs] = useState([]);
     const userToken = localStorage.getItem('userToken');
-    const [history, setHistory] = useState([]);
-    function extractTime(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true
-        });
+
+    const { data: topAuthors, isLoading: isLoadingAuthors, isError: isErrorAuthors } = useQuery('topAuthors', fetchTopAuthors);
+    const { data: latestNFTs, isLoading: isLoadingNFTs, isError: isErrorNFTs } = useQuery('latestNFTs', fetchLatestNFTs);
+    const { data: history, isLoading: isLoadingHistory, isError: isErrorHistory } = useQuery(['history', userToken], () => fetchHistory(userToken));
+
+    if (isLoadingAuthors || isLoadingNFTs || isLoadingHistory) {
+        return <Skeleton count={5} />;
     }
-    
- 
-    useEffect(() => {
-        const fetchTopAuthors = async () => {
-            try {
-                const response = await axios.get(`${baseURL}/api/nfts/topauthors`);
-                setTopAuthors(response.data);
-            } catch (error) {
-                console.error('Failed to fetch top authors:', error);
-            }
-        };
 
-        const fetchLatestNFTs = async () => {
-            try {
-                const response = await axios.get(`${baseURL}/api/nfts/latest`);
-                setLatestNFTs(response.data.slice(0, 5));
-            } catch (error) {
-                console.error('Failed to fetch latest NFTs:', error);
-            }
-        };
+    if (isErrorAuthors || isErrorNFTs || isErrorHistory) {
+        return <div>Error loading data</div>;
+    }
 
-        const fetchHistory = async () => {
-            try {
-                const response = await axios.get(`${baseURL}/api/orders/`, {
-                    headers: { 'x-access-token': userToken }
-                });
-                setHistory(response.data);
-            } catch (error) {
-                console.error('Failed to fetch history:', error);
-            }
-        };
-
-        fetchTopAuthors();
-        fetchLatestNFTs();
-        fetchHistory();
-    }, []);
     return (
         <div className="side-bar">
             <div className="widget widget-recently">

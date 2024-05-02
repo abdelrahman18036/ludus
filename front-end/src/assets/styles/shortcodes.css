@@ -3615,7 +3615,7 @@ form label i.icon-star.active {
     position: absolute;
     right: 0;
     top: 110%;
-    padding: 35px 20px 12px 20px;
+    padding: 35px 20px 35px 20px;
     overflow: hidden;
     border-radius: 10px;
     background: #232323;
@@ -3786,7 +3786,7 @@ form label i.icon-star.active {
 
 .widget-recently .card-small {
     display: flex;
-    align-items: center;
+    align-items: star;
     justify-content: space-between;
     margin-bottom: 20px;
 }

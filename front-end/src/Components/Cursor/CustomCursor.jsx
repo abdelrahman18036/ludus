@@ -1,48 +1,52 @@
-import React, { useEffect } from 'react'
-import "../../assets/styles/style.css";
-function CustomCursor() {
+import React, { useEffect } from 'react';
+import '../../assets/styles/style.css';
+
+
+const CustomCursor = () => {
+    const [cursorPos, setCursorPos] = React.useState({ x: 0, y: 0 });
+    const [hoverState, setHoverState] = React.useState(false);
+
+    const handleMouseMove = (event) => {
+        setCursorPos({ x: event.clientX, y: event.clientY });
+    };
+
+    const addHover = () => setHoverState(true);
+    const removeHover = () => setHoverState(false);
+
     useEffect(() => {
-        const mouseInner = document.querySelector('.tf-mouse-inner');
-        const mouseOuter = document.querySelector('.tf-mouse-outer');
-        
-        function mouseMove(e) {
-          mouseOuter.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-          mouseInner.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        }
-    
-        function mouseEnter() {
-          mouseInner.classList.add('mouse-hover');
-          mouseOuter.classList.add('mouse-hover');
-        }
-    
-        function mouseLeave() {
-          mouseInner.classList.remove('mouse-hover');
-          mouseOuter.classList.remove('mouse-hover');
-        }
-    
-        document.addEventListener('mousemove', mouseMove);
-        document.querySelectorAll('a, .canvas, .progress-wrap, .wishlist-button').forEach(el => {
-          el.addEventListener('mouseenter', mouseEnter);
-          el.addEventListener('mouseleave', mouseLeave);
+        document.addEventListener('mousemove', handleMouseMove);
+        document.querySelectorAll('a, .canvas, .progress-wrap, .wishlist-button,li,.author,img').forEach(el => {
+            el.addEventListener('mouseenter', addHover);
+            el.addEventListener('mouseleave', removeHover);
         });
-    
+
         return () => {
-          document.removeEventListener('mousemove', mouseMove);
-          document.querySelectorAll('a, .canvas, .progress-wrap, .wishlist-button').forEach(el => {
-            el.removeEventListener('mouseenter', mouseEnter);
-            el.removeEventListener('mouseleave', mouseLeave);
-          });
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.querySelectorAll('a, .canvas, .progress-wrap, .wishlist-button,li,img').forEach(el => {
+                el.removeEventListener('mouseenter', addHover);
+                el.removeEventListener('mouseleave', removeHover);
+            });
         };
-      }, []);
-  return (
-    <>
-        <div>
-        <div className="tf-mouse tf-mouse-outer" />
-        <div className="tf-mouse tf-mouse-inner" />
-        </div>
+    }, []);
 
-    </>
-  )
-}
+    return (
+        <>
+            <div className="tf-mouse tf-mouse-outer" style={{
+                transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)`,
+                opacity: hoverState ? 0 : 0.5,
+                visibility: 'visible'
+            }} />
+            <div className="tf-mouse tf-mouse-inner" style={{
+                transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)`,
+                width: hoverState ? '80px' : '8px',
+                height: hoverState ? '80px' : '8px',
+                opacity: hoverState ? 0.3 : 1,
+                margin: hoverState ? '-40px 0 0 -40px' : '-5px 0 0 -5px',
+                backgroundColor: hoverState ? 'rgba(22, 22, 22, 1)' : '#865DFF',
+                visibility: 'visible'
+            }} />
+        </>
+    );
+};
 
-export default CustomCursor
+export default CustomCursor;

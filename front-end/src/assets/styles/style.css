@@ -6,6 +6,19 @@
 @import "font.css";
 @import "bootstrap.css";
 @import "icon.css";
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-ms-clear {
+    display: none;
+}
 
 
 .rounded{
@@ -2722,9 +2735,9 @@ a:focus {
 }
 
 body.background-white .tf-mouse-inner {
-    background-color: rgba(22, 22, 22, 1);
+    background-color: #865DFF;
 }
 
 body.background-white .tf-mouse-outer {
-    border-color: rgba(22, 22, 22, 1);
+    border-color: #865DFF;
 }

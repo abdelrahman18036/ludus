@@ -3,8 +3,11 @@ import axios from 'axios';
 import MarketHeader from '../MarketHeader';
 import { baseURL } from '../../../Auth/API';
 import uploadImage from '../../../../assets/images/upload.png';
+import { toast ,ToastContainer ,Flip } from 'react-toastify';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Create() {
+    const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -40,10 +43,35 @@ export default function Create() {
                 }
             });
             console.log(response.data);
-            alert('Product created successfully!');
+            toast('🔴 NFT created successfully', {
+                position: "top-right",
+                autoClose: 1100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+            });
+            setTimeout(() => {
+                navigate('/market');
+              },2500);
+           
         } catch (error) {
             console.error('Error uploading product:', error);
-            alert('Failed to create product');
+               toast('👏 Failed To Create NFT ', {
+                position: "top-right",
+                autoClose: 1100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+            });
+
         }
     };
 
@@ -51,6 +79,7 @@ export default function Create() {
 
     return (
         <div className='bg-main' style={{backgroundColor:"#111"}}>
+            <ToastContainer />
              <div id="page" className="market-page mark" style={{ paddingLeft: "40px" }}>
             <div className="heading-section">
                 <a href="/market" className="pb-30">Back To Market</a>
@@ -64,14 +93,9 @@ export default function Create() {
                         <div className="widget-tabs relative">
                             <ul className="widget-menu-tab">
                                 <li className="item-title active">
-                                    <span className="inner"><span className="order">1</span> Upload your image <i className="icon-keyboard_arrow_right" /></span>
+                                    <span className="inner"><span className="order">i</span> Upload your image <i className="icon-keyboard_arrow_right" /></span>
                                 </li>
-                                <li className="item-title">
-                                    <span className="inner"><span className="order">2</span>Description <i className="icon-keyboard_arrow_right" /></span>
-                                </li>
-                                <li className="item-title">
-                                    <span className="inner"><span className="order">3</span>Submit NFT</span>
-                                </li>
+
                             </ul>
                             <div className="widget-content-tab">
                                 <div className="widget-content-inner upload active">
@@ -99,7 +123,7 @@ export default function Create() {
                                                 </fieldset>
                                                 <fieldset className="price">
                                                     <label>Price</label>
-                                                    <input type="text" placeholder="Price" onChange={e => setPrice(e.target.value)} required />
+                                                    <input type="number" placeholder="Price" onChange={e => setPrice(e.target.value)} required />
                                                 </fieldset>
                                                 <fieldset className="collection">
                                                     <label>Category</label>
