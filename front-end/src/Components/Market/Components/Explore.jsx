@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, Flip, ToastContainer, toast } from "react-toastify";
 import Loading from "../../Loading/Loading";
 import { baseURL } from "../../Auth/API";
+import { queryClient } from "../../../App";
 
 export default function Explore() {
     const [categories, setCategories] = useState([]);
@@ -49,7 +50,7 @@ export default function Explore() {
 
     const fetchProducts = async (categoryId, setProducts, setCardsLoading, cancelToken) => {
         setCardsLoading(true);
-        setProducts([]); // Clear previous products immediately when a new category is selected
+        setProducts([]); 
 
         const url = categoryId === 'All' ? `${baseURL}/api/nfts/` : `${baseURL}/api/nfts/category/${categoryId}`;
         try {
@@ -99,6 +100,8 @@ export default function Explore() {
                 transition: Flip,
             });
             fetchProducts(activeCategory);
+            queryClient.refetchQueries('history');
+
         } catch (error) {
             console.error('Failed to place bid:', error);
             setLoading(false);

@@ -75,7 +75,6 @@ export default function Collection() {
     };
     
     queryClient.refetchQueries('latestNFTs');
-    queryClient.refetchQueries('history');
 
     useEffect(() => {
         fetchActiveBid();

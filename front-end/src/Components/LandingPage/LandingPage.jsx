@@ -4,14 +4,15 @@ import imageTwo from '../../assets/images/item2.png'
 import imageThree from '../../assets/images/item3.png'
 import imageFour from '../../assets/images/item4.png'
 import imageFive from '../../assets/images/item5.png'
-
+import { TypeAnimation } from 'react-type-animation';
 import Tsparticles from '../Particles/Tsparticles';
-import Accordion from '../Accordion/Accordion'
+import MainSlider from "./MainSlider"
 function LandingPage() {
 
     return (
         <div>
             <div id="wrapper">
+
                 <div id="page" className="pt-40 home-1">
                     <div className="flat-pages-title">
                         <div className="widget-bg-line">
@@ -26,7 +27,21 @@ function LandingPage() {
                             <div className="row">
                                 <div className="col-12 pages-title">
                                     <div className="content">
-                                        <h1 data-wow-delay="0s" className="wow fadeInUp">World of top works</h1>
+                                        <h1 data-wow-delay="0s" className="wow fadeInUp">
+                                            <TypeAnimation
+                                                sequence={[
+                                                    'World Of Top Works',
+                                                    1000, 
+                                                    'World Of NFTS',
+                                                    1000,
+                                                    'World Of Digital Art',
+                                                    1000,
+                                                ]}
+                                                wrapper="span"
+                                                speed={60}
+                                                style={{ fontSize: '1em', display: 'inline-block' }}
+                                                repeat={Infinity}
+                                                /></h1>
                                         <p className="wow fadeInUp" data-wow-delay="0.1s">Welcome to the world of rare digital art.
                                             Explore the best art from hand-picked digital artist out there and find the hidden
                                             gem.</p>

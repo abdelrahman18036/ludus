@@ -12,6 +12,7 @@ import { Bounce, Flip, ToastContainer, toast } from "react-toastify";
 import "../../../assets/styles/style.css";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { queryClient } from '../../../App';
 export default function MarketContent() {
     const [nfts, setNfts] = useState([]);
     const [latestNfts, setLatestNFTs] = useState([]);
@@ -61,6 +62,7 @@ export default function MarketContent() {
                 theme: "dark",
                 transition: Flip,
                 });
+            queryClient.refetchQueries('history');
             fetchNFTs();
             fetchLatestNFTs();
 
@@ -135,7 +137,7 @@ export default function MarketContent() {
                                                                 </div>
                                                                 <div className="info">
                                                                     <span>Created by:</span>
-                                                                    <h6><a href={`author-2.html`}>{nft.author.username}</a></h6>
+                                                                    <h6><a >{nft.author.username}</a></h6>
                                                                 </div>
                                                             </div>
                                                             <div className="card-media">

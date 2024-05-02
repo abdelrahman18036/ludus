@@ -138,7 +138,7 @@ exports.getProductsByCategory = async (req, res) => {
     const products = await Product.find({
       category: categoryId,
       isAvailable: true,
-    }).populate("category");
+    }).populate("category").populate("author", "username profilePicture");
     if (products.length === 0) {
       return res.status(404).send("No products found in this category.");
     }

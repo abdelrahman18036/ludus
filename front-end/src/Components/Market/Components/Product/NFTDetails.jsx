@@ -5,6 +5,7 @@ import { baseURL } from '../../../Auth/API';
 import Skeleton from 'react-loading-skeleton';
 import { Flip, ToastContainer, toast } from 'react-toastify';
 import Loading from '../../../Loading/Loading';
+import { queryClient } from '../../../../App';
 
 function NFTDetails() {
     let { id } = useParams();
@@ -61,6 +62,7 @@ function NFTDetails() {
                 theme: "dark",
                 transition: Flip,
                 });
+            queryClient.refetchQueries('history');
 
         } catch (error) {
             console.error('Failed to place bid:', error);
