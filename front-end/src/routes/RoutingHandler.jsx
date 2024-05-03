@@ -13,7 +13,6 @@ import Product from '../Components/Market/Components/Product/NFTDetails';
 import Login from '../Components/Login/Login';
 import Create from '../Components/Market/Components/Product/Create';
 import Setting from '../Components/Market/Components/Settings';
-import Test from '../Components/LandingPage/test';
 function RoutingHandler() {
     return (
         <Routes>
