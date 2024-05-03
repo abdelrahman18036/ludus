@@ -354,8 +354,9 @@
 .tf-card-box:hover {
     transform: translateY(-10px);
 }
-.tf-card-box:hover .name  a{
-   color: #865DFF;
+
+.tf-card-box:hover .name a {
+    color: #865DFF;
 }
 
 .tf-card-box .card-media {
@@ -3557,7 +3558,7 @@ form label i.icon-star.active {
 
 }
 
-.mark{
+.mark {
     max-width: 1440px;
     margin: 0 auto;
 

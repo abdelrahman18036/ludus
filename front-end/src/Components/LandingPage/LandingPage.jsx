@@ -7,6 +7,7 @@ import imageFive from '../../assets/images/item5.png'
 import { TypeAnimation } from 'react-type-animation';
 import Tsparticles from '../Particles/Tsparticles';
 import MainSlider from "./MainSlider"
+
 function LandingPage() {
 
     return (
@@ -20,7 +21,7 @@ function LandingPage() {
                                 <div className="bg-grid-line y bottom ">
                                     <div className="bg-line" />
                                 </div>
-                           
+
                             </div>
                         </div>
                         <div className="themesflat-container w1490">
@@ -31,7 +32,7 @@ function LandingPage() {
                                             <TypeAnimation
                                                 sequence={[
                                                     'World Of Top Works',
-                                                    1000, 
+                                                    1000,
                                                     'World Of NFTS',
                                                     1000,
                                                     'World Of Digital Art',
@@ -41,7 +42,7 @@ function LandingPage() {
                                                 speed={60}
                                                 style={{ fontSize: '1em', display: 'inline-block' }}
                                                 repeat={Infinity}
-                                                /></h1>
+                                            /></h1>
                                         <p className="wow fadeInUp" data-wow-delay="0.1s">Welcome to the world of rare digital art.
                                             Explore the best art from hand-picked digital artist out there and find the hidden
                                             gem.</p>
@@ -49,6 +50,11 @@ function LandingPage() {
                                             <a href="/login" className="tf-button style-1 h50 w190 mr-16">Login Now <i className="icon-arrow-up-right2" /></a>
                                             <a href="/sign-up" className="tf-button style-1 h50 w190 active">Getstart Now <i className="icon-arrow-up-right2" /></a>
                                         </div>
+                                    </div>
+
+                                    <div class="relative">
+                                        <MainSlider />
+
                                     </div>
                                     <div className="icon-background">
                                         <img className="absolute item1" src={imageOne} alt="item" />
@@ -83,6 +89,10 @@ function LandingPage() {
                             </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
             </div>
 

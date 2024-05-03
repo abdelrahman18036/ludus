@@ -6,6 +6,7 @@
 @import "font.css";
 @import "bootstrap.css";
 @import "icon.css";
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -21,35 +22,41 @@ input[type="number"]::-ms-clear {
 }
 
 
-.rounded{
+
+.rounded {
     border-radius: 20px !important;
 }
-.gap15{
+
+.gap15 {
     gap: 15px;
 
 }
-.Toastify__toast  {
+
+.Toastify__toast {
     height: 80px !important;
-  }
-  
- 
-  .Toastify__toast-body  div {
-        font-size: 15px;
-  }
-  .collection-text  p{
-    font-size: 20px  !important;
+}
+
+
+.Toastify__toast-body div {
+    font-size: 15px;
+}
+
+.collection-text p {
+    font-size: 20px !important;
     margin: 20px;
     font-weight: semibold;
     font-family: 'Azeret Mono';
-  }
+}
 
 
-    .sliderCards:hover{
-        cursor: grab;
-    }
-    .sliderCards.active {
-        cursor: grabbing;
-    }
+.sliderCards:hover {
+    cursor: grab;
+}
+
+.sliderCards.active {
+    cursor: grabbing;
+}
+
 html,
 body,
 div,
@@ -143,9 +150,11 @@ video {
     font-style: inherit;
     font-weight: inherit;
 }
-textarea{
+
+textarea {
     resize: none;
 }
+
 article,
 aside,
 details,
@@ -1209,7 +1218,7 @@ a:focus {
     z-index: 100;
     width: 100%;
     border: none;
-    padding: 20px  0;
+    padding: 20px 0;
 }
 
 #site-logo {
@@ -1313,9 +1322,7 @@ a:focus {
 }
 
 /* main-nav */
-#main-nav {
-
-}
+#main-nav {}
 
 #main-nav ul li {
     position: relative;
@@ -1686,11 +1693,12 @@ a:focus {
     Maintainance
 
 */
-.maintain{
+.maintain {
     height: 100vh;
     overflow-y: hidden !important;
 }
-.maintenance-page{
+
+.maintenance-page {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -1699,25 +1707,30 @@ a:focus {
     position: relative;
 
 }
-.overflow-hidden{
+
+.overflow-hidden {
     overflow: hidden;
 }
-.maintenance{
+
+.maintenance {
     padding: 40px 0px;
 }
-.maintenance .maintain-h{
+
+.maintenance .maintain-h {
     font-family: 'Azeret Mono';
     font-size: 16px;
     font-weight: 500;
     line-height: 11px;
     margin-bottom: -11px;
 }
-.maintain-q{
+
+.maintain-q {
     font-family: 'Azeret Mono';
     color: rgba(255, 255, 255, 0.53);
     font-size: 14px;
 }
-.logoMainImg{
+
+.logoMainImg {
     width: 200px;
     height: 200px;
     margin-bottom: 20px;
@@ -1725,14 +1738,16 @@ a:focus {
     left: 50%;
     transform: translate(-50%, 5%);
 }
-.maintenance p{
+
+.maintenance p {
     font-size: 20px;
     color: #fff;
     margin: 0;
     padding: 0;
 
 }
-.maintenance h1{
+
+.maintenance h1 {
     font-size: 100px;
     font-weight: 800;
     line-height: 137px;
@@ -1741,12 +1756,14 @@ a:focus {
     padding: 0;
     margin: 0;
 }
-.box-button{
+
+.box-button {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
 }
+
 /* widget-social */
 .widget-social ul li {
     margin-right: 10px;
@@ -1880,22 +1897,25 @@ a:focus {
     font-size: 12px;
     line-height: 19px;
 }
+
 /* 404*/
-.content p{
+.content p {
     font-size: 300px;
     color: #fff;
     margin: 0;
     padding: 0;
 
- }
- .contents p{
+}
+
+.contents p {
     color: rgba(255, 255, 255, 0.53);
     font-family: 'Azeret Mono';
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
- }
- .section-404-page::before{
+}
+
+.section-404-page::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -1905,8 +1925,8 @@ a:focus {
     z-index: -1;
     bottom: 0px;
     left: 0;
- 
- }
+
+}
 
 /* heading-section */
 .heading-section {
@@ -2474,7 +2494,7 @@ a:focus {
     line-height: 22px;
     font-weight: 500;
     color: #fff;
- ;
+    ;
 }
 
 #menu-mobile-menu li.current-menu-item>a,

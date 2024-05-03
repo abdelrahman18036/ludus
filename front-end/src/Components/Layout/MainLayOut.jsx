@@ -3,17 +3,15 @@ import { Outlet } from 'react-router-dom'
 import LandingPage from '../LandingPage/LandingPage'
 import Footer from '../Footer/Footer'
 import NavBar from '../NavBar/NavBar'
-import MainSlider from '../LandingPage/MainSlider'
 function MainLayOut() {
-return (
-    <div>
-        <NavBar />
-        <LandingPage    />
-        <MainSlider />
-        <Footer />
+    return (
+        <div>
+            <NavBar />
+            <LandingPage />
+            <Footer />
 
-    </div>
-)
+        </div>
+    )
 }
 
 export default MainLayOut

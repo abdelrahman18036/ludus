@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import profilePic from ".   ./../assets/images/avatar/avatar-01.png";
+import profilePic from "../../assets/images/avatar/avatar-01.png";
 import { motion } from 'framer-motion';
 import Skeleton from 'react-loading-skeleton'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
+
+
+// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -44,76 +47,61 @@ function MainSlider() {
     };
 
     return (
-        <div className="themesflat-container w1490">
-            <Swiper
-                modules={[Autoplay, Navigation, Pagination]}
-                loop={true}
-                slidesPerView={'auto'}
-                spaceBetween={14}
-                direction={'vertical'}
-                speed={5000}
-                autoplay={{
-                    delay: 0,
-                    disableOnInteraction: false
-                }}
-                navigation={true}
-                pagination={{ clickable: true }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-            >
-                {loading ? (
-                    Array(10).fill().map((_, index) => (
-                        <SwiperSlide key={index}>
-                            <Skeleton variant="rectangular" width={210} height={118} />
-                            <Skeleton width="60%" />
-                        </SwiperSlide>
-                    ))
-                ) : error ? (
-                    <div>Error loading NFTs: {error}</div>
-                ) : (
-                    nfts.map(nft => (
-                        <SwiperSlide key={nft._id} className="relative z-99999">
-                            <Link className='sliderCards' to={`/nft/${nft._id}`}>
-                                <motion.div className="tf-card-box style-4" variants={itemVariants}>
-                                    <div className="author flex items-center">
-                                        <div className="avatar">
-                                          <img src={`http://localhost:5000/${nft.author.profilePicture}` || profilePic} alt={nft.author.username} />
+        <div class="themesflat-container w1490">
+            <div class="row">
+                <div class="col-12 pages-title">
+                    <div className="relative">
+                        <Swiper
+                            effect={'coverflow'}
+                            grabCursor={true}
+                            centeredSlides={true}
+                            loop={true}
+                            slidesPerView={4}
+                            coverflowEffect={{
+                                rotate: 0,
+                                stretch: 0,
+                                depth: 100,
+                                modifier: 2.5,
+                            }}
+                            pagination={{ el: '.swiper-pagination', clickable: true }}
+                            navigation={{
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev',
+                                clickable: true,
+                            }}
+                            modules={[EffectCoverflow, Pagination, Navigation]}
+                            className="swiper swiper-3d-7"
+                        >
+                            {nfts.map(nft => (
+                                <SwiperSlide key={nft._id}>
+                                    <div className="tf-card-box">
+                                        <div className="card-media">
+                                            <a href="#">
+                                                <img src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />                                        </a>
+                                            <span className="wishlist-button icon-heart"></span>
+                                            <div className="featured-countdown">
+                                                <span className="js-countdown" data-timer="7500" data-labels="d,h,m,s"></span>
+                                            </div>
+                                            <div className="button-place-bid">
+                                                <a href="#" className="tf-button"><span>Place Bid</span></a>
+                                            </div>
                                         </div>
-                                        <div className="info">
-                                            <span>Created by:</span>
-                                            <h6><a>{nft.author.username}</a></h6>
-                                        </div>
-                                    </div>
-                                    <div className="card-media">
-                                        <img src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />
-                                        <span className="wishlist-button icon-heart" />
-                                    </div>
-                                    <h5 className="name"><a href="#">{nft.name}</a></h5>
-                                    <div className="meta-info flex items-center justify-between">
-                                        <div>
-                                            <span className="text-bid">Current Bid</span>
-                                            <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
-                                        </div>
-                                        <div className="button-place-bid">
-                                            <button
-                                                data-toggle="modal"
-                                                data-target="#popup_bid"
-                                                className="tf-button"
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                }}>
-                                                <span>Place Bid</span>
-                                            </button>
+                                        <div className="meta-info text-center">
+                                            <h5 className="name"><a href="nft-detail-2.html">Dayco serpentine belt</a></h5>
+                                            <h6 className="price gem"><i className="icon-gem"></i>0,34</h6>
                                         </div>
                                     </div>
-                                </motion.div>
-                            </Link>
-                        </SwiperSlide>
-                    ))
-                )}
-            </Swiper>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                        <div className="swiper-button-next next-3d over"></div>
+                        <div className="swiper-button-prev prev-3d over"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default MainSlider;
+
