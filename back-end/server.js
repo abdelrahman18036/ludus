@@ -35,6 +35,9 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/test", (req, res) => {
+  res.send("API is working");
+});
 
 // Error handling 404 NOT FOUND
 app.use((req, res, next) => {
