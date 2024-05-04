@@ -133,7 +133,7 @@ export default function MarketContent() {
                                                         <motion.div className="tf-card-box style-4" variants={itemVariants}>
                                                             <div className="author flex items-center">
                                                                 <div className="avatar">
-                                                                    <img src={`http://localhost:5000/${nft.author.profilePicture}` || profilePic} alt={nft.author.username} />
+                                                                    <img src={`${nft.author.profilePicture}` || profilePic} alt={nft.author.username} />
                                                                 </div>
                                                                 <div className="info">
                                                                     <span>Created by:</span>
@@ -141,7 +141,7 @@ export default function MarketContent() {
                                                                 </div>
                                                             </div>
                                                             <div className="card-media">
-                                                                <img src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />
+                                                                <img src={`${nft.imageUrl}`} alt={nft.name} />
                                                                 <span className="wishlist-button icon-heart" />
                                                             </div>
                                                             <h5 className="name"><a href="nft-detail-2.html">{nft.name}</a></h5>
@@ -211,7 +211,7 @@ export default function MarketContent() {
                                                         <div to={`/nft/${nft._id}`}>
                                                             <div className="tf-card-box style-1">
                                                                 <div className="card-media">
-                                                                    <img className="w-100  " src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />
+                                                                    <img className="w-100  " src={`${nft.imageUrl}`} alt={nft.name} />
                                                                     <span className="wishlist-button icon-heart" />
                                                                     <div className="button-place-bid">
                                                                         <button onClick={(event) => {
@@ -226,7 +226,7 @@ export default function MarketContent() {
                                                                 <h5 className="name">{nft.name}</h5>
                                                                 <div className="author flex items-center">
                                                                     <div className="avatar">
-                                                                        <img src={`http://localhost:5000/${nft.author.profilePicture}`} alt={nft.author.username} />
+                                                                        <img src={`${nft.author.profilePicture}`} alt={nft.author.username} />
                                                                     </div>
                                                                     <div className="info">
                                                                         <span>Created by:</span>

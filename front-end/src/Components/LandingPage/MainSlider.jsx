@@ -77,7 +77,7 @@ function MainSlider() {
                                     <div className="tf-card-box">
                                         <div className="card-media">
                                             <a href="#">
-                                                <img src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />                                        </a>
+                                                <img src={`${nft.imageUrl}`} alt={nft.name} />                                        </a>
                                             <span className="wishlist-button icon-heart"></span>
                                             <div className="featured-countdown">
                                                 <span className="js-countdown" data-timer="7500" data-labels="d,h,m,s"></span>

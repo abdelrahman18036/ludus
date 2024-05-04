@@ -52,7 +52,7 @@ export default function ActiveBid() {
     };
 
     const checkUserProfilePic = () => {
-        return userData.profilePicture ? `http://localhost:5000/${userData.profilePicture}` : profilePic;
+        return userData.profilePicture ? `${userData.profilePicture}` : profilePic;
     };
 
     // Fetch user data and active bids when component mounts
@@ -91,7 +91,7 @@ export default function ActiveBid() {
                                     <div className="col-item" key={activeBid.products[0]._id}>
                                         <div className="tf-card-box style-1">
                                             <div className="card-media">
-                                                <img src={`http://localhost:5000/${activeBid.products[0].imageUrl}`} alt="Bid" />
+                                                <img src={`${activeBid.products[0].imageUrl}`} alt="Bid" />
                                                 <span className="wishlist-button icon-heart" />
                                                 <div className="button-place-bid">
                                                     <button onClick={() => handleRemoveBid(activeBid._id)} className="tf-button">

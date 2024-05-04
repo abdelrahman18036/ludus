@@ -1,9 +1,8 @@
 const Product = require("../models/product");
 const Category = require("../models/category");
 const User = require("../models/user");
-const fs = require("fs");
 exports.createProduct = async (req, res) => {
-  const { category, ...productData } = req.body;
+  const { category, imageUrl, ...productData } = req.body;
 
   try {
     let categoryDoc = await Category.findOne({ name: category });
@@ -14,8 +13,6 @@ exports.createProduct = async (req, res) => {
       categoryDoc = new Category({ name: category });
       await categoryDoc.save();
     }
-
-    const imageUrl = req.file ? req.file.path : undefined;
 
     const newProduct = new Product({
       ...productData,
@@ -31,13 +28,6 @@ exports.createProduct = async (req, res) => {
     res
       .status(500)
       .send({ message: "Failed to create product", error: error.message });
-    if (req.file) {
-      // Optionally remove the file if there's an error after upload
-      fs.unlink(req.file.path, (err) => {
-        if (err)
-          console.error("Failed to delete uploaded file after error:", err);
-      });
-    }
   }
 };
 
@@ -138,7 +128,9 @@ exports.getProductsByCategory = async (req, res) => {
     const products = await Product.find({
       category: categoryId,
       isAvailable: true,
-    }).populate("category").populate("author", "username profilePicture");
+    })
+      .populate("category")
+      .populate("author", "username profilePicture");
     if (products.length === 0) {
       return res.status(404).send("No products found in this category.");
     }

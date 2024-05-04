@@ -33,7 +33,7 @@ function CheckUserProfilePic(orderHistory) {
     if (orderHistory?.user.profilePicture === "") {
         return profilePic;
     } else {
-        return `http://localhost:5000/${orderHistory?.user.profilePicture}`;
+        return `${orderHistory?.user.profilePicture}`;
     }
 }
 
@@ -72,7 +72,7 @@ export default function Sliderbar() {
                 {latestNFTs.map((nft, index) => (
                     <div className="card-small flex items-center  justify-center " key={index}>
                         <div className="author authos flex items-start  justify-center ">
-                            <img src={`http://localhost:5000/${nft.imageUrl}`} alt="alt" />
+                            <img src={`${nft.imageUrl}`} alt="alt" />
                             <div className="info flex flex-column justify-center ">
                                 <h6 className="m-0">{nft.name}</h6>
                                 <p className="m-0">@{nft.author.username}</p>
@@ -91,7 +91,7 @@ export default function Sliderbar() {
                         <div className="order">{index + 1}. </div>
                         <div className="author flex items-center flex-grow">
                             {
-                                topAuthors ? <img src={`http://localhost:5000/${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
+                                topAuthors ? <img src={`${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
                                     :
                                     <Skeleton className="mr-2" circle={true} highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
                             }

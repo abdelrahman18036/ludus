@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import MarketHeader from '../MarketHeader';
 import { baseURL } from '../../../Auth/API';
 import uploadImage from '../../../../assets/images/upload.png';
+import { Cloudinary } from "@cloudinary/url-gen";
 import { toast, ToastContainer, Flip } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+const cloudinaryPreset = "ht8wt3cy";
 
 export default function Create() {
     const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function Create() {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [about, setAbout] = useState('');
+
+    const cld = new Cloudinary({ cloud: { cloudName: 'dv1gth8hq' } });
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -32,22 +35,8 @@ export default function Create() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('productImage', file);
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('price', price);
-        formData.append('category', category);
-        formData.append('about', about);
-
-        try {
-            const response = await axios.post(`${baseURL}/api/nfts/`, formData, {
-                headers: {
-                    'x-access-token': localStorage.getItem('userToken')
-                }
-            });
-            console.log(response.data);
-            toast('🔴 NFT created successfully', {
+        if (!file) {
+            toast('Please upload a valid image', {
                 position: "top-right",
                 autoClose: 1100,
                 hideProgressBar: false,
@@ -58,9 +47,52 @@ export default function Create() {
                 theme: "dark",
                 transition: Flip,
             });
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', cloudinaryPreset);
+
+        try {
+            const cloudinaryResponse = await axios.post(
+                `https://api.cloudinary.com/v1_1/dv1gth8hq/image/upload`,
+                formData
+            );
+
+            const imageUrl = cloudinaryResponse.data.secure_url;
+
+            const backendFormData = {
+                name,
+                description,
+                price,
+                category,
+                about,
+                productImage: imageUrl
+            };
+
+            const response = await axios.post(`${baseURL}/api/nfts/`, backendFormData, {
+                headers: {
+                    'x-access-token': localStorage.getItem('userToken')
+                }
+            });
+
+            toast('✅ NFT created successfully', {
+                position: "top-right",
+                autoClose: 1100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+            });
+
             setTimeout(() => {
                 navigate('/market');
             }, 2500);
+
         } catch (error) {
             console.error('Error uploading product:', error);
             toast('👏 Failed To Create NFT', {
@@ -76,7 +108,6 @@ export default function Create() {
             });
         }
     };
-
     return (
         <div className='bg-main' style={{ backgroundColor: "#111" }}>
             <ToastContainer />

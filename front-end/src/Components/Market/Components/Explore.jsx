@@ -51,7 +51,7 @@ export default function Explore() {
 
     const fetchProducts = async (categoryId, setProducts, setCardsLoading, cancelToken) => {
         setCardsLoading(true);
-        setProducts([]); 
+        setProducts([]);
 
         const url = categoryId === 'All' ? `${baseURL}/api/nfts/` : `${baseURL}/api/nfts/category/${categoryId}`;
         try {
@@ -148,11 +148,11 @@ export default function Explore() {
                                         <Link to={`/nft/${product._id}`}>
                                             <div className="tf-card-box style-4">
                                                 <div className="card-media">
-                                                    <img src={`http://localhost:5000/${product.imageUrl}`} alt={product.name} />
+                                                    <img src={`${product.imageUrl}`} alt={product.name} />
                                                 </div>
                                                 <div className="author flex items-center">
                                                     <div className="avatar">
-                                                        <img src={`http://localhost:5000/${product.author.profilePicture}`} alt="Profile" />
+                                                        <img src={`${product.author.profilePicture}`} alt="Profile" />
                                                     </div>
                                                     <div className="info">
                                                         <span>Created by:</span>

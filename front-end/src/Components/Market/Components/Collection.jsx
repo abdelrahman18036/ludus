@@ -123,7 +123,7 @@ export default function Collection() {
                                         <motion.div className="col-item" key={activeBids._id} variants={itemVariants}>
                                             <div className="tf-card-box style-1">
                                                 <div className="card-media">
-                                                    <img src={`http://localhost:5000/${activeBids.imageUrl}`} alt="alt" />
+                                                    <img src={`${activeBids.imageUrl}`} alt="alt" />
                                                     <span className="wishlist-button icon-heart" />
                                                     <div className="button-place-bid">
                                                         <button className="tf-button" onClick={() => handleRemoveBid(activeBids._id)}>
@@ -136,7 +136,7 @@ export default function Collection() {
                                                 </h5>
                                                 <div className="author flex items-center">
                                                     <div className="avatar">
-                                                        <img src={activeBids.author.profilePicture ? `http://localhost:5000/${activeBids.author.profilePicture}` : profilePic} alt="Image" />
+                                                        <img src={activeBids.author.profilePicture ? `${activeBids.author.profilePicture}` : profilePic} alt="Image" />
                                                     </div>
                                                     <div className="info">
                                                         <span>Created by:</span>

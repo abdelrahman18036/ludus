@@ -45,11 +45,11 @@ export default function MarketHeader() {
     const { data: history, isError, isLoading, error } = useQuery(['history'], fetchHistory);
 
     function CheckUserProfilePic() {
-        return userData.profilePicture ? `http://localhost:5000/${userData.profilePicture}` : profilePic;
+        return userData.profilePicture ? `${userData.profilePicture}` : profilePic;
     }
 
     function CheckOrderProfilePic(order) {
-        return order?.user?.profilePicture ? `http://localhost:5000/${order.user.profilePicture}` : profilePic;
+        return order?.user?.profilePicture ? `${order.user.profilePicture}` : profilePic;
     }
 
     const extractTime = (dateString) => {

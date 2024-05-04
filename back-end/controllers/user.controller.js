@@ -65,12 +65,12 @@ exports.getUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
-
 exports.updateUser = async (req, res) => {
   const updateData = req.body;
 
-  if (req.file) {
-    updateData.profilePicture = req.file.path;
+  if (updateData.profilePictureUrl) {
+    updateData.profilePicture = updateData.profilePictureUrl;
+    delete updateData.profilePictureUrl;
   }
 
   try {
@@ -85,7 +85,10 @@ exports.updateUser = async (req, res) => {
 
     res.send(user);
   } catch (error) {
-    res.status(500).send(error);
+    console.error("Failed to update user:", error);
+    res
+      .status(500)
+      .send({ message: "Failed to update user", error: error.message });
   }
 };
 
