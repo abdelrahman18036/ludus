@@ -38,7 +38,9 @@ function MainNav() {
                             </nav>
 
 
-
+                            <div className="canvas" style={{ visibility: "hidden" }}>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
