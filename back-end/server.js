@@ -2,14 +2,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 // importing the database connection and the environment variables
 require("dotenv").config();
 require("./config/db");
 
 // define the routes
-const uploadDir = path.join(__dirname, "uploads");
+// const uploadDir = path.join(__dirname, "uploads");
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
@@ -19,13 +19,13 @@ const profileRoutes = require("./routes/profile.routes");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-if (!fs.existsSync(uploadDir)) {
-  try {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  } catch (error) {
-    console.error(`Error creating upload directory: ${error.message}`);
-  }
-}
+// if (!fs.existsSync(uploadDir)) {
+//   try {
+//     fs.mkdirSync(uploadDir, { recursive: true });
+//   } catch (error) {
+//     console.error(`Error creating upload directory: ${error.message}`);
+//   }
+// }
 
 // Middleware
 app.use(cors());
@@ -38,7 +38,7 @@ app.use("/api/nfts", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/profile", profileRoutes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/test", (req, res) => {
   res.send("API is working");
 });

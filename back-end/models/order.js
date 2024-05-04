@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
   products: [
     {
-      type: mongoose.Schema.Types.ObjectId, // Direct reference to Product model
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
     },
   ],
