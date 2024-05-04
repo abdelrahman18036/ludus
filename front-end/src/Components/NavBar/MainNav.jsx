@@ -38,9 +38,7 @@ function MainNav() {
                             </nav>
 
 
-                            <div className="canvas">
-                                <span></span>
-                            </div>
+
                         </div>
                     </div>
                 </div>

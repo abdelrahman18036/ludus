@@ -82,9 +82,7 @@ function MainSlider() {
                                             <div className="featured-countdown">
                                                 <span className="js-countdown" data-timer="7500" data-labels="d,h,m,s"></span>
                                             </div>
-                                            <div className="button-place-bid">
-                                                <a href="#" className="tf-button"><span>Place Bid</span></a>
-                                            </div>
+
                                         </div>
                                         <div className="meta-info text-center">
                                             <h5 className="name"><a href="nft-detail-2.html">Dayco serpentine belt</a></h5>
@@ -94,8 +92,7 @@ function MainSlider() {
                                 </SwiperSlide>
                             ))}
                         </Swiper>
-                        <div className="swiper-button-next next-3d over"></div>
-                        <div className="swiper-button-prev prev-3d over"></div>
+
                     </div>
                 </div>
             </div>
