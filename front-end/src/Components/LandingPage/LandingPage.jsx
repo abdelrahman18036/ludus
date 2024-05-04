@@ -33,7 +33,7 @@ function LandingPage() {
                                                 sequence={[
                                                     'World Of Top Works',
                                                     1000,
-                                                    'World Of NFTS',
+                                                    'World Of Sales',
                                                     1000,
                                                     'World Of Digital Art',
                                                     1000,

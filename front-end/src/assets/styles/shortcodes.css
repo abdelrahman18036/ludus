@@ -1670,7 +1670,7 @@
 }
 
 .flat-pages-title .swiper-slide-active .tf-card-box {
-    box-shadow: 0px 30px 70px 0px #0A0A0A;
+    box-shadow: 0;
 }
 
 .swiper-pagination.pagination-number .swiper-pagination-bullet {

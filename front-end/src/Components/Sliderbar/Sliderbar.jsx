@@ -23,7 +23,9 @@ const fetchLatestNFTs = async () => {
 const fetchHistory = async (userToken) => {
     const response = await axios.get(`${baseURL}/api/orders/`, {
         headers: { 'x-access-token': userToken }
+
     });
+    console.log(response.data);
     return response.data;
 };
 
@@ -37,9 +39,11 @@ const extractTime = (dateString) => {
     });
 };
 
+
+
 export default function Sliderbar() {
     const userToken = localStorage.getItem('userToken');
-
+    
     const { data: topAuthors, isLoading: isLoadingAuthors, isError: isErrorAuthors } = useQuery('topAuthors', fetchTopAuthors);
     const { data: latestNFTs, isLoading: isLoadingNFTs, isError: isErrorNFTs } = useQuery('latestNFTs', fetchLatestNFTs);
     const { data: history, isLoading: isLoadingHistory, isError: isErrorHistory } = useQuery(['history', userToken], () => fetchHistory(userToken));
@@ -51,6 +55,13 @@ export default function Sliderbar() {
     if (isErrorAuthors || isErrorNFTs || isErrorHistory) {
         return <div>Error loading data</div>;
     }
+    function CheckUserProfilePic(){
+        if(history?.user.profilePicture === ""){
+            return profilePic;
+        }else{
+            return `http://localhost:5000/${history?.user.profilePicture}`;
+        }
+    }   
 
     return (
         <div className="side-bar">
@@ -131,10 +142,10 @@ export default function Sliderbar() {
                     <h5 className="title-widget">History</h5>
                 </div>
                 {history.map((history, index) => (
-                    <div className="widget-creators-item flex mb-20">
+                    <div className="widget-creators-item flex mb-20" key={index}>
                         <div className="author flex items-center flex-grow">
                            {
-                            history?  <img  className="" src={`http://localhost:5000/${history.user.profilePicture}` || profilePic} alt="alt" />
+                            history?  <img  className="" src={CheckUserProfilePic()} alt="alt" />
                             :
                             <Skeleton className="mr-3" circle={true}  highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
                            }
@@ -148,7 +159,7 @@ export default function Sliderbar() {
                                         <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />
                                     }
                                     {
-                                        history?<span><a >Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
+                                        history?<span><a>Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
                                         :
                                         <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />
                                     }
