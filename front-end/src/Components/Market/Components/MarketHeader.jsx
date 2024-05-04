@@ -3,6 +3,7 @@ import axios from "axios";
 import { baseURL } from "../../Auth/API";
 import { Link, useNavigate } from "react-router-dom";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
+
 import { useQuery } from "react-query";
 
 export default function MarketHeader() {

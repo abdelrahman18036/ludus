@@ -27,6 +27,7 @@ export default function Explore() {
     }, []);
 
     useEffect(() => {
+        // Cancel the previous request before starting a new one
         if (cancelTokenSource.current) {
             cancelTokenSource.current.cancel("Category changed");
         }
@@ -80,7 +81,7 @@ export default function Explore() {
     const placeBid = async (nftId) => {
         setLoading(true);
         try {
-            const response = await axios.post(`${baseURL}/api/orders`, {
+            await axios.post(`${baseURL}/api/orders`, {
                 productIds: nftId,
             }, {
                 headers: {
@@ -88,7 +89,7 @@ export default function Explore() {
                 }
             });
             setLoading(false);
-            toast.success('🦄 NFT Added Successfully ', {
+            toast.success('🦄 NFT Added Successfully', {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -99,7 +100,7 @@ export default function Explore() {
                 theme: "dark",
                 transition: Flip,
             });
-            fetchProducts(activeCategory);
+            fetchProducts(activeCategory, setProducts, setCardsLoading, cancelTokenSource.current);
             queryClient.refetchQueries('history');
 
         } catch (error) {
@@ -108,7 +109,7 @@ export default function Explore() {
         }
     };
 
-    const realCat = categories.slice(0, 5);
+    const realCat = categories.slice(0, 3);
 
     return (
         <>
@@ -123,7 +124,7 @@ export default function Explore() {
                         <span className="inner">All</span>
                     </li>
                     {realCat.map(category => (
-                        <li key={category._id} className={`item-title ${activeCategory === category.name ? 'active' : ''}`} onClick={() => setActiveCategory(category._id)}>
+                        <li key={category._id} className={`item-title ${activeCategory === category._id ? 'active' : ''}`} onClick={() => setActiveCategory(category._id)}>
                             <span className="inner">{category.name}</span>
                         </li>
                     ))}
@@ -186,7 +187,7 @@ export default function Explore() {
                                     <div className="container">
                                         <div className="row">
                                             {Array.from({ length: 4 }).map((_, index) => (
-                                                <div className="col-md-3 my-5 flex justify-center">
+                                                <div key={index} className="col-md-3 my-5 flex justify-center">
                                                     <div className="col-item">
                                                         <Loading />
                                                     </div>

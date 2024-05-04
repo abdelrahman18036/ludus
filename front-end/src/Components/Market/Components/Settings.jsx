@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { baseURL } from "../../Auth/API";
 import profilePic from "../../../assets/images/avatar/avatar-01.png";
+import { ToastContainer,toast,Flip } from "react-toastify";
 export default function Setting() {
     const [file, setFile] = useState(null);
     const userId = localStorage.getItem('id');
@@ -57,16 +58,38 @@ export default function Setting() {
                     'x-access-token': userToken
                 }
             });
-            alert('Profile updated successfully!');
+           toast('👏 Data Was Updated Successfully', {
+                position: "top-right",
+                autoClose: 1100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+            });
             console.log(response.data);
         } catch (error) {
             console.error('Error updating profile:', error);
+            toast('👏 Error Has Occurred ', {
+                position: "top-right",
+                autoClose: 1100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Flip,
+            });
             alert('Failed to update profile');
         }
     };
 
     return (
         <>
+        <ToastContainer />
             <div style={{ position: "absolute" }}>
                 <div className="heading-section">
                     <h2 className="tf-title pb-30">Setting</h2>
