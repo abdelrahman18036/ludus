@@ -68,7 +68,7 @@ export default function Create() {
                 price,
                 category,
                 about,
-                productImage: imageUrl
+                imageUrl: imageUrl
             };
 
             const response = await axios.post(`${baseURL}/api/nfts/`, backendFormData, {
