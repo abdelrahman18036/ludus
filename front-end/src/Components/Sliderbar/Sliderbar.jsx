@@ -29,6 +29,15 @@ const fetchHistory = async (userToken) => {
     return response.data;
 };
 
+function CheckUserProfilePic(orderHistory) {
+    if (orderHistory?.user.profilePicture === "") {
+        return profilePic;
+    } else {
+        return `http://localhost:5000/${orderHistory?.user.profilePicture}`;
+    }
+}
+
+
 const extractTime = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleTimeString('en-US', {
@@ -43,7 +52,7 @@ const extractTime = (dateString) => {
 
 export default function Sliderbar() {
     const userToken = localStorage.getItem('userToken');
-    
+
     const { data: topAuthors, isLoading: isLoadingAuthors, isError: isErrorAuthors } = useQuery('topAuthors', fetchTopAuthors);
     const { data: latestNFTs, isLoading: isLoadingNFTs, isError: isErrorNFTs } = useQuery('latestNFTs', fetchLatestNFTs);
     const { data: history, isLoading: isLoadingHistory, isError: isErrorHistory } = useQuery(['history', userToken], () => fetchHistory(userToken));
@@ -55,13 +64,6 @@ export default function Sliderbar() {
     if (isErrorAuthors || isErrorNFTs || isErrorHistory) {
         return <div>Error loading data</div>;
     }
-    function CheckUserProfilePic(){
-        if(history?.user.profilePicture === ""){
-            return profilePic;
-        }else{
-            return `http://localhost:5000/${history?.user.profilePicture}`;
-        }
-    }   
 
     return (
         <div className="side-bar">
@@ -88,27 +90,27 @@ export default function Sliderbar() {
                     <div className="widget-creators-item flex items-center mb-20" key={index}>
                         <div className="order">{index + 1}. </div>
                         <div className="author flex items-center flex-grow">
-                           {
-                            topAuthors? <img src={`http://localhost:5000/${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
-                            :
-                            <Skeleton className="mr-2" circle={true}  highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
-                           }
+                            {
+                                topAuthors ? <img src={`http://localhost:5000/${author.authorDetails.profilePicture}` || profilePic} alt="alt" />
+                                    :
+                                    <Skeleton className="mr-2" circle={true} highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
+                            }
                             <div className="info  ">
                                 <h6>{
-                                
-                                topAuthors? <a >{author.authorDetails.fullName}</a>
-                                :
-                                <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />    
 
-                                    }
+                                    topAuthors ? <a >{author.authorDetails.fullName}</a>
+                                        :
+                                        <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />
+
+                                }
                                 </h6>
                                 <span>{
-                                    
-                                    topAuthors? <a >@{author.authorDetails.username}</a>
-                                    :
-                                    <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />    
 
-                                    }</span>
+                                    topAuthors ? <a >@{author.authorDetails.username}</a>
+                                        :
+                                        <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />
+
+                                }</span>
                             </div>
                         </div>
                     </div>
@@ -144,38 +146,38 @@ export default function Sliderbar() {
                 {history.map((history, index) => (
                     <div className="widget-creators-item flex mb-20" key={index}>
                         <div className="author flex items-center flex-grow">
-                           {
-                            history?  <img  className="" src={CheckUserProfilePic()} alt="alt" />
-                            :
-                            <Skeleton className="mr-3" circle={true}  highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
-                           }
-                        <div className="w-100">
-                            <div className="flex  justify-between items-start">
-
-                                <div className="info">
-                                    {
-                                        history?<h6><a >{history.products[0].name}</a></h6>
-                                        :
-                                        <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />
-                                    }
-                                    {
-                                        history?<span><a>Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
-                                        :
-                                        <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />
-                                    }
-                                </div>
-                                <span className="time " >
-                                {
-                                    history? extractTime(history.createdAt)
+                            {
+                                history ? <img className="" src={CheckUserProfilePic(history)} alt="alt" />
                                     :
-                                    <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={70} />
-                                }
-                                </span>
+                                    <Skeleton className="mr-3" circle={true} highlightColor={"#333"} baseColor={"grey"} height={60} width={60} />
+                            }
+                            <div className="w-100">
+                                <div className="flex  justify-between items-start">
+
+                                    <div className="info">
+                                        {
+                                            history ? <h6><a >{history.products[0].name}</a></h6>
+                                                :
+                                                <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={60} />
+                                        }
+                                        {
+                                            history ? <span><a>Bought with {history.products[0].price} <i className="icon-gem"></i></a></span>
+                                                :
+                                                <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={110} />
+                                        }
+                                    </div>
+                                    <span className="time " >
+                                        {
+                                            history ? extractTime(history.createdAt)
+                                                :
+                                                <Skeleton className=" rounded  " highlightColor={"#333"} baseColor={"grey"} height={10} width={70} />
+                                        }
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
                         </div>
-                  
+
                     </div>
                 ))}
             </div>

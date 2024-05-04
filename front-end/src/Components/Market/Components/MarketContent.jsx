@@ -39,7 +39,7 @@ export default function MarketContent() {
             console.error('Failed to fetch latest NFTs:', error);
         }
     };
-    const test = [1,2,3,4]
+    const test = [1, 2, 3, 4]
 
     const placeBid = async (nftId) => {
         try {
@@ -61,7 +61,7 @@ export default function MarketContent() {
                 progress: undefined,
                 theme: "dark",
                 transition: Flip,
-                });
+            });
             queryClient.refetchQueries('history');
             fetchNFTs();
             fetchLatestNFTs();
@@ -93,7 +93,7 @@ export default function MarketContent() {
     return (
         <div id="market" className="tabcontent active">
             <ToastContainer />
-          
+
 
 
             <div className="wrapper-content">
@@ -126,10 +126,10 @@ export default function MarketContent() {
                                         className="featured pt-10 swiper-container carousel1"
                                     >
                                         {
-                                            
+
                                             nfts ? (nfts.map(nft => (
                                                 <SwiperSlide className="relative z-99999" key={nft._id}>
-                                                    <Link  className='sliderCards' to={`/nft/${nft._id}`}>
+                                                    <Link className='sliderCards' to={`/nft/${nft._id}`}>
                                                         <motion.div className="tf-card-box style-4" variants={itemVariants}>
                                                             <div className="author flex items-center">
                                                                 <div className="avatar">
@@ -167,22 +167,22 @@ export default function MarketContent() {
                                                     </Link>
                                                 </SwiperSlide>
                                             ))
-                                        )
-                                        :
-                                        <div className='flex  justify-center items-center gap30'>
-                                            {
-                                                test.map((nft) => (
-                                                    <div className='flex flex-column gap15'>
-                                                  
-                                                        <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"} width={250} height={300} />
-                                                        <Skeleton  className='rounded ml-2'  highlightColor={"#333"} baseColor={"grey"} width={200}  />
-                                                        <Skeleton  className='rounded ml-2'  highlightColor={"#333"} baseColor={"grey"} width={100} />
-                                                      
+                                            )
+                                                :
+                                                <div className='flex  justify-center items-center gap30'>
+                                                    {
+                                                        test.map((nft) => (
+                                                            <div className='flex flex-column gap15'>
 
-                                                    </div>
-                                            ))
-                                        }
-                                        </div>
+                                                                <Skeleton className='rounded' highlightColor={"#333"} baseColor={"grey"} width={250} height={300} />
+                                                                <Skeleton className='rounded ml-2' highlightColor={"#333"} baseColor={"grey"} width={200} />
+                                                                <Skeleton className='rounded ml-2' highlightColor={"#333"} baseColor={"grey"} width={100} />
+
+
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
                                         }
                                     </Swiper>
                                 </motion.div>
@@ -203,24 +203,24 @@ export default function MarketContent() {
                                         initial="hidden"
                                         animate="visible"
                                     >
-                                         
+
                                         {
                                             latestNfts ? (
                                                 latestNfts.map(nft => (
                                                     <motion.div className="col-item" key={nft._id} variants={itemVariants}>
-                                                        <Link to={`/nft/${nft._id}`}>
+                                                        <div to={`/nft/${nft._id}`}>
                                                             <div className="tf-card-box style-1">
                                                                 <div className="card-media">
-                                                                    <img  className="w-100  "src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />
+                                                                    <img className="w-100  " src={`http://localhost:5000/${nft.imageUrl}`} alt={nft.name} />
                                                                     <span className="wishlist-button icon-heart" />
                                                                     <div className="button-place-bid">
-                                                                        <button  onClick={(event) => {
+                                                                        <button onClick={(event) => {
                                                                             event.preventDefault();
                                                                             placeBid(nft._id);
                                                                         }}
-                                                                         data-toggle="modal" data-target="#popup_bid" className="tf-button">
+                                                                            data-toggle="modal" data-target="#popup_bid" className="tf-button">
                                                                             <span>Place Bid</span>
-                                                                            </button>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                                 <h5 className="name">{nft.name}</h5>
@@ -239,26 +239,26 @@ export default function MarketContent() {
                                                                     <h6 className="price gem"><i className="icon-gem" />{nft.price}</h6>
                                                                 </div>
                                                             </div>
-                                                        </Link>
+                                                        </div>
                                                     </motion.div>
                                                 ))
                                             ) :
-                                            (
-                                                <div className='flex  justify-center items-center gap30 m-auto w-11'>
-                                                {
-                                                    test.map((nft) => (
-                                                        <div className='flex flex-column gap15'>
-                                                      
-                                                            <Skeleton  className='rounded'  highlightColor={"#333"} baseColor={"grey"} width={250} height={300} />
-                                                            <Skeleton  className='rounded ml-2'  highlightColor={"#333"} baseColor={"grey"} width={200}  />
-                                                            <Skeleton  className='rounded ml-2'  highlightColor={"#333"} baseColor={"grey"} width={100} />
-                                                          
-    
-                                                        </div>
-                                                ))
-                                            }
-                                            </div>
-                                            )
+                                                (
+                                                    <div className='flex  justify-center items-center gap30 m-auto w-11'>
+                                                        {
+                                                            test.map((nft) => (
+                                                                <div className='flex flex-column gap15'>
+
+                                                                    <Skeleton className='rounded' highlightColor={"#333"} baseColor={"grey"} width={250} height={300} />
+                                                                    <Skeleton className='rounded ml-2' highlightColor={"#333"} baseColor={"grey"} width={200} />
+                                                                    <Skeleton className='rounded ml-2' highlightColor={"#333"} baseColor={"grey"} width={100} />
+
+
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                )
                                         }
                                     </motion.div>
                                 </div>
