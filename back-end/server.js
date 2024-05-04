@@ -9,7 +9,7 @@ require("dotenv").config();
 require("./config/db");
 
 // define the routes
-const uploadDir = "./uploads";
+const uploadDir = path.join(__dirname, "uploads");
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
@@ -20,7 +20,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
+  try {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  } catch (error) {
+    console.error(`Error creating upload directory: ${error.message}`);
+  }
 }
 
 // Middleware
