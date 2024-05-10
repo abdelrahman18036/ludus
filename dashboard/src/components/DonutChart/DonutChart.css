@@ -1,0 +1,5 @@
+.bg{
+    background-color: rgb(22, 28, 36);
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+    box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.08), 0 12px 24px -4px rgba(145, 158, 171, 0.08);
+}
