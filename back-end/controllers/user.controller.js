@@ -16,7 +16,6 @@ exports.registerUser = async (req, res) => {
     await newUser.save();
     res.send({ message: "User was registered successfully!" });
   } catch (error) {
-    console.error(error); // Log the error to see more details
     res.status(500).send({
       message:
         error.message || "Some error occurred while registering the User.",
@@ -45,8 +44,6 @@ exports.loginUser = async (req, res) => {
 
     res.status(200).send({
       id: user._id,
-      username: user.username,
-      email: user.email,
       accessToken: token,
     });
   } catch (error) {

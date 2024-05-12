@@ -64,7 +64,7 @@ export default function Layout({ children }) {
         </div>
         {children}
       </div>
-        <Sliderbar />
+      <Sliderbar />
     </div>
   );
 }

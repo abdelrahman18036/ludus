@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 const Category = require("../models/category");
 const User = require("../models/user");
+
 exports.createProduct = async (req, res) => {
   const { category, imageUrl, ...productData } = req.body;
 
@@ -24,7 +25,6 @@ exports.createProduct = async (req, res) => {
     await newProduct.save();
     res.status(201).send(newProduct);
   } catch (error) {
-    console.error("Failed to create product:", error);
     res
       .status(500)
       .send({ message: "Failed to create product", error: error.message });

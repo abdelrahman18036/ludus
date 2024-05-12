@@ -48,19 +48,16 @@ export default function Setting() {
         if (selectedFile) {
             setFile(selectedFile);
 
-            // Prepare form data for Cloudinary upload
             const formData = new FormData();
             formData.append("file", selectedFile);
             formData.append("upload_preset", uploadPreset);
 
             try {
-                // Upload to Cloudinary
                 const cloudinaryResponse = await axios.post(
                     `https://api.cloudinary.com/v1_1/dv1gth8hq/image/upload`,
                     formData
                 );
 
-                // Update profile picture URL in the state
                 setProfileData((prevData) => ({
                     ...prevData,
                     profilePicture: cloudinaryResponse.data.secure_url,
@@ -101,7 +98,7 @@ export default function Setting() {
 
         try {
             const response = await axios.put(
-                `${baseURL}/api/users/${userId}`,
+                `${baseURL}/api/profile/${userId}`,
                 profileData,
                 {
                     headers: { "x-access-token": userToken },
@@ -141,7 +138,7 @@ export default function Setting() {
     return (
         <>
             <ToastContainer />
-            <div style={{ position: "absolute" }}>
+            <div style={{ position: "sticky" }}>
                 <div className="heading-section">
                     <h2 className="tf-title pb-30">Setting</h2>
                 </div>

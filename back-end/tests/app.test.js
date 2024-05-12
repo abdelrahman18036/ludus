@@ -2,81 +2,73 @@ const supertest = require("supertest");
 const app = require("../server");
 const mongoose = require("mongoose");
 const User = require("../models/user");
-const Product = require("../models/product");
+
+const NFT = require("../models/product");
 const Category = require("../models/category");
-const Order = require("../models/order");
 require("dotenv").config();
 
 const request = supertest(app);
 
 beforeAll(async () => {
-  console.log(process.env.TEST_MONGO_URI);
-  await mongoose.connect(process.env.TEST_MONGO_URI, {
+  const testMongoUri = process.env.TEST_MONGO_URI;
+  console.log("Connecting to:", testMongoUri);
+  await mongoose.connect(testMongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+});
+
+afterEach(async () => {
+  await User.deleteMany({});
+  await NFT.deleteMany({});
+  await Category.deleteMany({});
 });
 
 afterAll(async () => {
   await mongoose.connection.close();
 });
 
-describe("API Tests", () => {
+describe("NFT Marketplace API Tests", () => {
+  let userToken;
+  let categoryId, userId, nftId;
+
   describe("User Endpoints", () => {
     test("Register user", async () => {
       const res = await request.post("/api/users/register").send({
-        username: "testuser",
-        email: "test@example.com",
+        username: `testuser_${Date.now()}`,
+        fullname: "Test User",
+        email: `test_${Date.now()}@example.com`,
         password: "password123",
+        isAdmin: false,
       });
       expect(res.status).toBe(201);
     });
 
     test("Login user", async () => {
-      const res = await request.post("/api/users/login").send({
-        email: "test@example.com",
+      const user = {
+        email: "login@example.com",
         password: "password123",
-      });
+      };
+      await new User({
+        username: "loginuser",
+        email: user.email,
+        password: user.password, // Assuming you would hash passwords in the real application
+      }).save();
+      const res = await request.post("/api/users/login").send(user);
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("accessToken");
-    });
-  });
-
-  describe("Product Endpoints", () => {
-    let categoryId;
-
-    beforeAll(async () => {
-      const category = await new Category({
-        name: "Electronics",
-        description: "Electronic items",
-      }).save();
-      categoryId = category._id;
-    });
-
-    test("Create product", async () => {
-      const res = await request.post("/api/products").send({
-        name: "Laptop",
-        description: "High performance laptop",
-        price: 1200,
-        category: categoryId,
-        stock: 10,
-      });
-      expect(res.status).toBe(201);
-    });
-
-    test("Get products", async () => {
-      const res = await request.get("/api/products");
-      expect(res.status).toBe(200);
+      userToken = res.body.accessToken;
     });
   });
 
   describe("Category Endpoints", () => {
     test("Create category", async () => {
       const res = await request.post("/api/categories").send({
-        name: "Books",
+        name: `Books_${Date.now()}`,
         description: "Various books",
       });
       expect(res.status).toBe(201);
+      categoryId = res.body._id;
     });
 
     test("Get categories", async () => {
@@ -85,35 +77,33 @@ describe("API Tests", () => {
     });
   });
 
-  describe("Order Endpoints", () => {
-    let userId, productId;
-
+  describe("NFT Endpoints", () => {
     beforeAll(async () => {
-      const user = await new User({
-        username: "buyer",
-        email: "buyer@example.com",
-        password: "password",
-      }).save();
-      userId = user._id;
-      const product = await new Product({
-        name: "Table",
-        description: "Wooden table",
-        price: 150,
-        stock: 5,
-      }).save();
-      productId = product._id;
-    });
-
-    test("Create order", async () => {
-      const res = await request.post("/api/orders").send({
-        products: [{ product: productId, quantity: 1 }],
-        user: userId,
+      const category = new Category({
+        name: "Digital Art",
+        description: "Digital artworks",
       });
-      expect(res.status).toBe(201);
+      await category.save();
+      categoryId = category._id;
     });
 
-    test("Get orders", async () => {
-      const res = await request.get("/api/orders");
+    test("Create NFT", async () => {
+      const nftData = {
+        title: "Unique Digital Asset",
+        description: "A very unique piece of digital art.",
+        price: 1000,
+        category: categoryId,
+        imageUrl:
+          "https://res.cloudinary.com/dv1gth8hq/image/upload/v1714851212/em7rofdj6j3no3g6li87.jpg",
+        author: userId,
+      };
+      const res = await request.post("/api/nfts").send(nftData);
+      expect(res.status).toBe(201);
+      nftId = res.body._id;
+    });
+
+    test("Get NFTs", async () => {
+      const res = await request.get("/api/nfts");
       expect(res.status).toBe(200);
     });
   });
