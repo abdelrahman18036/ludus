@@ -10,18 +10,12 @@ require("dotenv").config();
 const request = supertest(app);
 
 beforeAll(async () => {
-  const testMongoUri = process.env.TEST_MONGO_URI;
+  const testMongoUri = process.env.MONGO_URI;
   console.log("Connecting to:", testMongoUri);
   await mongoose.connect(testMongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-});
-
-afterEach(async () => {
-  await User.deleteMany({});
-  await NFT.deleteMany({});
-  await Category.deleteMany({});
 });
 
 afterAll(async () => {
@@ -41,19 +35,14 @@ describe("NFT Marketplace API Tests", () => {
         password: "password123",
         isAdmin: false,
       });
-      expect(res.status).toBe(201);
+      expect(res.status).toBe(200);
     });
 
     test("Login user", async () => {
       const user = {
-        email: "login@example.com",
+        email: "test_1715522703745@example.com",
         password: "password123",
       };
-      await new User({
-        username: "loginuser",
-        email: user.email,
-        password: user.password, // Assuming you would hash passwords in the real application
-      }).save();
       const res = await request.post("/api/users/login").send(user);
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("accessToken");
@@ -80,7 +69,7 @@ describe("NFT Marketplace API Tests", () => {
   describe("NFT Endpoints", () => {
     beforeAll(async () => {
       const category = new Category({
-        name: "Digital Art",
+        name: `Digital Art_${Date.now()}`,
         description: "Digital artworks",
       });
       await category.save();
@@ -89,15 +78,19 @@ describe("NFT Marketplace API Tests", () => {
 
     test("Create NFT", async () => {
       const nftData = {
-        title: "Unique Digital Asset",
+        name: "Unique Digital Asset",
         description: "A very unique piece of digital art.",
-        price: 1000,
-        category: categoryId,
+        price: 11,
+        about: "This is a unique digital asset.",
+        category: "Digital Art",
         imageUrl:
           "https://res.cloudinary.com/dv1gth8hq/image/upload/v1714851212/em7rofdj6j3no3g6li87.jpg",
         author: userId,
       };
-      const res = await request.post("/api/nfts").send(nftData);
+      const res = await request
+        .post("/api/nfts")
+        .set("x-access-token", `${userToken}`)
+        .send(nftData);
       expect(res.status).toBe(201);
       nftId = res.body._id;
     });

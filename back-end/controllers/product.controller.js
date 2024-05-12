@@ -4,10 +4,13 @@ const User = require("../models/user");
 
 exports.createProduct = async (req, res) => {
   const { category, imageUrl, ...productData } = req.body;
+  console.log("Received data for new product:", req.body);
 
   try {
+    console.log("Looking for category:", category);
     let categoryDoc = await Category.findOne({ name: category });
     if (!categoryDoc) {
+      console.log("Category not found, creating new one");
       if (!category || category.trim() === "") {
         throw new Error("Invalid category name");
       }
@@ -15,6 +18,7 @@ exports.createProduct = async (req, res) => {
       await categoryDoc.save();
     }
 
+    console.log("Creating new product with category ID:", categoryDoc._id);
     const newProduct = new Product({
       ...productData,
       category: categoryDoc._id,
@@ -23,8 +27,10 @@ exports.createProduct = async (req, res) => {
     });
 
     await newProduct.save();
+    console.log("Product created successfully:", newProduct);
     res.status(201).send(newProduct);
   } catch (error) {
+    console.error("Failed to create product:", error);
     res
       .status(500)
       .send({ message: "Failed to create product", error: error.message });
