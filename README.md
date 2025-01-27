@@ -1,4 +1,4 @@
-# Ludus
+# Luduss
 
 ## **NFT Marketplace Documentation**
 
